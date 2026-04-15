@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "#93000a",
+              "tertiary-container": "#9ba8eb",
+              "primary-fixed": "#ffe08f",
+              "on-error-container": "#ffdad6",
+              "surface-container-high": "#2a2a2a",
+              "surface-bright": "#3a3939",
+              "background": "#0a0a0a",
+              "error": "#ffb4ab",
+              "outline": "#99907e",
+              "on-primary-container": "#503d00",
+              "inverse-surface": "#e5e2e1",
+              "secondary-container": "#4e4638",
+              "tertiary-fixed-dim": "#b9c3ff",
+              "on-primary": "#3d2e00",
+              "on-tertiary-fixed-variant": "#35437e",
+              "primary-fixed-dim": "#e6c364",
+              "primary-container": "#c9a84c",
+              "on-primary-fixed-variant": "#584400",
+              "surface-dim": "#131313",
+              "on-secondary-fixed-variant": "#4e4638",
+              "on-surface-variant": "#d0c5b2",
+              "on-tertiary-container": "#2e3b77",
+              "surface-container-lowest": "#0e0e0e",
+              "on-tertiary": "#1e2b66",
+              "primary": "#e6c364",
+              "surface-variant": "#353534",
+              "on-secondary-fixed": "#211b0f",
+              "secondary-fixed-dim": "#d1c5b3",
+              "on-background": "#e5e2e1",
+              "inverse-primary": "#755b00",
+              "surface-container-low": "#1c1b1b",
+              "secondary": "#d1c5b3",
+              "on-secondary-container": "#bfb4a2",
+              "surface-container": "#201f1f",
+              "on-primary-fixed": "#241a00",
+              "on-secondary": "#362f23",
+              "on-tertiary-fixed": "#041451",
+              "tertiary-fixed": "#dde1ff",
+              "surface": "#131313",
+              "secondary-fixed": "#eee1ce",
+              "inverse-on-surface": "#313030",
+              "outline-variant": "#4d4637",
+              "on-surface": "#e5e2e1",
+              "tertiary": "#b9c4ff",
+              "surface-tint": "#e6c364",
+              "on-error": "#690005",
+              "surface-container-highest": "#353534",
+              "warm-white-text": "#EDE8DF",
+              "secondary-text": "#8A8070"
+            },
+            borderRadius: {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "9999px"
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      .grain {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: url("https://grainy-gradients.vercel.app/noise.svg");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 9999;
+      }
+      .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 2rem;
+      }
+      .masonry-container {
+        columns: 1;
+      }
+      @media (min-width: 768px) { .masonry-container { columns: 2; } }
+      @media (min-width: 1024px) { .masonry-container { columns: 3; } }
+    </style>
+</head>
+<body class="bg-background text-warm-white-text font-['Lora'] selection:bg-primary/30">
+<div class="grain"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80 flex justify-between items-center px-6 md:px-12 py-6">
+<div class="font-['Cormorant_Garamond'] text-2xl font-bold tracking-tighter text-[#EDE8DF]">OSTRIE</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Atelier</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Services</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#C9A84C] font-bold border-b border-[#C9A84C] pb-1" href="#">Gallery</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Team</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Booking</a>
+</div>
+<button class="bg-primary text-on-primary-fixed px-6 py-2 font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] font-bold hover:opacity-80 transition-opacity duration-300">
+            Reserve Now
+        </button>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-20">
+<h1 class="font-['Cormorant_Garamond'] text-5xl md:text-7xl font-light mb-6 tracking-tight">Галерия</h1>
+<div class="w-24 h-[1px] bg-primary mb-8"></div>
+<p class="max-w-xl text-secondary-text font-['Lora'] leading-relaxed text-lg">
+                Визуална антология на прецизността. Всеки детайл е внимателно обмислен, всяка линия е резултат от майсторство. Открийте своя стил в нашето ателие.
+            </p>
+</header>
+<!-- Filters Section -->
+<div class="flex flex-wrap gap-4 md:gap-8 mb-16 border-b border-outline-variant/30 pb-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.2em] text-[0.75rem] text-primary border-b-2 border-primary pb-2">All</button>
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.2em] text-[0.75rem] text-secondary-text hover:text-warm-white-text transition-colors pb-2">Men</button>
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.2em] text-[0.75rem] text-secondary-text hover:text-warm-white-text transition-colors pb-2">Women</button>
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.2em] text-[0.75rem] text-secondary-text hover:text-warm-white-text transition-colors pb-2">Beard</button>
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.2em] text-[0.75rem] text-secondary-text hover:text-warm-white-text transition-colors pb-2">Coloring</button>
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.2em] text-[0.75rem] text-secondary-text hover:text-warm-white-text transition-colors pb-2">Therapies</button>
+</div>
+<!-- Masonry Grid -->
+<div class="masonry-container gap-8">
+<!-- Item 1 -->
+<div class="masonry-item relative group overflow-hidden bg-surface-container-low">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="close-up of a sharp masculine fade haircut with clean lines on a dark moody background with cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs4GgFj8lssw7leZYYnBrIyoxP1RxLhzBlD3L16gOddd_3Xm9Ohewf2uJYQDgmMQyw1rPLF8hHKoz5GyAM5Ic2MkVotwqLLj_pAkN259aBUarrREgd1B1K8hprW58_nob6I50a2xsNYnRhqxd3DFY0YxJg9xC-cgGUJ6G9A9R_W3UjKYvQZGX8jsXkSX-C-3oi80Ep4I4d2-uwjz17VB884nW-_ic-cDN3E0eC4reMNTmrqGBnE0z-Dn73fbhntDLdnmJR4quxYg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+<span class="font-['DM_Mono'] text-[0.65rem] text-primary uppercase tracking-widest mb-1">Men / Precision Cut</span>
+<span class="font-['Josefin_Sans'] text-xs uppercase tracking-widest text-warm-white-text">Artisan: Victor Drago</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="masonry-item relative group overflow-hidden bg-surface-container-low">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="professional editorial hair coloring on long hair with subtle warm tones in a high-fashion studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw4xea2qcF0-1kSH5CExpLP8_sRUXu2quKdMmI-V1zIBSWWRazHahC5JPdCOU0wfz8mhD_UPgOXFLJQWUqobJzmYeEUvcxhUZO2SET4q91gB7FwbzAZ4iQGL-Op6LrQZidRVR7TOGOL2s28Qd9AKRrUWT4xL37eVLVuvkS1vo3e3WgshmC77WbdPESov_QZ1J2ODbzx4RcC5u5szHV1itxb6nxI5JnPFgrUnVg7ttbHYn2crWU2RNe-xLPWAjWMrgOl6XVQdO-Ag"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+<span class="font-['DM_Mono'] text-[0.65rem] text-primary uppercase tracking-widest mb-1">Coloring / Balayage</span>
+<span class="font-['Josefin_Sans'] text-xs uppercase tracking-widest text-warm-white-text">Artisan: Elena Vaneva</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="masonry-item relative group overflow-hidden bg-surface-container-low">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="meticulous beard grooming and shaping with straight razor details and essential oils shine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd4WMusbsuXxhAtLvC748uRtZMiWLryI1xccHYoqACh1-3MQRWkrx0QUPrAUryTSGnWjeOw3AISG7w90ouyVXHfe-32RipPqi7t54EujWbrrLAixc7L0AxenO_7cK32i-x3VlZaM316Bblbrg0mycitdI6gOB_qAqw-gYpud-6jVO3qXWlHMeWiob-p5QP9DdOy_BXTjXUprNHbkpLD5iI0XAkoarm5F-L8DVqgXzQ75X7N1ckIOk8GjIj9colVORFYOxfiDEj1Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+<span class="font-['DM_Mono'] text-[0.65rem] text-primary uppercase tracking-widest mb-1">Beard / Ritual</span>
+<span class="font-['Josefin_Sans'] text-xs uppercase tracking-widest text-warm-white-text">Artisan: Marko Slavov</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="masonry-item relative group overflow-hidden bg-surface-container-low">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="close up of premium hair therapy tools and serums being applied to healthy scalp and hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhB0Ueneu4B_qblZ_ATElh2Jcdn4t0IkKsaFGzhDh-ZMoO7fSZTdgeqlx16P0opATVjXpnV-U0nSh2E9Wn-jJUQnRLzkRlBAEjm9luvksnnPMfK6dSqYBQz-XeLRbwzQ804lqKc5dNarQQq4qRT2lsJpDlQAuaeusyu1tn1QcO0qUwScvCwisUdqIzYUN7DIRl5UiP-OP7sMyZC4EIWXL7nFWO24rSx8lCuVmohnYK8u7M1ae1wB9cEnLzZ6zSSxQjOIYDPsuIew"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+<span class="font-['DM_Mono'] text-[0.65rem] text-primary uppercase tracking-widest mb-1">Therapies / Detox</span>
+<span class="font-['Josefin_Sans'] text-xs uppercase tracking-widest text-warm-white-text">Artisan: Anna Petrova</span>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="masonry-item relative group overflow-hidden bg-surface-container-low">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="avant-garde creative haircutting with sharp architectural lines on a female model with dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL1a47sis3GfO2eZlp9y3l4beKEfgxnQWA8ogOUqP7za5F0Hz0fsi41RP402BMYfNSZvCbDD9WHh0ZQW4UjI1S1TQWki5IBkwXAs9CSpmjWqvfa4sD_c73XSjT6T0niUedQVlBwz7bjjzkuPBsNuXy3Vc4L9WUqK-u5g9VNrqo2H07FZrrFWKx3o3BV96v97WbsUj7SOM1vYk63RqrY70T_b48bXHKiAtzxPtxxUi8kmnFvG6Qs8YBwyk8Zd4BUu63blAQAWQr6A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+<span class="font-['DM_Mono'] text-[0.65rem] text-primary uppercase tracking-widest mb-1">Women / Avant-Garde</span>
+<span class="font-['Josefin_Sans'] text-xs uppercase tracking-widest text-warm-white-text">Artisan: Elena Vaneva</span>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="masonry-item relative group overflow-hidden bg-surface-container-low">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="macro shot of a silver barber scissor making a precise cut on dark hair with bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXboW5oNdRc3_7ioGfgIvJeHx1BThTCKdxr6Sgj_m0mHfD1chVrDjalM0QfObM82pN3wUiDkX5dSrrFbDTgVkrV72gGvqcKHJWAx_s4r4CfGP7JB4w2MT6Yn01AqrDRvvD9Iq5346-hRRs_YGrTcoAn4JhAEQ1f5vtjmbKJhrW5Hw-EbUKUry7r1Q9uUesAew7P_QnAbpdxDa8WYRKpn86AEKGWEhQ_Dqs2_AbL8wbWNtEqLVZnAqhBMKFITpoEa57kQWef96AJQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+<span class="font-['DM_Mono'] text-[0.65rem] text-primary uppercase tracking-widest mb-1">Process / Precision</span>
+<span class="font-['Josefin_Sans'] text-xs uppercase tracking-widest text-warm-white-text">Artisan: Victor Drago</span>
+</div>
+</div>
+</div>
+<!-- Instagram CTA Section -->
+<section class="mt-32 border-t border-outline-variant/20 pt-20">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<span class="font-['DM_Mono'] text-primary uppercase tracking-[0.3em] text-xs mb-4 block">Последвайте ни</span>
+<h2 class="font-['Cormorant_Garamond'] text-4xl md:text-5xl font-light mb-6">Отвъд огледалото</h2>
+<p class="text-secondary-text mb-8 leading-relaxed max-w-md">
+                        За ежедневна доза вдъхновение, процеси "зад кулисите" и най-новите ни творби, присъединете се към нашата общност в Instagram.
+                    </p>
+<a class="inline-flex items-center gap-4 group" href="#">
+<div class="w-12 h-12 rounded-full border border-primary flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+<span class="material-symbols-outlined text-primary group-hover:text-black">photo_camera</span>
+</div>
+<span class="font-['Josefin_Sans'] uppercase tracking-widest text-sm text-warm-white-text">@ostrie_atelier</span>
+</a>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" data-alt="square instagram post showing a minimalist barber workstation with black tools and warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrM6XeY5N2LWD3tnq1htf-HDO0O1t-VU5W_inU0c7olIwJgUI_M_0HyMCrH6_a7cuuR2t8nYhhSITnYymNKS1DPQdNtmkBK-C5PtOOvhEaxQjlS1vJsIhze4WaGdMx_p9zRqmQrIKuP45eMYUIRYo-b3ubvpNdyd0pDGGBPkxLaEZbZRAmRYhJVdRyM3tytfJRBRIDbGYqSuUZncDQ7bZEaLFqKZp-kkr4cfNBq5GwamWyoN4JAPJZvRlH_lAwMMWs0C5aMzIOYg"/>
+</div>
+<div class="aspect-square bg-surface-container-high overflow-hidden mt-8">
+<img class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" data-alt="square instagram post showing a close-up of a man's styled hair with cinematic shadow play" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQMyL2mXrgyM287gc8EgksxzzuVHByzBjQm5DPCJ9V5COuJIcBJ17L6Y0uAcWHxVVW5Dv5UQmfeqlDxAq9GoHu_7PjLI97Gr2wNmTUf-HFr-SMvI8TzRGheawmwaTngmVIXd-oaCU4U8TbwJqK1lkpVEw0DQlWLciiF5Y3RMLe03Vu3HLm_nE73R6H5t7YRihoxZQ72MBUbEf8IwIhQmLuTVu0tBOhGrCymlTC3dNajC7ehTWldtnkESq98w1G9ALcKmbWnUe8Fg"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 px-6 md:px-12 border-t border-[#2A2A2A] bg-[#0A0A0A]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-['Cormorant_Garamond'] text-3xl font-light text-[#EDE8DF] mb-4">OSTRIE</div>
+<p class="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">
+                    Прецизно ателие за съвременна естетика и занаятчийско майсторство.
+                </p>
+</div>
+<div>
+<h4 class="font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] text-[#C9A84C] mb-6">Navigation</h4>
+<ul class="space-y-4">
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Atelier</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Services</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Gallery</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Team</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] text-[#C9A84C] mb-6">Information</h4>
+<ul class="space-y-4">
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] text-[#C9A84C] mb-6">Atelier</h4>
+<p class="font-['Lora'] text-sm text-[#8A8070] leading-loose">
+                    ул. "Прецизност" 12<br/>
+                    София, България<br/>
+                    +359 888 000 000
+                </p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#2A2A2A] flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-['Lora'] text-xs text-[#8A8070]">© 2024 OSTRIE PRECISION ATELIER. ALL RIGHTS RESERVED.</span>
+<div class="flex gap-6">
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#"><span class="material-symbols-outlined text-sm">share</span></a>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
+</div>
+</div>
+</footer>
+</body></html>

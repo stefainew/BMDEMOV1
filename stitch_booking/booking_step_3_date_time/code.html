@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&amp;family=DM+Mono:wght@400;500&amp;family=Josefin+Sans:ital,wght@0,100..700;1,100..700&amp;family=Lora:ital,wght@0,400..700;1,400..700&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#dde1ff",
+                    "tertiary-container": "#9ba8eb",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed": "#eee1ce",
+                    "surface-bright": "#3a3939",
+                    "on-background": "#e5e2e1",
+                    "on-error": "#690005",
+                    "surface": "#131313",
+                    "on-tertiary": "#1e2b66",
+                    "outline-variant": "#4d4637",
+                    "on-primary": "#3d2e00",
+                    "background": "#131313",
+                    "error": "#ffb4ab",
+                    "outline": "#99907e",
+                    "secondary-container": "#4e4638",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#d1c5b3",
+                    "surface-container": "#201f1f",
+                    "primary-container": "#c9a84c",
+                    "secondary": "#d1c5b3",
+                    "on-tertiary-fixed-variant": "#35437e",
+                    "on-secondary-fixed-variant": "#4e4638",
+                    "tertiary-fixed-dim": "#b9c3ff",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-fixed": "#241a00",
+                    "surface-variant": "#353534",
+                    "on-tertiary-fixed": "#041451",
+                    "on-primary-container": "#503d00",
+                    "on-surface": "#e5e2e1",
+                    "on-tertiary-container": "#2e3b77",
+                    "surface-dim": "#131313",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#755b00",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-fixed": "#211b0f",
+                    "primary-fixed": "#ffe08f",
+                    "on-secondary-container": "#bfb4a2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed-dim": "#e6c364",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed-variant": "#584400",
+                    "primary": "#e6c364",
+                    "on-surface-variant": "#d0c5b2",
+                    "on-secondary": "#362f23",
+                    "surface-tint": "#e6c364",
+                    "tertiary": "#b9c4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Cormorant Garamond", "serif"],
+                    "body": ["Lora", "serif"],
+                    "label": ["Josefin Sans", "sans-serif"],
+                    "mono": ["DM Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0e0e0e; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<div class="grain-overlay fixed inset-0 z-[100]"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80">
+<div class="flex justify-between items-center px-6 md:px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<span class="text-2xl font-bold tracking-[0.2em] text-[#EDE8DF] font-label">OSTRIE</span>
+<div class="hidden md:flex gap-10 items-center">
+<a class="font-label uppercase tracking-widest text-xs text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Services</a>
+<a class="font-label uppercase tracking-widest text-xs text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Gallery</a>
+<a class="font-label uppercase tracking-widest text-xs text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Team</a>
+<button class="bg-primary px-6 py-2.5 rounded-sm text-on-primary font-label uppercase tracking-widest text-[10px] font-bold active:scale-95 transition-all">Запази час</button>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 md:px-12 max-w-screen-xl mx-auto">
+<!-- Progress Stepper -->
+<div class="mb-16">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0">
+<div class="flex flex-wrap items-center gap-4 text-[10px] font-label uppercase tracking-[0.2em]">
+<div class="flex items-center gap-2 text-primary opacity-60">
+<span class="material-symbols-outlined !text-sm">check_circle</span>
+<span>1. Услуга</span>
+</div>
+<div class="w-8 h-[1px] bg-outline-variant/30 hidden md:block"></div>
+<div class="flex items-center gap-2 text-primary opacity-60">
+<span class="material-symbols-outlined !text-sm">check_circle</span>
+<span>2. Майстор</span>
+</div>
+<div class="w-8 h-[1px] bg-outline-variant/30 hidden md:block"></div>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="w-5 h-5 rounded-full border border-primary flex items-center justify-center text-[8px]">3</span>
+<span>3. Час</span>
+</div>
+<div class="w-8 h-[1px] bg-outline-variant/30 hidden md:block"></div>
+<div class="flex items-center gap-2 text-outline">
+<span class="w-5 h-5 rounded-full border border-outline/30 flex items-center justify-center text-[8px]">4</span>
+<span>4. Потвърждение</span>
+</div>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl text-on-surface">Избор на дата и час</h1>
+</div>
+<div class="h-1 w-full bg-surface-container-high mt-8 relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-3/4 bg-primary transition-all duration-700"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left: Calendar Selection -->
+<div class="lg:col-span-5 bg-surface-container-low p-8 rounded-sm shadow-2xl">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-label uppercase tracking-widest text-sm text-primary">Декември 2024</h2>
+<div class="flex gap-4">
+<button class="p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">chevron_left</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="grid grid-cols-7 gap-y-4 text-center">
+<!-- Weekdays -->
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Пн</div>
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Вт</div>
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Ср</div>
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Чт</div>
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Пт</div>
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Сб</div>
+<div class="font-label text-[10px] text-outline uppercase tracking-tighter pb-4">Нд</div>
+<!-- Previous Month -->
+<div class="text-outline/20 font-mono text-sm py-3">25</div>
+<div class="text-outline/20 font-mono text-sm py-3">26</div>
+<div class="text-outline/20 font-mono text-sm py-3">27</div>
+<div class="text-outline/20 font-mono text-sm py-3">28</div>
+<div class="text-outline/20 font-mono text-sm py-3">29</div>
+<div class="text-outline/20 font-mono text-sm py-3">30</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">1</div>
+<!-- Current Month -->
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">2</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">3</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">4</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">5</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">6</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">7</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">8</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">9</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">10</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">11</div>
+<!-- Today State -->
+<div class="relative py-3 flex items-center justify-center">
+<span class="absolute inset-0 m-auto w-8 h-8 border border-primary/40 rounded-sm"></span>
+<span class="text-primary font-mono text-sm font-bold relative">12</span>
+</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">13</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">14</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">15</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">16</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">17</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">18</div>
+<!-- Selected State -->
+<div class="relative py-3 flex items-center justify-center">
+<span class="absolute inset-0 m-auto w-8 h-8 bg-primary rounded-sm"></span>
+<span class="text-on-primary font-mono text-sm font-bold relative">19</span>
+</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">20</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">21</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">22</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">23</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">24</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">25</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">26</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">27</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">28</div>
+<div class="text-on-surface font-mono text-sm py-3 cursor-pointer hover:text-primary transition-colors">29</div>
+</div>
+<div class="mt-10 pt-8 border-t border-outline-variant/20 flex gap-6 items-center">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary rounded-[1px]"></div>
+<span class="font-label text-[10px] text-outline uppercase tracking-wider">Избрано</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 border border-primary/40 rounded-[1px]"></div>
+<span class="font-label text-[10px] text-outline uppercase tracking-wider">Днес</span>
+</div>
+</div>
+</div>
+<!-- Right: Time Slots Grid -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-low rounded-sm h-full flex flex-col">
+<div class="p-8 border-b border-outline-variant/10 flex justify-between items-center">
+<div>
+<h3 class="font-label uppercase tracking-widest text-sm text-on-surface">Налични часове</h3>
+<p class="font-body text-xs text-outline mt-1 italic">Четвъртък, 19 Декември</p>
+</div>
+<span class="font-mono text-xs text-primary bg-primary/10 px-3 py-1 border border-primary/20">GMT +02:00</span>
+</div>
+<div class="p-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 custom-scrollbar overflow-y-auto max-h-[500px]">
+<!-- Morning -->
+<div class="col-span-full font-label text-[10px] text-outline uppercase tracking-widest mt-2 mb-4">Сутрин</div>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95 group">
+                            09:00
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            09:45
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-outline opacity-30 cursor-not-allowed">
+                            10:30
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            11:15
+                        </button>
+<!-- Afternoon -->
+<div class="col-span-full font-label text-[10px] text-outline uppercase tracking-widest mt-6 mb-4">Следобед</div>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            13:00
+                        </button>
+<button class="py-4 bg-primary border border-primary font-mono text-sm text-on-primary font-bold shadow-lg shadow-primary/20">
+                            13:45
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            14:30
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            15:15
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-outline opacity-30 cursor-not-allowed">
+                            16:00
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            16:45
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            17:30
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            18:15
+                        </button>
+<!-- Evening -->
+<div class="col-span-full font-label text-[10px] text-outline uppercase tracking-widest mt-6 mb-4">Вечер</div>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            19:00
+                        </button>
+<button class="py-4 border border-outline-variant/20 font-mono text-sm text-on-surface hover:border-primary transition-all active:scale-95">
+                            19:45
+                        </button>
+</div>
+<div class="mt-auto p-8 bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4 text-outline text-xs">
+<span class="material-symbols-outlined !text-sm">info</span>
+<span>Продължителност на услугата: 45 мин.</span>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-8 py-3 border border-outline/30 text-outline font-label uppercase tracking-widest text-[10px] hover:bg-surface-container-high transition-colors">
+                                Назад
+                            </button>
+<button class="flex-1 md:flex-none px-12 py-3 bg-primary text-on-primary font-label font-bold uppercase tracking-widest text-[10px] active:scale-95 transition-transform">
+                                Продължи
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Appointment Summary Floating (Desktop) -->
+<div class="hidden xl:block fixed right-12 bottom-12 w-80 bg-surface-container-high border-t-2 border-primary shadow-2xl p-6 transition-all duration-500">
+<h4 class="font-label uppercase tracking-widest text-[10px] text-primary mb-4">Вашият избор</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<span class="font-body text-xs text-outline">Услуга</span>
+<span class="font-label text-xs text-on-surface text-right">Класическо подстригване</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="font-body text-xs text-outline">Майстор</span>
+<span class="font-label text-xs text-on-surface text-right">Виктор Ангелов</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="font-body text-xs text-outline">Дата и час</span>
+<span class="font-mono text-xs text-primary text-right">19 Дек, 13:45 ч.</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="font-label text-[10px] text-outline uppercase tracking-widest">Общо</span>
+<span class="font-mono text-lg text-on-surface">45.00 лв</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-[#0A0A0A] dark:bg-[#0A0A0A] w-full border-t border-[#2A2A2A]">
+<div class="flex flex-col md:flex-row justify-between items-start px-6 md:px-12 py-16 gap-8 w-full max-w-screen-2xl mx-auto">
+<div class="flex flex-col gap-6">
+<span class="text-xl font-bold tracking-widest text-[#EDE8DF] font-label">OSTRIE</span>
+<p class="font-body text-[#8A8070] max-w-xs text-sm leading-relaxed">
+                    Прецизност във всяко движение. Атлие за мъжки стил и автентично преживяване.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="flex flex-col gap-4">
+<span class="font-label uppercase text-[10px] tracking-widest text-primary">Социални</span>
+<a class="text-sm font-label text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Instagram</a>
+<a class="text-sm font-label text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Facebook</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label uppercase text-[10px] tracking-widest text-primary">Локация</span>
+<a class="text-sm font-label text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">София, ул. Шишман 14</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label uppercase text-[10px] tracking-widest text-primary">Контакт</span>
+<a class="text-sm font-label text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">+359 888 123 456</a>
+<a class="text-sm font-label text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">contact@ostrie.bg</a>
+</div>
+</div>
+</div>
+<div class="px-6 md:px-12 pb-12 w-full max-w-screen-2xl mx-auto">
+<p class="font-mono text-[10px] text-[#8A8070]">© 2024 OSTRIE Precision Atelier. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

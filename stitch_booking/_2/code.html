@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#93000a",
+                    "tertiary-container": "#9ba8eb",
+                    "primary-fixed": "#ffe08f",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-bright": "#3a3939",
+                    "background": "#0a0a0a",
+                    "error": "#ffb4ab",
+                    "outline": "#99907e",
+                    "on-primary-container": "#503d00",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#4e4638",
+                    "tertiary-fixed-dim": "#b9c3ff",
+                    "on-primary": "#3d2e00",
+                    "on-tertiary-fixed-variant": "#35437e",
+                    "primary-fixed-dim": "#e6c364",
+                    "primary-container": "#c9a84c",
+                    "on-primary-fixed-variant": "#584400",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed-variant": "#4e4638",
+                    "on-surface-variant": "#d0c5b2",
+                    "on-tertiary-container": "#2e3b77",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary": "#1e2b66",
+                    "primary": "#e6c364",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed": "#211b0f",
+                    "secondary-fixed-dim": "#d1c5b3",
+                    "on-background": "#e5e2e1",
+                    "inverse-primary": "#755b00",
+                    "surface-container-low": "#131313",
+                    "secondary": "#d1c5b3",
+                    "on-secondary-container": "#bfb4a2",
+                    "surface-container": "#201f1f",
+                    "on-primary-fixed": "#241a00",
+                    "on-secondary": "#362f23",
+                    "on-tertiary-fixed": "#041451",
+                    "tertiary-fixed": "#dde1ff",
+                    "surface": "#0a0a0a",
+                    "secondary-fixed": "#eee1ce",
+                    "inverse-on-surface": "#313030",
+                    "outline-variant": "#4d4637",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#b9c4ff",
+                    "surface-tint": "#e6c364",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#353534"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Cormorant Garamond", "serif"],
+                    "body": ["Lora", "serif"],
+                    "label": ["Josefin Sans", "sans-serif"],
+                    "technical": ["DM Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(53, 53, 52, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+<div class="noise-overlay"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80 flex justify-between items-center px-12 py-6">
+<div class="font-['Cormorant_Garamond'] text-2xl font-bold tracking-tighter text-[#EDE8DF]">OSTRIE</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Atelier</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Services</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Gallery</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Team</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#C9A84C] font-bold border-b border-[#C9A84C] pb-1" href="#">Booking</a>
+</div>
+<button class="bg-primary text-on-primary-fixed px-6 py-2.5 font-label uppercase text-[0.7rem] tracking-widest font-bold hover:bg-primary-fixed-dim transition-all duration-300">
+            Reserve Now
+        </button>
+</nav>
+<main class="pt-40 pb-20">
+<!-- Hero Title Section -->
+<header class="px-12 mb-24 max-w-7xl mx-auto">
+<h1 class="font-headline text-[5rem] md:text-[8rem] leading-[0.9] tracking-tighter text-on-surface">
+                Контакти
+            </h1>
+<div class="mt-8 flex items-center gap-4">
+<div class="h-[1px] w-12 bg-primary"></div>
+<p class="font-label uppercase tracking-widest text-primary text-xs">Прецизност във всяко докосване</p>
+</div>
+</header>
+<!-- Main Content Grid -->
+<section class="px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left: Contact Information -->
+<div class="lg:col-span-5 space-y-20">
+<!-- Address & Phone -->
+<div class="space-y-12">
+<div class="group">
+<label class="font-label uppercase text-[0.7rem] tracking-[0.2em] text-secondary mb-4 block">Локация</label>
+<p class="font-headline text-3xl text-on-surface group-hover:text-primary transition-colors duration-500">ул. „Цар Иван Асен II“ 12,<br/>София 1124, България</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<label class="font-label uppercase text-[0.7rem] tracking-[0.2em] text-secondary mb-4 block">Телефон</label>
+<p class="font-technical text-xl text-on-surface">+359 888 123 456</p>
+</div>
+<div>
+<label class="font-label uppercase text-[0.7rem] tracking-[0.2em] text-secondary mb-4 block">Електронна поща</label>
+<p class="font-technical text-xl text-on-surface underline decoration-primary/30 hover:decoration-primary transition-all">atelier@ostrie.bg</p>
+</div>
+</div>
+</div>
+<!-- Working Hours -->
+<div class="bg-surface-container-low p-8 border-l-2 border-primary/20">
+<label class="font-label uppercase text-[0.7rem] tracking-[0.2em] text-primary mb-6 block font-bold">Работно Време</label>
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-2">
+<span class="font-body text-secondary">Понеделник — Петък</span>
+<span class="font-technical text-on-surface">10:00 — 20:00</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-2">
+<span class="font-body text-secondary">Събота</span>
+<span class="font-technical text-on-surface">10:00 — 18:00</span>
+</div>
+<div class="flex justify-between items-center pb-2">
+<span class="font-body text-secondary">Неделя</span>
+<span class="font-technical text-error">Затворено</span>
+</div>
+</div>
+</div>
+<!-- Social Media -->
+<div class="flex gap-8 items-center">
+<a class="group" href="#">
+<span class="font-label uppercase text-[0.75rem] tracking-widest text-secondary group-hover:text-primary transition-colors">Instagram</span>
+</a>
+<div class="w-1.5 h-1.5 bg-outline-variant/30 rounded-full"></div>
+<a class="group" href="#">
+<span class="font-label uppercase text-[0.75rem] tracking-widest text-secondary group-hover:text-primary transition-colors">Facebook</span>
+</a>
+<div class="w-1.5 h-1.5 bg-outline-variant/30 rounded-full"></div>
+<a class="group" href="#">
+<span class="font-label uppercase text-[0.75rem] tracking-widest text-secondary group-hover:text-primary transition-colors">Behance</span>
+</a>
+</div>
+</div>
+<!-- Right: Contact Form / Visual Space -->
+<div class="lg:col-span-7">
+<div class="glass-card p-10 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-primary/20 text-6xl select-none">content_cut</span>
+</div>
+<h3 class="font-headline text-3xl mb-10 text-on-surface">Запазете своя час</h3>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative">
+<label class="font-label text-[0.65rem] uppercase tracking-widest text-secondary mb-2 block">Име</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary text-on-surface py-2 px-0 transition-all placeholder:text-outline-variant/50" placeholder="Вашето име" type="text"/>
+</div>
+<div class="relative">
+<label class="font-label text-[0.65rem] uppercase tracking-widest text-secondary mb-2 block">Телефон</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary text-on-surface py-2 px-0 transition-all placeholder:text-outline-variant/50" placeholder="+359 ..." type="tel"/>
+</div>
+</div>
+<div class="relative">
+<label class="font-label text-[0.65rem] uppercase tracking-widest text-secondary mb-2 block">Съобщение</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary text-on-surface py-2 px-0 transition-all placeholder:text-outline-variant/50" placeholder="Как можем да Ви помогнем?" rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary-fixed py-5 font-label uppercase tracking-[0.25em] text-xs font-bold hover:bg-primary-fixed-dim transition-all flex items-center justify-center gap-3" type="submit">
+                            Изпрати Запитване
+                            <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</button>
+</form>
+</div>
+</div>
+</section>
+<!-- Full Width Map Section -->
+<section class="mt-32 w-full h-[600px] relative grayscale hover:grayscale-0 transition-all duration-1000 overflow-hidden group">
+<div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-background via-transparent to-background"></div>
+<!-- Placeholder for Google Maps Embed with data-location -->
+<div class="w-full h-full bg-surface-container-low flex items-center justify-center relative">
+<img class="w-full h-full object-cover opacity-40" data-alt="Monochrome minimalist map of Sofia city center with architectural details and dark moody urban aesthetic" data-location="Sofia, Bulgaria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7tiYdndQG81tD-dt3EcCB6vdODjdborkjb2wu3zsjUHXUr095HP6HS7Uw7HSbRtAGq0-dTytGAqQ71wZd73_Doy12bugkoh0A2EcQIruC75NwJ-AMdh0q9ntNIv0Gh2b0gZSuRlU3GbkGEVnm9GhBlRh_81hDzIqTBdQcIuPC4dwK7T4GuJLApaZqIS4UH-w8eusp8lC-8MwHxKR7h-WipQhxk2tl7TkedLQYB03Kfc04Hl_2RpNABOnUAw55u1UzUXviN1r_3w"/>
+<div class="absolute z-20 flex flex-col items-center">
+<div class="w-16 h-16 bg-primary/20 backdrop-blur-md rounded-full flex items-center justify-center border border-primary/40 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div class="mt-4 glass-card px-6 py-2 border border-primary/20">
+<span class="font-technical text-primary text-sm uppercase tracking-widest">42.6934° N, 23.3364° E</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full py-20 px-12 border-t border-[#2A2A2A]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="font-['Cormorant_Garamond'] text-3xl font-light text-[#EDE8DF] mb-4">OSTRIE</div>
+<p class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] max-w-xs">
+                    Изкуството на мъжкото подстригване, превърнато в хирургическа прецизност. Повече от салон — Вашето ателие за стил.
+                </p>
+</div>
+<div>
+<h4 class="font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] text-[#C9A84C] mb-6">Навигация</h4>
+<ul class="space-y-3">
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Начало</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Ателие</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Услуги</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Екип</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] text-[#C9A84C] mb-6">Правна информация</h4>
+<ul class="space-y-3">
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Политика за поверителност</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Общи условия</a></li>
+<li><a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Бисквитки</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-['Josefin_Sans'] uppercase tracking-widest text-[0.7rem] text-[#C9A84C] mb-6">Бюлетин</h4>
+<p class="font-['Lora'] text-sm text-[#8A8070] mb-4">Абонирайте се за ексклузивни новини и събития.</p>
+<div class="flex border-b border-[#2A2A2A] pb-2">
+<input class="bg-transparent border-none text-[#EDE8DF] text-sm focus:ring-0 w-full placeholder-[#4d4637]" placeholder="Email" type="email"/>
+<button class="text-[#C9A84C] hover:text-[#EDE8DF] transition-colors">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#1C1B1B] flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-['Lora'] text-[0.7rem] tracking-widest text-[#4d4637]">© 2024 OSTRIE PRECISION ATELIER. ALL RIGHTS RESERVED.</span>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-[#8A8070] text-lg hover:text-[#C9A84C] cursor-pointer transition-colors">brand_awareness</span>
+<span class="material-symbols-outlined text-[#8A8070] text-lg hover:text-[#C9A84C] cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-[#8A8070] text-lg hover:text-[#C9A84C] cursor-pointer transition-colors">contact_support</span>
+</div>
+</div>
+</footer>
+</body></html>

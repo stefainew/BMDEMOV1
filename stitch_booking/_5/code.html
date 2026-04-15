@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=DM+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#93000a",
+                        "tertiary-container": "#9ba8eb",
+                        "primary-fixed": "#ffe08f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "background": "#131313",
+                        "error": "#ffb4ab",
+                        "outline": "#99907e",
+                        "on-primary-container": "#503d00",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#4e4638",
+                        "tertiary-fixed-dim": "#b9c3ff",
+                        "on-primary": "#3d2e00",
+                        "on-tertiary-fixed-variant": "#35437e",
+                        "primary-fixed-dim": "#e6c364",
+                        "primary-container": "#c9a84c",
+                        "on-primary-fixed-variant": "#584400",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#4e4638",
+                        "on-surface-variant": "#d0c5b2",
+                        "on-tertiary-container": "#2e3b77",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#1e2b66",
+                        "primary": "#e6c364",
+                        "surface-variant": "#353534",
+                        "on-secondary-fixed": "#211b0f",
+                        "secondary-fixed-dim": "#d1c5b3",
+                        "on-background": "#e5e2e1",
+                        "inverse-primary": "#755b00",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#d1c5b3",
+                        "on-secondary-container": "#bfb4a2",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed": "#241a00",
+                        "on-secondary": "#362f23",
+                        "on-tertiary-fixed": "#041451",
+                        "tertiary-fixed": "#dde1ff",
+                        "surface": "#131313",
+                        "secondary-fixed": "#eee1ce",
+                        "inverse-on-surface": "#313030",
+                        "outline-variant": "#4d4637",
+                        "on-surface": "#e5e2e1",
+                        "tertiary": "#b9c4ff",
+                        "surface-tint": "#e6c364",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#353534"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Cormorant Garamond"],
+                        "body": ["Lora"],
+                        "label": ["Josefin Sans"],
+                        "mono": ["DM Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #EDE8DF;
+            font-family: 'Lora', serif;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .shimmer-text {
+            background: linear-gradient(135deg, #C9A84C 0%, #FFE08F 50%, #C9A84C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0A]">
+<div class="grain-overlay"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80 flex justify-between items-center px-12 py-6 w-full">
+<div class="font-['Cormorant_Garamond'] text-2xl font-bold tracking-tighter text-[#EDE8DF]">OSTRIE</div>
+<div class="hidden md:flex gap-12">
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Atelier</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Services</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Gallery</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Team</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Booking</a>
+</div>
+<button class="bg-[#C9A84C] text-[#241a00] font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] px-6 py-3 rounded-[2px] hover:bg-[#e6c364] transition-colors">Reserve Now</button>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="px-12 mb-32">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+<div class="md:col-span-7">
+<h1 class="font-headline text-[5rem] leading-[0.9] font-bold text-[#EDE8DF] mb-8">
+                        За нас
+                    </h1>
+<p class="font-body text-xl text-[#8A8070] max-w-xl">
+                        ОСТРИЕ не е просто бръснарница. Това е ателие за прецизност, където занаятът се среща с хирургическа точност в сърцето на съвременната естетика.
+                    </p>
+</div>
+<div class="md:col-span-5 flex justify-end">
+<span class="font-mono text-sm tracking-widest text-[#C9A84C]">EST. 2018 / SOFIA</span>
+</div>
+</div>
+<div class="mt-16 h-[600px] w-full relative overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-75" data-alt="Cinematic close-up of a vintage straight razor reflecting soft golden light in a dark, atmospheric atelier setting with subtle smoke" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsiUAtmTqN7Vj7pdr9qB4i4It7HZkvme4zW4VDANjLHq9IBV_MWjhw7ZoFAWCEmP26F7CM47DNd9UIn6qkPtD5HuN0phlbQbsg2Ro4mlWWHu9EUOHTmrWH0sNhXi1LUO0aYkQIF9mP6Z90fxJmxbme5iYQW4HU2URFedkDQsxmY3-dba0Qy9_NZCdnoShGHL16LciiHuhNe2Ag_5htvgeoUXyAkyBTsu_SVK7F1vk8nyIJlvPh6NBdWGVnrGqV_KWPs0FUF_xflw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent"></div>
+</div>
+</section>
+<!-- History Section (Architectural Asymmetry) -->
+<section class="px-12 py-32 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="space-y-12">
+<h2 class="font-headline text-4xl text-[#EDE8DF]">Историята на Острието</h2>
+<div class="space-y-6 font-body text-lg text-[#8A8070] leading-relaxed">
+<p>
+                            Всичко започна с една единствена идея: да премахнем излишното и да се фокусираме върху съвършенството. В свят на бързи решения, ние избрахме пътя на търпението.
+                        </p>
+<p>
+                            През 2018 г. ОСТРИЕ отвори врати като скромно пространство с два стола и непоколебима визия. Днес ние сме еталон за качество, дефинирайки стандартите за мъжка грижа чрез симбиоза от традиционни техники и авангарден стил.
+                        </p>
+</div>
+</div>
+<div class="relative h-[500px]">
+<div class="absolute top-0 right-0 w-4/5 h-4/5 z-10">
+<img class="w-full h-full object-cover" data-alt="Black and white architectural photography of a minimalist modern barbershop interior with sharp lines and high contrast shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE2CJP10ngrTxua_Sohzb9WiNkSwSr9vJ_PLK2VKWujutOsk0wwXA3L6p9slo7-QcLpk_vmhOcjieHloHbb9Pvx9bKPaRoIM9wOPsWhNyscgVuhaGgxIz5ntoc_sP-tiQZXq5e6nk4QHTh__c_2_4c6R-mbSDnbrcbqF4U8KHXrYiT3ybh5sn9jOYvTxg6lfRnT08c_u8C3X4QmpZlQgnNJ5LRKrbmoQMGW2JsX8b4YvtCik1H3Qx40gHGX30dAYnOsBKDV34I3Q"/>
+</div>
+<div class="absolute bottom-0 left-0 w-3/5 h-3/5 bg-surface-container-high p-8 flex flex-col justify-end">
+<span class="font-mono text-xs text-[#C9A84C] mb-2">ARCHIVE NO. 001</span>
+<p class="font-label text-sm uppercase tracking-widest">Първият детайл е най-важен.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Philosophy (Tonal Layering) -->
+<section class="px-12 py-40">
+<div class="max-w-5xl mx-auto text-center space-y-12">
+<span class="font-label text-xs uppercase tracking-[0.3em] text-[#C9A84C]">Нашата Философия</span>
+<h2 class="font-headline text-6xl leading-tight">Ние не просто подстригваме.<br/><span class="italic text-[#8A8070]">Ние ваем идентичност.</span></h2>
+<p class="font-body text-xl text-[#8A8070] max-w-2xl mx-auto">
+                    Всяко движение на инструмента е продиктувано от геометрията на лицето и характера на човека. Вярваме, че детайлът не е просто част от цялото, той е самото цяло.
+                </p>
+</div>
+</section>
+<!-- Core Values (Bento Grid) -->
+<section class="px-12 pb-40">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Precision -->
+<div class="bg-surface-container-low p-12 space-y-8 flex flex-col justify-between border-b-2 border-transparent hover:border-[#C9A84C] transition-all group">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-[#C9A84C] text-3xl">architecture</span>
+<h3 class="font-label text-xl uppercase tracking-widest text-[#EDE8DF]">Прецизност</h3>
+<p class="font-body text-[#8A8070]">Никакви компромиси. Използваме инструменти с хирургическа точност, за да гарантираме перфектен резултат до последния милиметър.</p>
+</div>
+<span class="font-mono text-xs text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity">01 / ACCURACY</span>
+</div>
+<!-- Honesty -->
+<div class="bg-surface-container-low p-12 space-y-8 flex flex-col justify-between border-b-2 border-transparent hover:border-[#C9A84C] transition-all group">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-[#C9A84C] text-3xl">shield</span>
+<h3 class="font-label text-xl uppercase tracking-widest text-[#EDE8DF]">Честност</h3>
+<p class="font-body text-[#8A8070]">Връзката ни с клиентите се гради върху доверие. Предлагаме само това, което работи за вашия стил, без излишни обещания.</p>
+</div>
+<span class="font-mono text-xs text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity">02 / INTEGRITY</span>
+</div>
+<!-- Craft -->
+<div class="bg-surface-container-low p-12 space-y-8 flex flex-col justify-between border-b-2 border-transparent hover:border-[#C9A84C] transition-all group">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-[#C9A84C] text-3xl">content_cut</span>
+<h3 class="font-label text-xl uppercase tracking-widest text-[#EDE8DF]">Занаят</h3>
+<p class="font-body text-[#8A8070]">Майсторството е процес на учене през целия живот. Всеки наш стилист е артист, посветен на съвършенството на формата.</p>
+</div>
+<span class="font-mono text-xs text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity">03 / MASTERY</span>
+</div>
+</div>
+</section>
+<!-- Image Gallery Callout -->
+<section class="h-[819px] relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Macro shot of hands using professional steel scissors to trim dark hair with moody dramatic lighting and shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB8NbfTDxRlmYA1NNODyz3jAumkCkCD5PG4fodfulO7TtG2XdrwGbOwC-8tt_3HIiAHGyybeJ3IK5RBfx05b4GQLA3CcvmhJIB_RL85SJwpcqy6hMrRda_Iv9VBfRZdTPs9YSSSykN_AsrCm-_91PEKOvJGn4UyAmeSMyx8tCj2hmWRUSjMGu0vZbFYHObUGBJ1CbBmlNkNvuoUx8my9D9nX32tRbm2jul2oG87JYJbN0AjSFrRVanA4O4KL6Cu8H7W6Kuhhmb8A"/>
+<div class="absolute inset-0 bg-[#0A0A0A]/40 flex items-center justify-center">
+<div class="text-center space-y-8">
+<h2 class="font-headline text-5xl">Вижте нашия занаят в действие</h2>
+<button class="border border-[#C9A84C] text-[#C9A84C] font-label uppercase tracking-widest px-10 py-4 hover:bg-[#C9A84C] hover:text-black transition-all">Към Галерията</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full py-20 px-12 border-t border-[#2A2A2A]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="md:col-span-2">
+<div class="font-['Cormorant_Garamond'] text-3xl font-light text-[#EDE8DF] mb-4">OSTRIE</div>
+<p class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] max-w-xs">
+                    Прецизен бръснарски занаят и съвременна естетика. Създадено за мъжете, които не правят компромис с детайлите.
+                </p>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-[#C9A84C] mb-6">Навигация</h4>
+<ul class="space-y-4 font-['Lora'] text-sm">
+<li><a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Ателие</a></li>
+<li><a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Услуги</a></li>
+<li><a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Екип</a></li>
+<li><a class="text-[#C9A84C] transition-colors" href="#">За нас</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-[#C9A84C] mb-6">Контакт</h4>
+<ul class="space-y-4 font-['Lora'] text-sm text-[#8A8070]">
+<li>Ул. „Граф Игнатиев“ 24</li>
+<li>София, България</li>
+<li>+359 888 123 456</li>
+<li>atelier@ostrie.bg</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#1C1B1B] flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="font-['Lora'] text-sm text-[#8A8070]">
+                © 2024 OSTRIE PRECISION ATELIER. ALL RIGHTS RESERVED.
+            </div>
+<div class="flex gap-8 font-['Lora'] text-sm text-[#8A8070]">
+<a class="hover:text-[#EDE8DF] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#EDE8DF] transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-[#EDE8DF] transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

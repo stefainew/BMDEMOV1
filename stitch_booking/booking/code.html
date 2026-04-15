@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking: Потвърждение и Успех</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#93000a",
+                    "tertiary-container": "#9ba8eb",
+                    "primary-fixed": "#ffe08f",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-bright": "#3a3939",
+                    "background": "#0a0a0a",
+                    "error": "#ffb4ab",
+                    "outline": "#99907e",
+                    "on-primary-container": "#503d00",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#4e4638",
+                    "tertiary-fixed-dim": "#b9c3ff",
+                    "on-primary": "#3d2e00",
+                    "on-tertiary-fixed-variant": "#35437e",
+                    "primary-fixed-dim": "#e6c364",
+                    "primary-container": "#c9a84c",
+                    "on-primary-fixed-variant": "#584400",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed-variant": "#4e4638",
+                    "on-surface-variant": "#d0c5b2",
+                    "on-tertiary-container": "#2e3b77",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary": "#1e2b66",
+                    "primary": "#e6c364",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed": "#211b0f",
+                    "secondary-fixed-dim": "#d1c5b3",
+                    "on-background": "#e5e2e1",
+                    "inverse-primary": "#755b00",
+                    "surface-container-low": "#131313",
+                    "secondary": "#d1c5b3",
+                    "on-secondary-container": "#bfb4a2",
+                    "surface-container": "#201f1f",
+                    "on-primary-fixed": "#241a00",
+                    "on-secondary": "#362f23",
+                    "on-tertiary-fixed": "#041451",
+                    "tertiary-fixed": "#dde1ff",
+                    "surface": "#131313",
+                    "secondary-fixed": "#eee1ce",
+                    "inverse-on-surface": "#313030",
+                    "outline-variant": "#4d4637",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#b9c4ff",
+                    "surface-tint": "#e6c364",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#353534"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Cormorant Garamond", "serif"],
+                    "body": ["Lora", "serif"],
+                    "label": ["Josefin Sans", "sans-serif"],
+                    "mono": ["DM Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #EDE8DF;
+    font-family: "Lora", serif;
+    position: relative
+    }
+.grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuChCpgQquHGd2DCfSAqisRNrDYOPvpyIbbw-efcnttL9NTTZaxD3z_1XlCDOmZb7vSK8KVPijsDpcxNGLZWhXhoAT8udYoUyTPKUN8414Uho7vvLq4m_VWkLFPdtcbSWYF2ZZn8EER-_risM13iFHtZvHfDCMCIy9o2jZy43rHlshX4s2NiwwR4OVeGKWCGDqI71_l4WiG3npQfAF54vCBoiTLH3KsmWIzaEmZXLiF7R5gylZrHvz9f3vPvNOrWxbWq4l2cE1Edmg)
+    }
+.text-precision {
+    font-family: "Josefin Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em
+    }
+.text-brand-header {
+    font-family: "Cormorant Garamond", serif
+    }
+.text-technical {
+    font-family: "DM Mono", monospace
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }</style>
+</head>
+<body class="bg-background selection:bg-primary selection:text-on-primary">
+<div class="grain-overlay"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80">
+<div class="flex justify-between items-center px-6 md:px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-[0.2em] text-[#EDE8DF] Josefin-Sans uppercase">OSTRIE</div>
+<div class="hidden md:flex gap-12 items-center">
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300 text-precision text-[0.75rem]" href="#">Services</a>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300 text-precision text-[0.75rem]" href="#">Gallery</a>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300 text-precision text-[0.75rem]" href="#">Team</a>
+<a class="bg-primary text-on-primary px-8 py-3 text-precision text-[0.75rem] font-bold hover:bg-primary-fixed-dim transition-all active:scale-95" href="#">Запази час</a>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-xl mx-auto">
+<!-- Booking Step 5: Confirmation -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start" id="confirmation-step">
+<div class="lg:col-span-7">
+<div class="mb-12">
+<span class="text-precision text-primary text-xs mb-4 block">Стъпка 05 / 05</span>
+<h1 class="text-brand-header text-5xl md:text-6xl font-bold text-on-background mb-6">Данни за контакт</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-xl">Моля, въведете вашите данни за потвърждение на резервацията. Ще получите SMS с детайлите за вашия час.</p>
+</div>
+<form class="space-y-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative group">
+<label class="text-precision text-[0.7rem] text-outline mb-2 block group-focus-within:text-primary transition-colors">Име</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-background focus:ring-0 focus:border-primary placeholder:text-surface-container-highest transition-all font-body text-lg" placeholder="Иван" type="text"/>
+</div>
+<div class="relative group">
+<label class="text-precision text-[0.7rem] text-outline mb-2 block group-focus-within:text-primary transition-colors">Фамилия</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-background focus:ring-0 focus:border-primary placeholder:text-surface-container-highest transition-all font-body text-lg" placeholder="Петров" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative group">
+<label class="text-precision text-[0.7rem] text-outline mb-2 block group-focus-within:text-primary transition-colors">Телефон</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-background focus:ring-0 focus:border-primary placeholder:text-surface-container-highest transition-all font-technical text-lg tracking-wider" placeholder="+359 888 000 000" type="tel"/>
+</div>
+<div class="relative group">
+<label class="text-precision text-[0.7rem] text-outline mb-2 block group-focus-within:text-primary transition-colors">E-mail (незадължително)</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 text-on-background focus:ring-0 focus:border-primary placeholder:text-surface-container-highest transition-all font-body text-lg" placeholder="ivan@example.com" type="email"/>
+</div>
+</div>
+<div class="flex items-center gap-4 pt-4">
+<input class="w-5 h-5 rounded-none border-outline-variant bg-transparent text-primary focus:ring-0 focus:ring-offset-0" id="terms" type="checkbox"/>
+<label class="text-on-surface-variant text-sm font-body" for="terms">Съгласен съм с <a class="text-primary underline" href="#">Общите условия</a> и политиката за поверителност.</label>
+</div>
+<div class="pt-8">
+<button class="w-full md:w-auto bg-primary text-on-primary px-16 py-5 text-precision text-sm font-bold hover:bg-primary-fixed-dim transition-all active:scale-95 flex items-center justify-center gap-4" type="button">
+                            Потвърди резервацията
+                            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Summary Sidebar -->
+<div class="lg:col-span-5 bg-surface-container-low p-12 relative overflow-hidden border-l border-outline-variant/10">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-8xl">content_cut</span>
+</div>
+<h3 class="text-precision text-sm text-outline mb-10 border-b border-outline-variant pb-4">Резюме на резервацията</h3>
+<div class="space-y-8">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-precision text-[0.65rem] text-outline mb-1">Услуга</p>
+<p class="text-xl font-headline font-bold text-on-background">Класическо подстригване</p>
+<p class="text-on-surface-variant text-sm font-body mt-1">45 минути</p>
+</div>
+<p class="text-technical text-primary text-lg">45.00 лв.</p>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-precision text-[0.65rem] text-outline mb-1">Майстор</p>
+<div class="flex items-center gap-3 mt-2">
+<div class="w-10 h-10 bg-surface-container-highest flex items-center justify-center">
+<img alt="Portrait of a professional barber with sharp beard in a moody studio setting" class="w-full h-full object-cover grayscale brightness-75" data-alt="Portrait of a professional barber with sharp beard in a moody studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvTfkoIXlkYqWWfTaZGDPES3XqT1ojxuRe-FKyMNr0ldOgE8S_OiebjqfGXHqydZfYGZYK6f8Qgqcv31Li9LI9Fgh4hq-VHwTSoo1SdbTWkn1WBdw25he6f6b1NmNEJUTnj0C2aYsv_zV5Y4F9xaDFfR03lZCvluKC4hk-SzwiQSEjGJl0-n-xhYD2EyfOOB9igXIYxKTFa7Vec05qUt55vJ6EJg1zCrxzVlrj1KlnjOSyW_Ns-t1on_y5AJKQNhzOFjZKX8r1IQ"/>
+</div>
+<p class="text-lg font-headline text-on-background">Виктор Колев</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8 pt-4">
+<div>
+<p class="text-precision text-[0.65rem] text-outline mb-1">Дата</p>
+<p class="text-lg font-headline text-on-background">15 Октомври, 2024</p>
+</div>
+<div>
+<p class="text-precision text-[0.65rem] text-outline mb-1">Час</p>
+<p class="text-lg font-technical text-on-background">14:30 ч.</p>
+</div>
+</div>
+<div class="pt-10 border-t border-outline-variant/30 flex justify-between items-baseline">
+<p class="text-precision text-sm text-on-background">Общо за плащане</p>
+<p class="text-3xl font-technical text-primary">45.00 лв.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="my-24 border-0 h-px bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"/>
+<!-- Success Page Section (Hidden by default or shown after action) -->
+<section class="max-w-3xl mx-auto text-center py-20" id="success-message">
+<div class="mb-12 inline-flex items-center justify-center w-24 h-24 bg-surface-container-low border border-primary/20 relative">
+<span class="material-symbols-outlined text-primary text-5xl">check_circle</span>
+<div class="absolute -bottom-2 -right-2 w-8 h-8 bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-weight="fill">verified</span>
+</div>
+</div>
+<h2 class="text-brand-header text-5xl md:text-7xl font-bold text-on-background mb-8">Резервацията е успешна!</h2>
+<div class="bg-surface-container-low p-8 md:p-12 mb-12 text-left border-l-2 border-primary">
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="flex-1">
+<p class="text-on-surface-variant text-lg mb-6 leading-relaxed">Благодарим Ви, Иван! Вашият час е потвърден в системата на OSTRIE Precision Atelier.</p>
+<div class="flex items-start gap-4 text-[#8A8070]">
+<span class="material-symbols-outlined text-primary mt-1">sms</span>
+<p class="text-sm">Ще получите SMS потвърждение на телефон <span class="text-on-background font-technical">+359 888 000 000</span> в следващите няколко минути.</p>
+</div>
+</div>
+<div class="w-full md:w-auto pt-4 md:pt-0">
+<button class="w-full md:w-auto outline outline-1 outline-outline-variant px-8 py-3 text-precision text-xs hover:bg-surface-container-high transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_add_on</span>
+                            Добави в Календар
+                        </button>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-6 justify-center">
+<a class="bg-primary text-on-primary px-12 py-5 text-precision text-sm font-bold hover:bg-primary-fixed-dim transition-all" href="#">Обратно към начало</a>
+<a class="text-on-surface-variant hover:text-on-background px-12 py-5 text-precision text-sm border border-outline-variant transition-all" href="#">Виж моите резервации</a>
+</div>
+<div class="mt-20 opacity-30 grayscale hover:opacity-100 transition-opacity duration-700">
+<img alt="Cinematic wide shot of a high-end minimalist barbershop interior with dark leather chairs and focused lighting" class="w-full h-64 object-cover" data-alt="Cinematic wide shot of a high-end minimalist barbershop interior with dark leather chairs and focused lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHZgz_qcb1PZgEjtl02IPyQdxfBQ_KIxcR-x3kcSi8356-VxDfvaJoMBkEoXsuz6hdRvm3OuMuQYDxXSquMXBteZ7ImjoWjUCp2qtFYuuK1IYvWqmlOqwjIOI8X9pfyQp1TubusGSv7Rq8mauCbauARR_v6ZXkRX-TYwLdN7dG_HAkw3O2vmn0ksFjMASFzvzcJuqLL6V_jTkMJug4qYRIDAjpYUfk7NAvTezAx6C9SEekO51xeF3fezsMQR1Tpmp304-BIgzC2A"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#2A2A2A] bg-[#0A0A0A] dark:bg-[#0A0A0A]">
+<div class="flex flex-col md:flex-row justify-between items-start px-6 md:px-12 py-16 gap-8 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-6">
+<div class="text-xl font-bold tracking-widest text-[#EDE8DF] uppercase">OSTRIE</div>
+<p class="text-[#8A8070] max-w-xs font-body leading-relaxed">Прецизност във всяко движение. Вашата визия е нашата мисия в сърцето на града.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-24">
+<div class="flex flex-col gap-4">
+<span class="text-precision text-[0.65rem] text-primary">Социални мрежи</span>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors text-sm font-body" href="#">Instagram</a>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors text-sm font-body" href="#">Facebook</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-precision text-[0.65rem] text-primary">Локация</span>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors text-sm font-body" href="#">Бул. Витоша 42</a>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors text-sm font-body" href="#">София, България</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-precision text-[0.65rem] text-primary">Контакт</span>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors text-sm font-body" href="#">+359 888 123 456</a>
+<a class="text-[#8A8070] hover:text-[#EDE8DF] transition-colors text-sm font-body" href="#">atelier@ostrie.bg</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-precision text-[0.65rem] text-primary">Работно време</span>
+<span class="text-[#8A8070] text-sm font-technical">Пон-Съб: 10:00 - 20:00</span>
+<span class="text-[#8A8070] text-sm font-technical">Неделя: Почивен ден</span>
+</div>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#2A2A2A]/30">
+<p class="text-[#8A8070] text-[0.7rem] text-precision opacity-60">© 2024 OSTRIE Precision Atelier. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

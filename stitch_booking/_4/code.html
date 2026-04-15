@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:wght@400;500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#93000a",
+                        "tertiary-container": "#9ba8eb",
+                        "primary-fixed": "#ffe08f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "background": "#0a0a0a",
+                        "error": "#ffb4ab",
+                        "outline": "#99907e",
+                        "on-primary-container": "#503d00",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#4e4638",
+                        "tertiary-fixed-dim": "#b9c3ff",
+                        "on-primary": "#3d2e00",
+                        "on-tertiary-fixed-variant": "#35437e",
+                        "primary-fixed-dim": "#e6c364",
+                        "primary-container": "#c9a84c",
+                        "on-primary-fixed-variant": "#584400",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#4e4638",
+                        "on-surface-variant": "#d0c5b2",
+                        "on-tertiary-container": "#2e3b77",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#1e2b66",
+                        "primary": "#c9a84c",
+                        "surface-variant": "#353534",
+                        "on-secondary-fixed": "#211b0f",
+                        "secondary-fixed-dim": "#d1c5b3",
+                        "on-background": "#e5e2e1",
+                        "inverse-primary": "#755b00",
+                        "surface-container-low": "#131313",
+                        "secondary": "#d1c5b3",
+                        "on-secondary-container": "#bfb4a2",
+                        "surface-container": "#1c1b1b",
+                        "on-primary-fixed": "#241a00",
+                        "on-secondary": "#362f23",
+                        "on-tertiary-fixed": "#041451",
+                        "tertiary-fixed": "#dde1ff",
+                        "surface": "#0a0a0a",
+                        "secondary-fixed": "#eee1ce",
+                        "inverse-on-surface": "#313030",
+                        "outline-variant": "#4d4637",
+                        "on-surface": "#ede8df",
+                        "tertiary": "#b9c4ff",
+                        "surface-tint": "#e6c364",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#353534"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "2px",
+                        "lg": "2px",
+                        "xl": "2px",
+                        "full": "9999px"
+                    }
+                },
+            },
+        }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #EDE8DF;
+    font-family: "Lora", serif;
+    position: relative
+    }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAMEbGIlj79vbK5Wlsxg_YL0USuO92PrGfRwqfHXbbt7Ta11Q-7mtPedcxqNV-HMy83fp3KsMVWdC_j0Ts4hTTqHznVyK21ZKRRzxNPHuzCCOECHkZecPBOnqo_6kHcvvPl1g6rpJOonDfoNh1qmA0oShu8vY0qspaEbupWBzBcak13zss8YOsSaJSmUmVhNMcfY8qNbzHjHriTzcxGrH9BCtIgd3_90xxmPq6Do-SiVd0JPjIu1RsUdU2lsh9z5UCqhc39V9Xuqw);
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }
+.price-line {
+    font-family: "DM Mono", monospace
+    }
+.brand-header {
+    font-family: "Cormorant Garamond", serif
+    }
+.ui-label {
+    font-family: "Josefin Sans", sans-serif
+    }
+.shimmer-bg {
+    background: linear-gradient(135deg, #c9a84c 0%, #584400 100%)
+    }</style>
+</head>
+<body class="selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80 flex justify-between items-center px-12 py-6">
+<div class="font-['Cormorant_Garamond'] text-2xl font-bold tracking-tighter text-[#EDE8DF]">OSTRIE</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Atelier</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#C9A84C] font-bold border-b border-[#C9A84C] pb-1" href="#">Services</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Gallery</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Team</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Booking</a>
+</div>
+<button class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] bg-primary-container text-on-primary-container px-6 py-3 rounded-sm hover:opacity-80 transition-all duration-300 active:scale-95">
+            Reserve Now
+        </button>
+</nav>
+<main class="pt-40 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+<!-- Hero Section -->
+<header class="mb-32">
+<h1 class="brand-header text-6xl md:text-8xl font-bold tracking-tighter mb-8 max-w-4xl leading-tight">
+                Услуги и цени
+            </h1>
+<div class="flex flex-col md:flex-row gap-12 items-start">
+<p class="text-secondary text-xl max-w-xl leading-relaxed">
+                    Прецизност във всеки детайл. Нашето ателие предлага изключително внимание към вашата визия чрез съчетание на традиционни техники и модерен стил.
+                </p>
+<div class="h-px w-24 bg-primary mt-4 hidden md:block"></div>
+</div>
+</header>
+<!-- Services Grid -->
+<div class="space-y-40">
+<!-- Men's Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12" id="men">
+<div class="lg:col-span-5">
+<span class="ui-label uppercase tracking-[0.3em] text-primary text-xs mb-4 block">Maison Homme</span>
+<h2 class="brand-header text-5xl font-light mb-6">Мъжко Подстригване</h2>
+<p class="text-secondary mb-8 leading-relaxed italic">Класическа елегантност и съвременна прецизност за модерния джентълмен.</p>
+<div class="relative w-full aspect-[4/5] overflow-hidden group">
+<img alt="Professional barber cutting man's hair" class="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-700" data-alt="close-up of a professional barber using sharp scissors on dark hair in a moody cinematic atelier lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmD81urfGX3diDlqTxzy7VZlgJXXtTJ8WbFVouiiXStiitZj73i6xQAh7HdKaMqKv41O4bUdS2ykhIUuz4txnqV2yrmS3uFpdexVYZXejtLTlxHIP1cNL6wSsJ0pLqeYV0aYOPsN65L0sq-9dSkjJnUFub6dCMK--IPz_pigW-elpHTNEyikldodsncTgnv0eit1CyOtVH2OIk_7ZphmdQl3KVmV6WzUs6YuhUPzmNhO-JW9gJfXnvzj2Q-Vx4iuccSmbQ7jWmwQ"/>
+</div>
+</div>
+<div class="lg:col-span-7 flex flex-col justify-center space-y-8">
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="ui-label uppercase tracking-widest text-on-surface">Precision Cut</h3>
+<p class="text-secondary text-sm">Класическо подстригване с включена консултация</p>
+</div>
+<span class="price-line text-primary text-xl">45.00 BGN</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="ui-label uppercase tracking-widest text-on-surface">Director's Choice</h3>
+<p class="text-secondary text-sm">Подстригване от главен стилист</p>
+</div>
+<span class="price-line text-primary text-xl">60.00 BGN</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="ui-label uppercase tracking-widest text-on-surface">Fade Specialist</h3>
+<p class="text-secondary text-sm">Специфична техника за преливане</p>
+</div>
+<span class="price-line text-primary text-xl">50.00 BGN</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Women's Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12" id="women">
+<div class="lg:col-span-7 order-2 lg:order-1 flex flex-col justify-center space-y-8">
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="ui-label uppercase tracking-widest text-on-surface">Atelier Styling</h3>
+<p class="text-secondary text-sm">Подстригване и оформяне със сешоар</p>
+</div>
+<span class="price-line text-primary text-xl">85.00 BGN</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="ui-label uppercase tracking-widest text-on-surface">Editorial Look</h3>
+<p class="text-secondary text-sm">Стилизиране за специални поводи</p>
+</div>
+<span class="price-line text-primary text-xl">120.00 BGN</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<h3 class="ui-label uppercase tracking-widest text-on-surface">Deep Restore</h3>
+<p class="text-secondary text-sm">Подстригване с възстановяваща терапия</p>
+</div>
+<span class="price-line text-primary text-xl">110.00 BGN</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 order-1 lg:order-2">
+<span class="ui-label uppercase tracking-[0.3em] text-primary text-xs mb-4 block">Studio Femme</span>
+<h2 class="brand-header text-5xl font-light mb-6">Дамско Стилизиране</h2>
+<p class="text-secondary mb-8 leading-relaxed italic">Архитектура на косата, която подчертава естествената ви красота и индивидуалност.</p>
+<div class="relative w-full aspect-[4/5] overflow-hidden group">
+<img alt="Woman with elegant hairstyle" class="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-700" data-alt="dramatic profile of a woman with high-fashion sleek hairstyle in sharp chiaroscuro lighting on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1HhQ_qjN86co6xYKC9JfmCbnwp_WxUKNy3I_ODd69tuZ8cXKj5RC4a4xE0GNIrPwH7gSr9ib8hR-2hNKFtZBSIfYQBMLE1V4a-J9NgJ14VWQrNJyr0-4IorsPX9jE0-xT07wog3FIO6xZH2eORN_BwOQqiV8b1-qOxTVRF1qtLQH3KBquCPvktljCiJR-YoHG4ppbYm_LSCP61POxRRp7U_ShK9utXgu2Te__VRF_s_l5g3pAFmlCiowwr-M9mpgFa8tuDgfDvw"/>
+</div>
+</div>
+</section>
+<!-- Beard & Coloring (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Beard -->
+<div class="bg-surface-container-low p-12 flex flex-col justify-between">
+<div>
+<span class="ui-label uppercase tracking-[0.3em] text-primary text-xs mb-4 block">The Blade</span>
+<h2 class="brand-header text-4xl font-light mb-12">Брада и Бръснене</h2>
+<div class="space-y-6">
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="ui-label text-sm uppercase tracking-widest">Royal Shave</span>
+<span class="price-line text-primary">40.00 BGN</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="ui-label text-sm uppercase tracking-widest">Beard Sculpting</span>
+<span class="price-line text-primary">30.00 BGN</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="ui-label text-sm uppercase tracking-widest">Hot Towel Ritual</span>
+<span class="price-line text-primary">25.00 BGN</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Coloring -->
+<div class="bg-surface-container-low p-12 flex flex-col justify-between">
+<div>
+<span class="ui-label uppercase tracking-[0.3em] text-primary text-xs mb-4 block">Chromatic</span>
+<h2 class="brand-header text-4xl font-light mb-12">Боядисване</h2>
+<div class="space-y-6">
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="ui-label text-sm uppercase tracking-widest">Global Color</span>
+<span class="price-line text-primary">от 90.00 BGN</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="ui-label text-sm uppercase tracking-widest">Balayage Art</span>
+<span class="price-line text-primary">от 160.00 BGN</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="ui-label text-sm uppercase tracking-widest">Men's Camo</span>
+<span class="price-line text-primary">45.00 BGN</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Therapies & Kids (Featured) -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Kids -->
+<div class="lg:col-span-1 bg-surface-container-high p-8 flex flex-col justify-center">
+<span class="ui-label uppercase tracking-[0.3em] text-primary text-xs mb-4 block">Junior</span>
+<h2 class="brand-header text-3xl font-light mb-4">Малкият Господин</h2>
+<p class="text-secondary text-sm mb-6 leading-relaxed">Специално отношение за бъдещите джентълмени под 12г.</p>
+<div class="flex justify-between items-center">
+<span class="ui-label text-xs uppercase tracking-widest text-on-surface">Kids Precision Cut</span>
+<span class="price-line text-primary">30.00 BGN</span>
+</div>
+</div>
+<!-- Therapies (Wide Card) -->
+<div class="lg:col-span-2 relative overflow-hidden p-12 bg-surface-container-low border border-outline-variant/20">
+<div class="relative z-10">
+<span class="ui-label uppercase tracking-[0.3em] text-primary text-xs mb-4 block">Care</span>
+<h2 class="brand-header text-4xl font-light mb-8">Терапии и Грижа</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="ui-label text-sm uppercase tracking-widest">Scalp Detox</span>
+<span class="price-line text-primary">35.00 BGN</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="ui-label text-sm uppercase tracking-widest">Molecular Repair</span>
+<span class="price-line text-primary">65.00 BGN</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="ui-label text-sm uppercase tracking-widest">Hydra Gloss</span>
+<span class="price-line text-primary">50.00 BGN</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="ui-label text-sm uppercase tracking-widest">Anti-Hair Loss</span>
+<span class="price-line text-primary">45.00 BGN</span>
+</div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -right-10 -bottom-10 opacity-5">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 0;">spa</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Appointment CTA -->
+<section class="mt-40 mb-20 text-center py-24 bg-surface-container-lowest border border-primary/10">
+<h2 class="brand-header text-4xl md:text-6xl font-light mb-8 italic">Готови ли сте за своята трансформация?</h2>
+<p class="text-secondary ui-label uppercase tracking-[0.2em] mb-12">Резервирайте своя час онлайн или по телефона</p>
+<div class="flex flex-col md:flex-row justify-center gap-6">
+<a class="shimmer-bg text-on-primary-container px-12 py-5 ui-label uppercase tracking-widest font-bold hover:scale-105 transition-transform" href="#">
+                    Онлайн Резервация
+                </a>
+<a class="border border-outline px-12 py-5 ui-label uppercase tracking-widest hover:bg-surface-variant transition-colors" href="#">
+                    +359 888 000 000
+                </a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 px-12 border-t border-[#2A2A2A] bg-[#0A0A0A]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-2">
+<div class="font-['Cormorant_Garamond'] text-3xl font-light text-[#EDE8DF] mb-4">OSTRIE</div>
+<p class="text-[#8A8070] font-['Lora'] text-sm leading-relaxed max-w-sm">
+                    Мястото, където занаятчийството среща модерната визия. Ние не просто подстригваме — ние ваем идентичност.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="ui-label uppercase tracking-widest text-primary text-xs mb-2">Навигация</span>
+<a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Terms of Service</a>
+<a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Careers</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="ui-label uppercase tracking-widest text-primary text-xs mb-2">Контакт</span>
+<a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Press</a>
+<a class="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Contact</a>
+<div class="flex gap-4 mt-2">
+<span class="material-symbols-outlined text-[#C9A84C] cursor-pointer hover:opacity-70 transition-opacity">public</span>
+<span class="material-symbols-outlined text-[#C9A84C] cursor-pointer hover:opacity-70 transition-opacity">share</span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-[#8A8070] font-['Lora'] text-xs uppercase tracking-widest">© 2024 OSTRIE PRECISION ATELIER. ALL RIGHTS RESERVED.</span>
+<div class="price-line text-[10px] text-outline/50 uppercase">Precision. Sharpness. Authority.</div>
+</div>
+</footer>
+</body></html>

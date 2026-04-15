@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=DM+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#dde1ff",
+                    "tertiary-container": "#9ba8eb",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed": "#eee1ce",
+                    "surface-bright": "#3a3939",
+                    "on-background": "#e5e2e1",
+                    "on-error": "#690005",
+                    "surface": "#131313",
+                    "on-tertiary": "#1e2b66",
+                    "outline-variant": "#4d4637",
+                    "on-primary": "#3d2e00",
+                    "background": "#131313",
+                    "error": "#ffb4ab",
+                    "outline": "#99907e",
+                    "secondary-container": "#4e4638",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#d1c5b3",
+                    "surface-container": "#201f1f",
+                    "primary-container": "#c9a84c",
+                    "secondary": "#d1c5b3",
+                    "on-tertiary-fixed-variant": "#35437e",
+                    "on-secondary-fixed-variant": "#4e4638",
+                    "tertiary-fixed-dim": "#b9c3ff",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-fixed": "#241a00",
+                    "surface-variant": "#353534",
+                    "on-tertiary-fixed": "#041451",
+                    "on-primary-container": "#503d00",
+                    "on-surface": "#e5e2e1",
+                    "on-tertiary-container": "#2e3b77",
+                    "surface-dim": "#131313",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#755b00",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-fixed": "#211b0f",
+                    "primary-fixed": "#ffe08f",
+                    "on-secondary-container": "#bfb4a2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed-dim": "#e6c364",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed-variant": "#584400",
+                    "primary": "#e6c364",
+                    "on-surface-variant": "#d0c5b2",
+                    "on-secondary": "#362f23",
+                    "surface-tint": "#e6c364",
+                    "tertiary": "#b9c4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Cormorant Garamond", "serif"],
+                    "body": ["Lora", "serif"],
+                    "label": ["Josefin Sans", "sans-serif"],
+                    "mono": ["DM Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #EDE8DF;
+    font-family: "Lora", serif;
+    position: relative
+    }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA6eKXq5F8cIbC76edXGMz7kFbCLlZ2NwvvHPG15iJuE9fauaHw-BJakLrmtqDKEqnyS6UkNFfpsCNcs6DjECJKob4nByHPVpxFYEz_IvGKCgVIRgwntS7-8IvkRHWrFoPCdnLjAKXtWyRUPqrk4b8-qDLGNl56UeknKMOR70p5pYUKfCgDFOeCEWIH6lv7pnVgL8Ryzy4wY9UibgEW_bPqKl-C2ozg2slO1-xQWxI4TffUeM2xCeSYt4EpidWhlBiNZm3ShMFnnQ);
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 100
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.josefin-nav {
+    font-family: "Josefin Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em
+    }
+.cormorant-display {
+    font-family: "Cormorant Garamond", serif
+    }
+.dm-mono-price {
+    font-family: "DM Mono", monospace
+    }
+.selection-ring {
+    border: 2px solid #C9A84C;
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0.3)
+    }
+/* Transition utility */
+.smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    }</style>
+</head>
+<body class="bg-[#0A0A0A]">
+<!-- TopNavBar from Shared Components -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80">
+<div class="flex justify-between items-center px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-[0.2em] text-[#EDE8DF] josefin-nav">OSTRIE</div>
+<div class="hidden md:flex gap-12 items-center">
+<a class="josefin-nav text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Services</a>
+<a class="josefin-nav text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Gallery</a>
+<a class="josefin-nav text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Team</a>
+</div>
+<button class="josefin-nav text-sm px-6 py-2 border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-[#0A0A0A] transition-all duration-300">
+                Запази час
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-6xl mx-auto">
+<!-- Booking Progress Stepper -->
+<div class="mb-20">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-3xl mx-auto relative">
+<!-- Progress Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-[#2A2A2A] -translate-y-1/2 hidden md:block"></div>
+<!-- Step 1 (Active) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#C9A84C] text-[#0A0A0A] flex items-center justify-center font-bold josefin-nav text-xs shadow-[0_0_15px_rgba(201,168,76,0.5)]">1</div>
+<span class="josefin-nav text-[10px] text-[#C9A84C] font-bold">1. Услуга</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#131313] border border-[#2A2A2A] text-[#8A8070] flex items-center justify-center font-bold josefin-nav text-xs">2</div>
+<span class="josefin-nav text-[10px] text-[#8A8070]">2. Майстор</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#131313] border border-[#2A2A2A] text-[#8A8070] flex items-center justify-center font-bold josefin-nav text-xs">3</div>
+<span class="josefin-nav text-[10px] text-[#8A8070]">3. Час</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#131313] border border-[#2A2A2A] text-[#8A8070] flex items-center justify-center font-bold josefin-nav text-xs">4</div>
+<span class="josefin-nav text-[10px] text-[#8A8070]">4. Потвърждение</span>
+</div>
+</div>
+</div>
+<div class="grid lg:grid-cols-12 gap-16">
+<!-- Left Column: Service Selection -->
+<div class="lg:col-span-7 space-y-12">
+<header>
+<h1 class="cormorant-display text-5xl font-bold text-[#EDE8DF] mb-4">Избор на услуга</h1>
+<p class="text-[#8A8070] font-body italic">Прецизност във всяко движение. Изберете вашия ритуал.</p>
+</header>
+<!-- Category Chips -->
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2 bg-[#C9A84C] text-[#0A0A0A] josefin-nav text-[11px] font-bold rounded-[2px] smooth-transition">Мъжко</button>
+<button class="px-6 py-2 bg-[#1C1B1B] text-[#8A8070] josefin-nav text-[11px] hover:text-[#EDE8DF] rounded-[2px] smooth-transition border border-transparent hover:border-[#2A2A2A]">Дамско</button>
+<button class="px-6 py-2 bg-[#1C1B1B] text-[#8A8070] josefin-nav text-[11px] hover:text-[#EDE8DF] rounded-[2px] smooth-transition border border-transparent hover:border-[#2A2A2A]">Брада</button>
+<button class="px-6 py-2 bg-[#1C1B1B] text-[#8A8070] josefin-nav text-[11px] hover:text-[#EDE8DF] rounded-[2px] smooth-transition border border-transparent hover:border-[#2A2A2A]">Грим</button>
+</div>
+<!-- Service Grid -->
+<div class="grid gap-4">
+<!-- Service Item Selected -->
+<div class="group relative bg-[#131313] border-l-4 border-[#C9A84C] p-6 flex justify-between items-center cursor-pointer transition-all duration-300 hover:bg-[#1C1B1B]">
+<div class="space-y-1">
+<h3 class="josefin-nav text-sm font-bold text-[#EDE8DF]">Класическо подстригване</h3>
+<p class="text-xs text-[#8A8070] font-body">Прецизна форма, измиване и стилизиране с премиум продукти.</p>
+<span class="inline-block text-[10px] uppercase tracking-widest text-[#C9A84C] mt-2 josefin-nav">45 минути</span>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="dm-mono-price text-lg font-medium text-[#C9A84C]">45.00 лв</span>
+<span class="material-symbols-outlined text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Service Item Standard -->
+<div class="group relative bg-[#131313] border-l-4 border-transparent p-6 flex justify-between items-center cursor-pointer transition-all duration-300 hover:bg-[#1C1B1B] hover:border-[#2A2A2A]">
+<div class="space-y-1">
+<h3 class="josefin-nav text-sm font-bold text-[#EDE8DF]">Бръснене с гореща кърпа</h3>
+<p class="text-xs text-[#8A8070] font-body">Традиционен ритуал с бръснач и релаксираща терапия.</p>
+<span class="inline-block text-[10px] uppercase tracking-widest text-[#8A8070] mt-2 josefin-nav">30 минути</span>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="dm-mono-price text-lg font-medium text-[#EDE8DF]">35.00 лв</span>
+<div class="w-6 h-6 rounded-full border border-[#2A2A2A]"></div>
+</div>
+</div>
+<!-- Service Item Standard -->
+<div class="group relative bg-[#131313] border-l-4 border-transparent p-6 flex justify-between items-center cursor-pointer transition-all duration-300 hover:bg-[#1C1B1B] hover:border-[#2A2A2A]">
+<div class="space-y-1">
+<h3 class="josefin-nav text-sm font-bold text-[#EDE8DF]">Комбо: Подстригване + Брада</h3>
+<p class="text-xs text-[#8A8070] font-body">Пълна трансформация за безкомпромисен външен вид.</p>
+<span class="inline-block text-[10px] uppercase tracking-widest text-[#8A8070] mt-2 josefin-nav">75 минути</span>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="dm-mono-price text-lg font-medium text-[#EDE8DF]">70.00 лв</span>
+<div class="w-6 h-6 rounded-full border border-[#2A2A2A]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Master Selection -->
+<div class="lg:col-span-5 space-y-12">
+<header>
+<h2 class="cormorant-display text-4xl font-bold text-[#EDE8DF] mb-4">Избор на майстор</h2>
+<p class="text-[#8A8070] font-body italic">Вашият стил заслужава експертна ръка.</p>
+</header>
+<div class="flex flex-col gap-8">
+<!-- Master 1 Selected -->
+<div class="flex items-center gap-6 group cursor-pointer">
+<div class="relative">
+<div class="w-24 h-24 rounded-full overflow-hidden selection-ring p-1">
+<img alt="Master Stylist" class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close-up portrait of a professional male barber with a well-groomed beard, sharp gaze, in a dark atmospheric studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNu20OhJkNhxLm0CJFgL6NhpYA4CROETYfbqyRvNdHVnnSI45MwVM1GcNQX7w-OUmuECZ368lzMs5ueuPajGuruZ8Qn6n8F5bLO_DCk0glHZW42zoXFIlesMJsgfYeOURy2HIxspWnk6ClUGho51zGJrkFnErEV2_SN3t5KoQEJtzVqPsk1Z8ZBp5f9kNu7a1PCbpSKSt5UNuDUSyLMkYKlL9gMlU-Aq5M2plyN1CJvuBaL8exwFBEBvh2GUHkgscxnQw7ddo8vg"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-[#C9A84C] text-[#0A0A0A] rounded-full p-1 shadow-lg">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="space-y-1">
+<h4 class="josefin-nav text-lg font-bold text-[#C9A84C]">Виктор Костов</h4>
+<p class="text-xs text-[#8A8070] font-body">Creative Director / Master Barber</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] text-[#8A8070] ml-2 josefin-nav">(128 отзива)</span>
+</div>
+</div>
+</div>
+<!-- Master 2 -->
+<div class="flex items-center gap-6 group cursor-pointer opacity-60 hover:opacity-100 transition-opacity">
+<div class="relative">
+<div class="w-24 h-24 rounded-full overflow-hidden border border-[#2A2A2A] p-1">
+<img alt="Master Stylist" class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="Portrait of a young male stylist with modern haircut and stylish accessories, cinematic lighting, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsUBvXmYpXuC-wvWxB94xYDIikIBpTLpH6D_V7d61mQnXJVDegSe1Ee_p24QC655yqfeUVniwDwKztalMvf49jyiaxjU6c071JdZg2u3yZWTw7iipPHdA3jHsO7nKDwgmecaePVnxd7WgJcK2YtSQ8hIibkxlf3zLf7o20Sy5LOsq5Dz8iltONUxijmD7BNrqESCNF7Ob215j9KVW3JDjPyoXPMt5Xh7pL6894Y0thZlZwMJt6rWxe2dRashUyxA6l9gJxHRPIzQ"/>
+</div>
+</div>
+<div class="space-y-1">
+<h4 class="josefin-nav text-lg font-bold text-[#EDE8DF]">Александър Димитров</h4>
+<p class="text-xs text-[#8A8070] font-body">Senior Stylist / Fade Specialist</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#8A8070]">star</span>
+<span class="text-[10px] text-[#8A8070] ml-2 josefin-nav">(94 отзива)</span>
+</div>
+</div>
+</div>
+<!-- Master 3 -->
+<div class="flex items-center gap-6 group cursor-pointer opacity-60 hover:opacity-100 transition-opacity">
+<div class="relative">
+<div class="w-24 h-24 rounded-full overflow-hidden border border-[#2A2A2A] p-1">
+<img alt="Master Stylist" class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close-up of a masculine barber with tattoos on neck, wearing a white shirt, professional look in a luxury barbershop setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN79xXFBRDaSX0moYplKd5JnQkMzaBFYgteMMQGB33E9P40jViqTXZKefOuoBeKjb1xLaiKPH-OTzk92mU85hPDpS1HBYNbLRsWbnV0IOJTigjp8ibWGNgy_0X7qxosmH8bisUEmn_8_7TBWcfSlseFvp810kh1B3UicUXs2UT-OWGkf4Gyzk477VNDIOCK5SXtuFcvyd7eXHkFku9xFwun10S26PfRKoagpC1DsR9nSwetyjNdelzClqQYffYiAu-uFf-xGN-tQ"/>
+</div>
+</div>
+<div class="space-y-1">
+<h4 class="josefin-nav text-lg font-bold text-[#EDE8DF]">Никола Иванов</h4>
+<p class="text-xs text-[#8A8070] font-body">Artisan Barber / Beard Expert</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#C9A84C]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+<span class="text-[10px] text-[#8A8070] ml-2 josefin-nav">(76 отзива)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Summary for Mobile/Action -->
+<div class="mt-20 flex flex-col md:flex-row justify-between items-center bg-[#0E0E0E] p-8 border-t border-[#2A2A2A]">
+<div class="mb-6 md:mb-0 text-center md:text-left">
+<p class="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mb-1">Вашият избор</p>
+<div class="flex flex-col">
+<span class="josefin-nav text-lg font-bold text-[#EDE8DF]">Класическо подстригване</span>
+<span class="text-[#8A8070] font-body text-sm italic">Майстор: Виктор Костов</span>
+</div>
+</div>
+<div class="flex items-center gap-12">
+<div class="text-right">
+<p class="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mb-1">Общо</p>
+<span class="dm-mono-price text-2xl font-bold text-[#C9A84C]">45.00 лв</span>
+</div>
+<button class="bg-[#C9A84C] text-[#0A0A0A] josefin-nav font-bold py-4 px-12 text-sm tracking-widest hover:brightness-110 transition-all flex items-center gap-4">
+                    ПРОДЪЛЖИ КЪМ ЧАС
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer from Shared Components -->
+<footer class="w-full border-t border-[#2A2A2A] bg-[#0A0A0A] dark:bg-[#0A0A0A]">
+<div class="flex flex-col md:flex-row justify-between items-start px-12 py-16 gap-8 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4">
+<div class="text-xl font-bold tracking-widest text-[#EDE8DF] josefin-nav">OSTRIE</div>
+<p class="text-[#8A8070] max-w-xs text-sm font-body italic">
+                    Precision is not a skill, it is a state of mind. Experience the surgical excellence of modern male grooming.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="flex flex-col gap-3">
+<span class="josefin-nav text-[10px] text-[#C9A84C] font-bold">Follow</span>
+<a class="text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors josefin-nav" href="#">Instagram</a>
+<a class="text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors josefin-nav" href="#">Facebook</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="josefin-nav text-[10px] text-[#C9A84C] font-bold">Visit</span>
+<a class="text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors josefin-nav" href="#">Location</a>
+<a class="text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors josefin-nav" href="#">Contact</a>
+</div>
+</div>
+<div class="md:text-right space-y-2">
+<p class="text-[10px] text-[#8A8070] josefin-nav uppercase tracking-widest">© 2024 OSTRIE Precision Atelier. All rights reserved.</p>
+<div class="flex md:justify-end gap-6">
+<a class="text-[10px] text-[#4d4637] hover:text-[#EDE8DF] josefin-nav uppercase" href="#">Privacy Policy</a>
+<a class="text-[10px] text-[#4d4637] hover:text-[#EDE8DF] josefin-nav uppercase" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

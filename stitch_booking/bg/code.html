@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="bg"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#e6c364",
+                    "on-secondary-fixed": "#211b0f",
+                    "secondary-container": "#4e4638",
+                    "tertiary-container": "#9ba8eb",
+                    "outline-variant": "#4d4637",
+                    "on-surface": "#e5e2e1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-background": "#e5e2e1",
+                    "tertiary-fixed-dim": "#b9c3ff",
+                    "primary": "#e6c364",
+                    "surface-dim": "#131313",
+                    "on-tertiary": "#1e2b66",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-fixed": "#ffe08f",
+                    "on-surface-variant": "#d0c5b2",
+                    "on-secondary-container": "#bfb4a2",
+                    "surface-bright": "#3a3939",
+                    "inverse-primary": "#755b00",
+                    "error-container": "#93000a",
+                    "surface-container": "#201f1f",
+                    "on-secondary": "#362f23",
+                    "on-tertiary-fixed-variant": "#35437e",
+                    "on-tertiary-fixed": "#041451",
+                    "on-primary-fixed": "#241a00",
+                    "on-secondary-fixed-variant": "#4e4638",
+                    "surface-tint": "#e6c364",
+                    "tertiary": "#b9c4ff",
+                    "on-primary-container": "#503d00",
+                    "surface-container-highest": "#353534",
+                    "secondary-fixed-dim": "#d1c5b3",
+                    "tertiary-fixed": "#dde1ff",
+                    "background": "#131313",
+                    "primary-container": "#c9a84c",
+                    "outline": "#99907e",
+                    "surface": "#131313",
+                    "secondary-fixed": "#eee1ce",
+                    "secondary": "#d1c5b3",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#353534",
+                    "on-primary": "#3d2e00",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-fixed-variant": "#584400",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#2e3b77",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Cormorant Garamond"],
+                    "body": ["Lora"],
+                    "label": ["Josefin Sans"],
+                    "mono": ["DM Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }
+.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDGKe0xOYrol7pf29QeAMgB6NtM6sZKycNPo20yUdOjXZCzbb-O8gyOBxUY1kuYO2cgqaW3YnGV7Y8H8gkmkXbizbg0HJIpD-gJlm-S_fX3-N9WN0cFl63xiAniUwltDUs_cDv4trbECo2e2ONgMBxKtV0ILGOMA8C5TfSEtbWDcApLfvBm9ZRdNzB-zYjNJsRDwVdyfR9oqK-PefjzZx0AWZQyLL1q-vgym-j3xmIwYJDj9X9trDRkWbw9GUQULJmrDGLZtylxJA);
+    opacity: 0.03;
+    pointer-events: none
+    }
+.no-scrollbar::-webkit-scrollbar {
+    display: none
+    }
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none
+    }
+.text-shimmer {
+    background: linear-gradient(135deg, #e6c364 0%, #c9a84c 50%, #e6c364 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+    }</style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-on-primary">
+<div class="fixed inset-0 grain-overlay z-[100]"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md dark:bg-black/80 flex justify-between items-center px-12 py-6 w-full">
+<div class="font-['Cormorant_Garamond'] text-2xl font-bold tracking-tighter text-[#EDE8DF]">OSTRIE</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#C9A84C] font-bold border-b border-[#C9A84C] pb-1" href="#">Ателие</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Услуги</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Галерия</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Екип</a>
+<a class="font-['Josefin_Sans'] uppercase tracking-[0.15em] text-[0.75rem] text-[#8A8070] hover:text-[#EDE8DF] transition-colors" href="#">Резервация</a>
+</div>
+<button class="bg-primary px-6 py-2 text-on-primary font-label text-[0.75rem] uppercase tracking-widest hover:opacity-80 transition-opacity duration-300 rounded-sm">
+            Запази час
+        </button>
+</nav>
+<main>
+<!-- Hero Split Screen -->
+<section class="min-h-screen flex flex-col md:flex-row pt-24">
+<div class="w-full md:w-1/2 flex flex-col justify-center px-12 md:px-24 py-12 order-2 md:order-1">
+<span class="font-label text-primary uppercase tracking-[0.4em] text-xs mb-6">Основано MMXXIV</span>
+<h1 class="font-headline text-6xl md:text-8xl text-on-surface leading-[0.9] mb-8 font-bold">
+                    Прецизност. <br/>
+<span class="italic font-light">Характер.</span> <br/>
+                    Стил.
+                </h1>
+<p class="font-body text-lg text-on-surface-variant max-w-md leading-relaxed mb-12">
+                    Модерното барбер ателие за безкомпромисния индивид. Ние не просто подстригваме; ние скулптурираме идентичности чрез техническо майсторство и архитектурна точност.
+                </p>
+<div class="flex items-center space-x-8">
+<button class="bg-primary text-on-primary px-10 py-4 font-label uppercase tracking-widest text-xs rounded-sm hover:bg-primary-fixed-dim transition-colors">
+                        Меню Услуги
+                    </button>
+<button class="border border-outline-variant text-on-surface px-10 py-4 font-label uppercase tracking-widest text-xs rounded-sm hover:bg-surface-container-low transition-colors">
+                        Историята
+                    </button>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-[614px] md:h-auto relative overflow-hidden order-1 md:order-2">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Moody black and white close-up of a high-fashion male model with a precision haircut, intense cinematic lighting, architectural shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdreiaFdBTH7plf2YyxkkS82AlTtnJgc6txSFUyrnkRpFgKPQxb14cs6-Wz8oXS6KsnpOw35LGBd09_JCdMvoptXuRChSdJwo9J_0W3uwgIHTbcNgodXNg2n7zzqTK9UGljWCkin9cYkU6wRH5wIrfS2P2mzCCWtxJLkixj_FmTVZWmxZOI_2siUQDlzYCCGJaJkIaMQYAo8jWSAP9pzN0KO5MBHlhr7bRzPG-2rF-IsMXOmU49bBiF1k8Fj72pCxiWyZScXSYeg"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent hidden md:block"></div>
+<div class="absolute bottom-12 left-12 md:hidden">
+<span class="font-headline text-3xl text-primary italic">Ostrie Precision</span>
+</div>
+</div>
+</section>
+<!-- Service Rituals - Asymmetric Grid -->
+<section class="py-32 px-12 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-2xl">
+<h2 class="font-headline text-5xl text-on-surface mb-6">Ритуали на занаята</h2>
+<p class="font-body text-secondary text-lg">Всяко посещение в Ostrie е хореографирана последователност от техническо съвършенство и сетивно пречистване. Превръщаме грижата за външния вид в изкуство.</p>
+</div>
+<div class="font-mono text-primary text-sm uppercase tracking-tighter">
+                        [ СКУЛПТУРИРАНЕ НА АВАНГАРДА ]
+                    </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Ritual 1 -->
+<div class="md:col-span-8 group relative overflow-hidden h-[500px]">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" data-alt="Professional barber performing a surgical straight razor shave with steam and premium tools, cinematic low light atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf_zCemJwt5ryWurCqv0XzjfZXSRtRrkP12R-Bqgu2U9yS4GVdK3ePYWlLTeInVjO21KFPum8ZYgh4IWv7YAyXdoPtZ_DXkJ0ZMhguCVd9Q7MFjKpLUbpbQij6epTbEzm6pvoyvbv5wpjh9K21MFUX7ljk3PW0jdFuEy1jF4f_Yji3pIUs-nLYKBY1GA17hftcgrJnkRRvErSnACcrb-_RhmsPDx9D_U6zC1s6XxQjNp1RIsQsYuMc8DGFr4xi4uE6r1gMuaEaOA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+<div class="absolute bottom-12 left-12 right-12">
+<span class="font-mono text-primary mb-2 block">01</span>
+<h3 class="font-headline text-3xl text-on-surface mb-4">Подстригване "Signature Atelier"</h3>
+<p class="font-body text-secondary-fixed-dim max-w-md mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                60-минутна техническа сесия, включваща анализ на чертите на лицето, архитектурно оформяне и завършващо измиване.
+                            </p>
+<span class="font-mono text-primary-fixed-dim">ОТ 85.00 лв.</span>
+</div>
+</div>
+<!-- Ritual 2 -->
+<div class="md:col-span-4 bg-surface-container-high p-12 flex flex-col justify-end border-l border-primary/20">
+<span class="font-mono text-primary mb-2 block">02</span>
+<h3 class="font-headline text-2xl text-on-surface mb-4">Ритуал с бръснач</h3>
+<p class="font-body text-secondary text-sm mb-8">
+                            Двуфазна терапия с горещи кърпи, последвана от хирургически прецизно бръснене и ботаническа компресия след бръснене.
+                        </p>
+<div class="font-mono text-primary-fixed-dim">60.00 лв.</div>
+</div>
+<!-- Ritual 3 -->
+<div class="md:col-span-4 bg-surface-container-low p-12 flex flex-col justify-between">
+<div>
+<span class="font-mono text-primary mb-2 block">03</span>
+<h3 class="font-headline text-2xl text-on-surface mb-4">Архитектура на брадата</h3>
+</div>
+<div>
+<p class="font-body text-secondary text-sm mb-8">Прецизно скулптуриране според естествените линии на челюстта. Включва терапия с пара и масла.</p>
+<div class="font-mono text-primary-fixed-dim">45.00 лв.</div>
+</div>
+</div>
+<!-- Ritual 4 -->
+<div class="md:col-span-8 group relative overflow-hidden h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:grayscale-0 grayscale transition-all duration-700" data-alt="Modern minimalist aesthetic of a luxury barber shop interior with black leather chairs and ambient warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW-0eoDTbFUD3Yn-7scJZpleb6nkERJ4eyO3QSznzBErYSOGc6a_I5e79lgyu7QEYYbc6io3h_wrneBQH3cxDyreYy6DrJIXXb3FPsdEbQ1KVhpXBo01kI7Fi69yVQ_tegpC6QvWH55krYCtvznS698y2F0-IPZGNSXbsccTNPKn-UH3VbVdnShuCFylJE36Gcelk9yBiVr0KZBDOwxyBlM7vt0fvpN-PI_zQkGQqufkkDNjF8Nic9hgGMtFsRHsPDh8oPl4JG6g"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+<div class="absolute left-12 top-1/2 -translate-y-1/2">
+<span class="font-mono text-primary mb-2 block">04</span>
+<h3 class="font-headline text-3xl text-on-surface mb-2">Пълно възстановяване</h3>
+<p class="font-body text-on-surface-variant max-w-xs mb-4">Комбинация от подстригване "Signature" и пълния ритуал с бръснач.</p>
+<div class="font-mono text-primary-fixed-dim">130.00 лв.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Spotlight -->
+<section class="py-32 bg-background overflow-hidden">
+<div class="px-12 mb-16">
+<h2 class="font-headline text-4xl text-on-surface">Гласът на клиентите</h2>
+</div>
+<div class="flex overflow-x-auto no-scrollbar space-x-8 px-12 pb-12">
+<!-- Testimonial 1 -->
+<div class="min-w-[400px] md:min-w-[500px] bg-surface-container-low p-12 relative">
+<span class="material-symbols-outlined text-primary text-5xl absolute top-8 right-8 opacity-20">format_quote</span>
+<p class="font-body text-xl text-on-surface italic mb-8 leading-relaxed">
+                        "Ostrie е убежище за тези, които ценят детайла. Техническата прецизност е несравнима с никое друго място в града. Това е истинско ателие преживяване."
+                    </p>
+<div>
+<div class="font-label text-on-surface uppercase tracking-widest text-sm">Юлиан Ванев</div>
+<div class="font-mono text-secondary text-xs">Архитект</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="min-w-[400px] md:min-w-[500px] bg-surface-container-low p-12 relative">
+<span class="material-symbols-outlined text-primary text-5xl absolute top-8 right-8 opacity-20">format_quote</span>
+<p class="font-body text-xl text-on-surface italic mb-8 leading-relaxed">
+                        "Идвам заради атмосферата, оставам заради хирургическата точност. Самият процес на консултация показва колко държат на геометрията на лицето."
+                    </p>
+<div>
+<div class="font-label text-on-surface uppercase tracking-widest text-sm">Маркус Чен</div>
+<div class="font-mono text-secondary text-xs">Криейтив Директор</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="min-w-[400px] md:min-w-[500px] bg-surface-container-low p-12 relative">
+<span class="material-symbols-outlined text-primary text-5xl absolute top-8 right-8 opacity-20">format_quote</span>
+<p class="font-body text-xl text-on-surface italic mb-8 leading-relaxed">
+                        "Кинематографична среда, в която занаятът е на почит. Всяко движение на бръснача е преднамерено. OSTRIE е новият стандарт."
+                    </p>
+<div>
+<div class="font-label text-on-surface uppercase tracking-widest text-sm">Давид Стерлинг</div>
+<div class="font-mono text-secondary text-xs">Технолог</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Team Grid -->
+<section class="py-32 px-12 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="mb-24 text-center">
+<h2 class="font-headline text-5xl text-on-surface mb-6">Майсторите</h2>
+<p class="font-body text-secondary max-w-xl mx-auto">Нашите стилисти са подбрани заради техния опит в архитектурата, изкуството и традиционното бръснарство.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Team 1 -->
+<div class="group">
+<div class="aspect-[3/4] overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Portrait of a professional male stylist with tattoos and a sharp uniform, moody lighting, studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxDLiiH9E4MdKpFbQ-CmLONXbBq4EjXM2DWmkopBT0cMUm-2bEGv1b-f45rvWIPmXXmVrpRnrvj3L_FlUiIq67qJu4CpV5J9QEd131ZuIY4fFExV5PBJCsNiXvufIT_Zg5lJzy7-b3geTbFApsKZ6PUDqCJqXP2yfU09ixQcWY3FH3bPFKTt_pvxnjraXqzy2uauUoZG0ZKKZrXp3eLoo2mOvV9p02i_db8EKrMKPNCCdoCSzHgRelv8Vvqxh_utKv75DH1kWgGw"/>
+<div class="absolute inset-0 border-[10px] border-primary/0 group-hover:border-primary/10 transition-all duration-500"></div>
+</div>
+<h4 class="font-headline text-2xl text-on-surface">Елиас Торн</h4>
+<p class="font-label text-primary uppercase tracking-widest text-xs mb-4">Криейтив Лийд</p>
+<p class="font-body text-secondary text-sm">Специалист в агресивните архитектурни преливания и стилистика от средата на века.</p>
+</div>
+<!-- Team 2 -->
+<div class="group">
+<div class="aspect-[3/4] overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Close up portrait of a barber focused on work, wearing black leather apron, dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_NgcVlKXmv6o9bjZOtoRCSq6etKm03Ghxq2PTCeTWV46BXaW336Y2KUiTVgXgcuStR07x_RHefKRSfcbpbMJHoo6dOlq-auT1FyZaPxOgOQd1LtfKmltX_PJW-PO0WMmfx2thra5eYp4MHhqby05cFslYfIro0uxCJJ2B4UMBb2XyUzwpctJAEfmHHm027w7DVcPEreVzkhmdNY4n7DFdDUP5pQ2OynPbOe-B3v7xWUXOvmVbaWkZbRHA74A-dqOPFiX3TXZ5EQ"/>
+<div class="absolute inset-0 border-[10px] border-primary/0 group-hover:border-primary/10 transition-all duration-500"></div>
+</div>
+<h4 class="font-headline text-2xl text-on-surface">Силас Вейн</h4>
+<p class="font-label text-primary uppercase tracking-widest text-xs mb-4">Майстор на острието</p>
+<p class="font-body text-secondary text-sm">Експерт в традиционния ритуал с бръснач и скулптурното оформяне на брада.</p>
+</div>
+<!-- Team 3 -->
+<div class="group">
+<div class="aspect-[3/4] overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Stylist with minimalist modern aesthetic, neutral background, sharp focus, professional portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArAhgDMRCz_wHU8IGWnnG4PmJUG1bXqzulzphLHGGtkRanTPzcIiVFbTbBhu4UojXLhVV-65gaEtqny1cN8A04mZn7UMO3SEIn4rrQLTJ1djrB0AufT9Yjqu-ZpHsERU5bOZADHStrOB-Ro2tIz4Ml3PZx6hT_XLGBUZsvbWsDHt4HBZGDLEdInZFCaiLzUV9bkl2WVMr11kACWbDHXFAzmsGXSeBrY-DpgFV5gDpCJDXisjseuiGwMitSLoU7gifPK4p37nDj0Q"/>
+<div class="absolute inset-0 border-[10px] border-primary/0 group-hover:border-primary/10 transition-all duration-500"></div>
+</div>
+<h4 class="font-headline text-2xl text-on-surface">Каелън Мур</h4>
+<p class="font-label text-primary uppercase tracking-widest text-xs mb-4">Старши стилист</p>
+<p class="font-body text-secondary text-sm">Фокусирана върху органичните текстури и прецизната работа с ножица и гребен.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Location & Contact (Map Footer) -->
+<section class="grid grid-cols-1 md:grid-cols-2 bg-[#0A0A0A] border-t border-outline-variant/20">
+<div class="p-12 md:p-24 flex flex-col justify-center">
+<h2 class="font-headline text-4xl text-on-surface mb-12">Посетете ателието</h2>
+<div class="space-y-12">
+<div>
+<span class="font-label text-primary uppercase tracking-widest text-xs block mb-4">Адрес</span>
+<p class="font-body text-xl text-on-surface">ул. "Прецизност" 1442, <br/>Квартал на индустриалните изкуства <br/>Лондон, EC1V</p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<span class="font-label text-primary uppercase tracking-widest text-xs block mb-4">Работно време</span>
+<p class="font-mono text-secondary text-sm">ПОН - ПЕТ: 10:00 - 21:00</p>
+<p class="font-mono text-secondary text-sm">СЪБ: 09:00 - 18:00</p>
+<p class="font-mono text-secondary text-sm">НЕД: ПОЧИВЕН ДЕН</p>
+</div>
+<div>
+<span class="font-label text-primary uppercase tracking-widest text-xs block mb-4">Контакти</span>
+<p class="font-mono text-secondary text-sm">+44 (0) 20 7946 0110</p>
+<p class="font-mono text-secondary text-sm">info@ostrieatelier.com</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h-[400px] md:h-auto w-full grayscale contrast-125 opacity-70">
+<img class="w-full h-full object-cover" data-alt="A dark, stylized top-down map of a city center with minimal white and gold accents" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx1nRpkz8Ohi4MSv28SuvAjVeqfU6vK0Z8vmLsM572BL9uZWybiG4QhyONAJGIRc1D_hmoC-QrQLMEEzlgqNAgx7YiX05sezS9KToKqM31ByfEXGLy01fixkbQqEkpmg2jIYo7hIu-Y6uui-FusiHvZjaX3ZyvMeMo5mNKFouwAQanL84ACmwQWyq3R5ir1fjhlN_M9CFZd8n0OVXbMo72_3Nju9YHtRfPBsnQHmqbfskFKSuMLUljFqVIB5x3H6nXr1Vdw4GQfw"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full py-20 px-12 border-t border-[#2A2A2A]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="font-['Cormorant_Garamond'] text-3xl font-light text-[#EDE8DF] mb-4">OSTRIE</div>
+<p class="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">Дефинираме стандарта за модерна прецизност в груминга. Светилище за занаятчии.</p>
+</div>
+<div class="flex flex-col space-y-4">
+<h5 class="font-label text-on-surface uppercase tracking-widest text-xs">Навигация</h5>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Ателие</a>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Услуги</a>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Галерия</a>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Екип</a>
+</div>
+<div class="flex flex-col space-y-4">
+<h5 class="font-label text-on-surface uppercase tracking-widest text-xs">Правна информация</h5>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Политика за поверителност</a>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Общи условия</a>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Кариери</a>
+<a class="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" href="#">Преса</a>
+</div>
+<div class="flex flex-col space-y-6">
+<h5 class="font-label text-on-surface uppercase tracking-widest text-xs">Бюлетин</h5>
+<div class="relative">
+<input class="bg-transparent border-0 border-b border-outline-variant w-full font-body text-sm py-2 focus:ring-0 focus:border-primary text-on-surface transition-colors placeholder:text-outline" placeholder="Имейл адрес" type="email"/>
+<button class="absolute right-0 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#2A2A2A] flex flex-col md:flex-row justify-between items-center text-[#8A8070] font-['Lora'] text-[0.7rem] tracking-widest">
+<div class="mb-4 md:mb-0 uppercase">© 2024 OSTRIE PRECISION ATELIER. ВСИЧКИ ПРАВА ЗАПАЗЕНИ.</div>
+<div class="flex space-x-8 uppercase">
+<a class="hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="hover:text-primary transition-colors" href="#">Vimeo</a>
+<a class="hover:text-primary transition-colors" href="#">Journal</a>
+</div>
+</div>
+</footer>
+</body></html>
