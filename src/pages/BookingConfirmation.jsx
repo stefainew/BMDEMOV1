@@ -30,32 +30,20 @@ export default function BookingConfirmation() {
 
     try {
       const fullName = `${form.firstName} ${form.lastName}`.trim()
-
-      // Upsert client by phone (find or create)
-      const { data: client, error: clientErr } = await supabase
-        .from('clients')
-        .upsert(
-          { name: fullName, phone: form.phone, email: form.email || null },
-          { onConflict: 'phone', ignoreDuplicates: false }
-        )
-        .select()
-        .single()
-
-      if (clientErr) throw clientErr
-
-      // Insert booking
       const timeEnd = computeTimeEnd(booking.time, booking.service.duration_min ?? 60)
-      const { error: bookingErr } = await supabase.from('bookings').insert({
-        client_id:   client.id,
-        master_id:   booking.master.id,
-        service_id:  booking.service.id,
-        date:        booking.date,
-        time_start:  booking.time,
-        time_end:    timeEnd,
-        status:      'pending',
+
+      const { error: rpcErr } = await supabase.rpc('book_appointment', {
+        p_name:       fullName,
+        p_phone:      form.phone,
+        p_email:      form.email || '',
+        p_master_id:  booking.master.id,
+        p_service_id: booking.service.id,
+        p_date:       booking.date,
+        p_time_start: booking.time,
+        p_time_end:   timeEnd,
       })
 
-      if (bookingErr) throw bookingErr
+      if (rpcErr) throw rpcErr
 
       reset()
       setSubmitted(true)
