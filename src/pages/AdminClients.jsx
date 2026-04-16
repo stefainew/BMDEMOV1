@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import AdminBottomNav from '../components/admin/AdminBottomNav'
+import { exportClientsExcel } from '../lib/exportExcel'
 
 const BG_MONTHS = ['Ян','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек']
 
@@ -143,10 +144,22 @@ function ClientCard({ client }) {
 }
 
 export default function AdminClients() {
-  const [query, setQuery]     = useState('')
-  const [clients, setClients] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [searched, setSearched] = useState(false)
+  const [query, setQuery]         = useState('')
+  const [clients, setClients]     = useState([])
+  const [loading, setLoading]     = useState(false)
+  const [searched, setSearched]   = useState(false)
+  const [exporting, setExporting] = useState(false)
+
+  async function handleExport() {
+    setExporting(true)
+    try {
+      await exportClientsExcel(supabase)
+    } catch (err) {
+      console.error('Export failed:', err)
+    } finally {
+      setExporting(false)
+    }
+  }
 
   useEffect(() => {
     if (query.length < 1) {
@@ -201,11 +214,22 @@ export default function AdminClients() {
       />
 
       {/* Top bar */}
-      <header className="flex items-center px-5 py-4 border-b border-[#2A2A2A] shrink-0">
+      <header className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A] shrink-0">
         <div>
           <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest">Brillare by BM</p>
           <h1 className="cormorant-display text-xl text-[#EDE8DF]">Клиенти</h1>
         </div>
+        <button
+          onClick={handleExport}
+          disabled={exporting}
+          title="Изтегли Excel"
+          className="flex items-center gap-1.5 px-3 py-2 border border-[#C9A84C]/40 text-[#C9A84C] josefin-nav text-[10px] uppercase tracking-widest active:bg-[#C9A84C]/10 transition-colors disabled:opacity-40"
+        >
+          <span className="material-symbols-outlined text-base">
+            {exporting ? 'hourglass_empty' : 'download'}
+          </span>
+          {exporting ? 'Зарежда…' : 'Excel'}
+        </button>
       </header>
 
       {/* Search bar */}
