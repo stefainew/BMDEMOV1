@@ -1,5 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
+import { AuthProvider } from './contexts/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
+import { BookingProvider } from './components/booking/BookingContext'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
@@ -9,24 +12,37 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import BookingStep1 from './pages/BookingStep1'
 import BookingStep3 from './pages/BookingStep3'
 import BookingConfirmation from './pages/BookingConfirmation'
+import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
+import AdminClients from './pages/AdminClients'
 
 export default function App() {
   return (
-    <>
-    <ScrollToTop />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/gallery" element={<Gallery />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/privacy" element={<PrivacyPolicy />} />
-      <Route path="/booking" element={<BookingStep1 />} />
-      <Route path="/booking/date" element={<BookingStep3 />} />
-      <Route path="/booking/confirmation" element={<BookingConfirmation />} />
-      <Route path="/admin" element={<AdminDashboard />} />
-    </Routes>
-    </>
+    <AuthProvider>
+      <ScrollToTop />
+      <Routes>
+        {/* Public pages */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+
+        {/* Booking flow — shared state via BookingProvider */}
+        <Route element={<BookingProvider />}>
+          <Route path="/booking" element={<BookingStep1 />} />
+          <Route path="/booking/date" element={<BookingStep3 />} />
+          <Route path="/booking/confirmation" element={<BookingConfirmation />} />
+        </Route>
+
+        {/* Admin */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/clients" element={<AdminClients />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   )
 }

@@ -1,183 +1,226 @@
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { supabase } from '../lib/supabase'
+import AdminBottomNav from '../components/admin/AdminBottomNav'
+import BookingCard from '../components/admin/BookingCard'
+import BookingModal from '../components/admin/BookingModal'
 
-const sidebarLinks = [
-  { icon: 'calendar_today', label: 'Календар', active: true },
-  { icon: 'content_cut', label: 'Услуги', active: false },
-  { icon: 'group', label: 'Екип', active: false },
-  { icon: 'person', label: 'Клиенти', active: false },
-]
+const BG_DAYS   = ['Неделя','Понеделник','Вторник','Сряда','Четвъртък','Петък','Събота']
+const BG_MONTHS = ['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември']
+const WEEKDAYS  = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд']
 
-const timeMarkers = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
+function toDateStr(d) { return d.toISOString().split('T')[0] }
 
-const masters = [
-  {
-    name: 'Виктор К.',
-    role: 'Master Barber',
-    appointments: [
-      { top: 20, height: 128, time: '10:00 - 11:30', client: 'Иван П.', service: 'Подстригване + Оформяне', status: 'confirmed', statusColor: 'bg-green-500', statusLabel: 'Confirmed' },
-      { top: 320, height: 80, time: '13:00 - 14:00', client: 'Марин Т.', service: null, status: 'pending', statusColor: 'bg-yellow-500', statusLabel: 'Pending' },
-    ],
-  },
-  {
-    name: 'Елена М.',
-    role: 'Senior Stylist',
-    appointments: [
-      { top: 0, height: 96, time: '09:00 - 10:15', client: 'Борис Д.', service: null, status: 'completed', statusColor: null, statusLabel: 'Completed', faded: true },
-      { top: 220, height: 128, time: '11:45 - 13:15', client: 'Асен Г.', service: 'Ритуал Бръснене', status: 'confirmed', statusColor: 'bg-green-500', statusLabel: 'Confirmed' },
-    ],
-  },
-  {
-    name: 'Стефан С.',
-    role: 'Creative Artist',
-    appointments: [
-      { top: 160, height: 160, time: '10:30 - 12:30', client: 'Никола Й.', service: 'Цялостен Стилизинг', status: 'confirmed', statusColor: 'bg-green-500', statusLabel: 'Confirmed' },
-    ],
-  },
-]
+function buildCalDays(year, month) {
+  const firstDay = new Date(year, month, 1).getDay()
+  const offset   = firstDay === 0 ? 6 : firstDay - 1
+  const inMonth  = new Date(year, month + 1, 0).getDate()
+  const inPrev   = new Date(year, month, 0).getDate()
+  const prev = Array.from({ length: offset }, (_, i) => ({ day: inPrev - offset + 1 + i, type: 'prev' }))
+  const cur  = Array.from({ length: inMonth }, (_, i) => ({ day: i + 1, type: 'cur' }))
+  const rem  = 42 - prev.length - cur.length
+  const next = Array.from({ length: rem }, (_, i) => ({ day: i + 1, type: 'next' }))
+  return [...prev, ...cur, ...next]
+}
 
 export default function AdminDashboard() {
-  return (
-    <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex overflow-hidden">
-      <div className="grain-overlay fixed inset-0 z-[100]"></div>
+  const today = new Date(); today.setHours(0,0,0,0)
+  const [view, setView]           = useState('today')
+  const [calYear, setCalYear]     = useState(today.getFullYear())
+  const [calMonth, setCalMonth]   = useState(today.getMonth())
+  const [selectedDate, setSelectedDate] = useState(today)
+  const [bookings, setBookings]   = useState([])
+  const [loading, setLoading]     = useState(true)
+  const [showModal, setShowModal] = useState(false)
+  const [editBooking, setEditBooking] = useState(null)
 
-      {/* Sidebar */}
-      <aside className="w-64 bg-surface-container-lowest border-r border-outline-variant flex flex-col h-screen z-40 flex-shrink-0">
-        <div className="px-8 py-10">
-          <Link to="/">
-            <img src="/logo.jpg" alt="Brillare by BM" className="h-8 w-auto" />
-          </Link>
-        </div>
-        <nav className="flex-1 px-4 space-y-2">
-          {sidebarLinks.map((link) => (
-            <a
-              key={link.label}
-              href="#"
-              className={`flex items-center gap-4 px-4 py-3 rounded-sm transition-all duration-300 group ${
-                link.active
-                  ? 'text-[#C9A84C] bg-surface-container-high font-bold'
-                  : 'text-[#8A8070] hover:text-[#EDE8DF] hover:bg-surface-container-low'
-              }`}
-            >
-              <span className="material-symbols-outlined">{link.icon}</span>
-              <span className="josefin-sans uppercase tracking-widest text-[0.75rem]">{link.label}</span>
-            </a>
-          ))}
-        </nav>
-        <div className="p-8 border-t border-outline-variant mt-auto">
+  const dateStr = toDateStr(selectedDate)
+
+  const fetchBookings = useCallback(async () => {
+    setLoading(true)
+    const { data } = await supabase
+      .from('bookings')
+      .select(`
+        *,
+        client:clients(id, name, phone, notes),
+        master:masters(id, name),
+        service:services(id, name, duration_min, price_label, price)
+      `)
+      .eq('date', dateStr)
+      .order('time_start')
+    setBookings(data ?? [])
+    setLoading(false)
+  }, [dateStr])
+
+  useEffect(() => { fetchBookings() }, [fetchBookings])
+
+  function openCreate() { setEditBooking(null); setShowModal(true) }
+  function openEdit(b)  { setEditBooking(b);    setShowModal(true) }
+
+  const displayDate = `${BG_DAYS[selectedDate.getDay()]}, ${selectedDate.getDate()} ${BG_MONTHS[selectedDate.getMonth()]}`
+  const isToday = toDateStr(selectedDate) === toDateStr(today)
+
+  function DayView() {
+    return (
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="px-5 pt-5 pb-3 flex items-center justify-between shrink-0">
+          <div>
+            <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest">
+              {isToday ? 'Днес' : 'Избрана дата'}
+            </p>
+            <h2 className="cormorant-display text-2xl text-[#EDE8DF]">{displayDate}</h2>
+          </div>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-sm bg-surface-container-high border border-outline-variant overflow-hidden">
-              <img
-                className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxDGbVk5Xpp-625QELNLHtgL_jJ8V2HX7zvDaYU5nG9wR6W6XQaU6GCIktU1O7pNrNf1CogkR6UehHi7YeSkLnOSSjGiK5RIxArRN1P0QZq50GAZMsqa6oVmsOII03pAnNYNgMW9vifmPt1Z0eEY4TQK_TlXKqFcnTpaD1o5OQOOMKRSJCBtFD9ALEx04OYfuHPsmKmF3hEYijHAX_hR2OtxrSUiROmTdo9BwQ20e5DCgHtnQgYPRzXYy6XHqLzMyGF77EkKb_7Q"
-                alt="Admin avatar"
-              />
-            </div>
-            <div>
-              <p className="text-[0.7rem] josefin-sans uppercase tracking-tighter text-[#EDE8DF]">Администратор</p>
-              <p className="text-[0.6rem] dm-mono text-[#8A8070]">ID: 4429-A</p>
+            {!isToday && (
+              <button
+                onClick={() => setSelectedDate(new Date(today))}
+                className="text-[10px] josefin-nav text-[#C9A84C] border border-[#C9A84C]/30 px-3 py-2"
+              >
+                Днес
+              </button>
+            )}
+            <div className={`josefin-nav text-sm font-bold px-3 py-2 rounded-sm ${
+              bookings.length === 0 ? 'text-[#8A8070]' : 'text-[#C9A84C] bg-[#C9A84C]/10'
+            }`}>
+              {loading ? '…' : `${bookings.length} ${bookings.length === 1 ? 'резерв.' : 'резерв.'}`}
             </div>
           </div>
         </div>
-      </aside>
 
-      {/* Main */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden bg-background">
-        {/* Top Bar */}
-        <header className="h-20 flex justify-between items-center px-12 bg-surface-container-lowest/50 backdrop-blur-xl border-b border-outline-variant/30">
-          <div className="flex items-center gap-8 w-1/2">
-            <div className="relative w-full max-w-md">
-              <span className="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline-variant text-lg">search</span>
-              <input
-                className="w-full bg-transparent border-0 border-b border-outline-variant py-2 pl-8 text-[0.75rem] josefin-sans focus:ring-0 focus:border-primary transition-all placeholder:text-outline-variant uppercase tracking-widest"
-                placeholder="ТЪРСЕНЕ..."
-                type="text"
-              />
-            </div>
-          </div>
-          <div className="flex items-center gap-6">
-            <button className="flex items-center gap-2 bg-primary text-on-primary-container px-6 py-2.5 rounded-sm josefin-sans uppercase tracking-widest text-[0.75rem] font-bold hover:bg-primary-fixed-dim transition-all active:scale-95">
-              <span className="material-symbols-outlined text-[1.1rem]">add</span>
-              Добави резервация
-            </button>
-          </div>
-        </header>
-
-        {/* Calendar Dashboard */}
-        <div className="flex-1 overflow-auto p-8 lg:p-12 admin-scrollbar">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="cormorant text-5xl font-bold text-[#EDE8DF] mb-2 tracking-tight">График на Ателието</h2>
-              <p className="josefin-sans uppercase tracking-[0.3em] text-[#8A8070] text-xs">Понеделник, 14 Октомври 2024</p>
-            </div>
-            <div className="flex gap-4">
-              <button className="p-2 border border-outline-variant hover:bg-surface-container-high transition-colors">
-                <span className="material-symbols-outlined text-sm">chevron_left</span>
-              </button>
-              <button className="px-4 py-2 border border-outline-variant text-[0.7rem] josefin-sans uppercase tracking-widest hover:bg-surface-container-high transition-colors">Днес</button>
-              <button className="p-2 border border-outline-variant hover:bg-surface-container-high transition-colors">
-                <span className="material-symbols-outlined text-sm">chevron_right</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Masters Grid */}
-          <div className="grid grid-cols-[80px_1fr_1fr_1fr] gap-6">
-            {/* Time Markers */}
-            <div className="pt-20 space-y-[84px]">
-              {timeMarkers.map((t) => (
-                <div key={t} className="dm-mono text-[0.7rem] text-[#8A8070]">{t}</div>
+        <div className="flex-1 overflow-y-auto px-5 pb-24 space-y-2">
+          {loading ? (
+            <div className="space-y-2 pt-2">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-20 bg-[#131313] animate-pulse rounded" />
               ))}
             </div>
+          ) : bookings.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <span className="material-symbols-outlined text-5xl text-[#2A2A2A] mb-4">calendar_today</span>
+              <p className="josefin-nav text-[#8A8070] uppercase tracking-wide text-sm">Няма резервации</p>
+              <p className="text-[#4A4540] text-xs mt-2">Докоснете + за нова резервация</p>
+            </div>
+          ) : (
+            bookings.map(b => (
+              <BookingCard
+                key={b.id}
+                booking={b}
+                onRefresh={fetchBookings}
+                onEdit={openEdit}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    )
+  }
 
-            {/* Master Columns */}
-            {masters.map((master) => (
-              <div key={master.name} className="space-y-4">
-                <div className="bg-surface-container-low p-4 mb-8">
-                  <h3 className="josefin-sans uppercase tracking-widest text-[0.8rem] text-[#EDE8DF] font-bold">{master.name}</h3>
-                  <p className="dm-mono text-[0.6rem] text-primary">{master.role}</p>
-                </div>
-                <div className="relative h-[800px] border-l border-outline-variant/20">
-                  {master.appointments.map((apt, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-full p-1"
-                      style={{ top: apt.top, height: apt.height }}
-                    >
-                      <div className={`h-full border-l-2 p-3 flex flex-col justify-between group cursor-pointer transition-colors ${
-                        apt.faded
-                          ? 'bg-surface-container-high/50 border-outline-variant opacity-50'
-                          : 'bg-surface-container-high border-primary hover:bg-surface-variant'
-                      }`}>
-                        <div>
-                          <p className={`dm-mono text-[0.65rem] mb-1 ${apt.faded ? 'text-[#8A8070]' : 'text-primary'}`}>{apt.time}</p>
-                          <p className="josefin-sans uppercase text-[0.75rem] font-bold tracking-wider">{apt.client}</p>
-                          {apt.service && <p className="lora italic text-[0.7rem] text-[#8A8070]">{apt.service}</p>}
-                        </div>
-                        <div className="flex justify-end items-center gap-1">
-                          {apt.faded
-                            ? <><span className="material-symbols-outlined text-[0.8rem] text-primary">check_circle</span><span className="dm-mono text-[0.55rem] text-[#8A8070] uppercase">{apt.statusLabel}</span></>
-                            : <><span className={`w-1.5 h-1.5 rounded-full ${apt.statusColor}`}></span><span className="dm-mono text-[0.55rem] text-[#8A8070] uppercase">{apt.statusLabel}</span></>
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+  function CalView() {
+    const calDays = buildCalDays(calYear, calMonth)
+
+    function prevMonth() {
+      if (calMonth === 0) { setCalMonth(11); setCalYear(y => y - 1) }
+      else setCalMonth(m => m - 1)
+    }
+    function nextMonth() {
+      if (calMonth === 11) { setCalMonth(0); setCalYear(y => y + 1) }
+      else setCalMonth(m => m + 1)
+    }
+
+    function selectDay(day, type) {
+      if (type !== 'cur') return
+      const d = new Date(calYear, calMonth, day)
+      setSelectedDate(d)
+      setView('today')
+    }
+
+    return (
+      <div className="flex-1 overflow-y-auto px-5 pt-5 pb-24">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="josefin-nav text-[#C9A84C] uppercase tracking-widest text-sm">
+            {BG_MONTHS[calMonth]} {calYear}
+          </h2>
+          <div className="flex gap-2">
+            <button onClick={prevMonth} className="p-2 text-[#8A8070] active:text-[#EDE8DF]">
+              <span className="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button onClick={nextMonth} className="p-2 text-[#8A8070] active:text-[#EDE8DF]">
+              <span className="material-symbols-outlined">chevron_right</span>
+            </button>
           </div>
         </div>
-      </main>
+
+        <div className="grid grid-cols-7 gap-y-2 text-center">
+          {WEEKDAYS.map(d => (
+            <div key={d} className="josefin-nav text-[10px] text-[#8A8070] uppercase pb-3">{d}</div>
+          ))}
+          {calDays.map(({ day, type }, idx) => {
+            const dateObj = new Date(calYear, calMonth + (type === 'prev' ? -1 : type === 'next' ? 1 : 0), day)
+            const isT  = dateObj.getTime() === today.getTime()
+            const isSel = dateObj.getTime() === selectedDate.getTime()
+            const disabled = type !== 'cur'
+
+            return (
+              <div
+                key={idx}
+                onClick={() => selectDay(day, type)}
+                className={`relative py-2 flex items-center justify-center ${disabled ? 'opacity-20' : 'cursor-pointer'}`}
+              >
+                {isSel && <span className="absolute inset-0 m-auto w-9 h-9 bg-[#C9A84C] rounded-sm" />}
+                {isT && !isSel && <span className="absolute inset-0 m-auto w-9 h-9 border border-[#C9A84C]/40 rounded-sm" />}
+                <span className={`relative font-mono text-sm ${
+                  isSel ? 'text-[#0A0A0A] font-bold' : isT ? 'text-[#C9A84C] font-bold' : 'text-[#EDE8DF]'
+                }`}>{day}</span>
+              </div>
+            )
+          })}
+        </div>
+
+        <p className="text-center text-xs text-[#8A8070] mt-8">Докоснете дата за да видите резервациите</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="fixed inset-0 bg-[#0A0A0A] flex flex-col">
+      <div
+        className="pointer-events-none fixed inset-0 opacity-[0.02]"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")', backgroundSize: '128px' }}
+      />
+
+      {/* Top bar */}
+      <header className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A] shrink-0">
+        <div>
+          <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest">Brillare by BM</p>
+          <h1 className="cormorant-display text-xl text-[#EDE8DF]">Панел</h1>
+        </div>
+        <button onClick={fetchBookings} className="p-2 text-[#8A8070] active:text-[#EDE8DF] transition-colors">
+          <span className="material-symbols-outlined">refresh</span>
+        </button>
+      </header>
+
+      {/* Content */}
+      <div className="flex-1 overflow-hidden flex flex-col">
+        {view === 'today'    && <DayView />}
+        {view === 'calendar' && <CalView />}
+      </div>
 
       {/* FAB */}
-      <div className="fixed bottom-12 right-12 flex flex-col gap-4 z-50">
-        <button className="w-14 h-14 bg-surface-container-highest border border-outline-variant flex items-center justify-center text-primary hover:text-white transition-all duration-300">
-          <span className="material-symbols-outlined">settings</span>
-        </button>
-        <button className="w-14 h-14 bg-primary text-on-primary-container flex items-center justify-center hover:scale-105 transition-all duration-300 active:scale-95 shadow-2xl">
-          <span className="material-symbols-outlined">edit_calendar</span>
-        </button>
-      </div>
+      <button
+        onClick={openCreate}
+        className="fixed right-5 bottom-[80px] z-40 w-14 h-14 bg-[#C9A84C] text-[#0A0A0A] rounded-full flex items-center justify-center shadow-lg shadow-[#C9A84C]/20 active:scale-95 transition-transform"
+      >
+        <span className="material-symbols-outlined text-2xl">add</span>
+      </button>
+
+      <AdminBottomNav activeView={view} onChangeView={setView} />
+
+      {showModal && (
+        <BookingModal
+          booking={editBooking}
+          onClose={() => setShowModal(false)}
+          onSaved={fetchBookings}
+        />
+      )}
     </div>
   )
 }
