@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import AdminBottomNav from '../components/admin/AdminBottomNav'
-import { exportClientsExcel } from '../lib/exportExcel'
+import { exportClientsExcel, exportClientsCSV } from '../lib/exportExcel'
 
 const BG_MONTHS = ['Ян','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек']
 
@@ -148,12 +148,15 @@ export default function AdminClients() {
   const [clients, setClients]     = useState([])
   const [loading, setLoading]     = useState(false)
   const [searched, setSearched]   = useState(false)
-  const [exporting, setExporting] = useState(false)
+  const [exporting, setExporting]   = useState(false)
+  const [showExportMenu, setShowExportMenu] = useState(false)
 
-  async function handleExport() {
+  async function handleExport(type) {
+    setShowExportMenu(false)
     setExporting(true)
     try {
-      await exportClientsExcel(supabase)
+      if (type === 'csv') await exportClientsCSV(supabase)
+      else                await exportClientsExcel(supabase)
     } catch (err) {
       console.error('Export failed:', err)
     } finally {
@@ -219,17 +222,42 @@ export default function AdminClients() {
           <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest">Brillare by BM</p>
           <h1 className="cormorant-display text-xl text-[#EDE8DF]">Клиенти</h1>
         </div>
-        <button
-          onClick={handleExport}
-          disabled={exporting}
-          title="Изтегли Excel"
-          className="flex items-center gap-1.5 px-3 py-2 border border-[#C9A84C]/40 text-[#C9A84C] josefin-nav text-[10px] uppercase tracking-widest active:bg-[#C9A84C]/10 transition-colors disabled:opacity-40"
-        >
-          <span className="material-symbols-outlined text-base">
-            {exporting ? 'hourglass_empty' : 'download'}
-          </span>
-          {exporting ? 'Зарежда…' : 'Excel'}
-        </button>
+        <div className="relative">
+          <button
+            onClick={() => setShowExportMenu(m => !m)}
+            disabled={exporting}
+            className="flex items-center gap-1.5 px-3 py-2 border border-[#C9A84C]/40 text-[#C9A84C] josefin-nav text-[10px] uppercase tracking-widest active:bg-[#C9A84C]/10 transition-colors disabled:opacity-40"
+          >
+            <span className="material-symbols-outlined text-base">
+              {exporting ? 'hourglass_empty' : 'download'}
+            </span>
+            {exporting ? 'Зарежда…' : 'Изтегли'}
+          </button>
+
+          {showExportMenu && (
+            <>
+              {/* backdrop to close on outside tap */}
+              <div className="fixed inset-0 z-40" onClick={() => setShowExportMenu(false)} />
+              <div className="absolute right-0 top-full mt-1 z-50 bg-[#1C1B1B] border border-[#2A2A2A] min-w-[140px] shadow-xl">
+                <button
+                  onClick={() => handleExport('excel')}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-left josefin-nav text-[11px] uppercase tracking-widest text-[#EDE8DF] hover:bg-[#2A2A2A] active:bg-[#2A2A2A] transition-colors"
+                >
+                  <span className="material-symbols-outlined text-base text-[#C9A84C]">table_view</span>
+                  Excel (.xlsx)
+                </button>
+                <div className="h-px bg-[#2A2A2A]" />
+                <button
+                  onClick={() => handleExport('csv')}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-left josefin-nav text-[11px] uppercase tracking-widest text-[#EDE8DF] hover:bg-[#2A2A2A] active:bg-[#2A2A2A] transition-colors"
+                >
+                  <span className="material-symbols-outlined text-base text-[#C9A84C]">csv</span>
+                  CSV (.csv)
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </header>
 
       {/* Search bar */}

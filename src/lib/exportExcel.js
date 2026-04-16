@@ -207,3 +207,92 @@ export async function exportClientsExcel(supabase) {
   const filename = `brillare-bm-${date}.xlsx`
   XLSX.writeFile(wb, filename)
 }
+
+// ─── CSV export ───────────────────────────────────────────────────────────────
+function escapeCSV(val) {
+  if (val == null) return ''
+  const str = String(val)
+  return str.includes(',') || str.includes('"') || str.includes('\n')
+    ? `"${str.replace(/"/g, '""')}"`
+    : str
+}
+
+export async function exportClientsCSV(supabase) {
+  const { data: clients, error } = await supabase
+    .from('clients')
+    .select(`
+      id, name, phone, email, notes, created_at,
+      bookings:bookings(
+        id, date, time_start, status, admin_notes,
+        service:services(name),
+        master:masters(name)
+      )
+    `)
+    .order('name')
+
+  if (error) throw error
+
+  const BOM = '\uFEFF' // UTF-8 BOM so Excel opens Cyrillic correctly
+
+  // ── Sheet 1: Clients summary ──────────────────────────────────────────────
+  const clientsHeader = ['Клиент', 'Телефон', 'Имейл', 'Посещения', 'Последно посещение', 'Бележки', 'Регистриран']
+  const clientsRows = clients.map(client => {
+    const bookings  = client.bookings ?? []
+    const valid     = bookings.filter(b => b.status !== 'cancelled' && b.status !== 'no_show')
+    const lastVisit = [...valid].sort((a, b) => b.date > a.date ? 1 : -1)[0]?.date ?? ''
+    return [
+      client.name,
+      client.phone,
+      client.email ?? '',
+      valid.length,
+      fmtDate(lastVisit),
+      client.notes ?? '',
+      fmtTimestamp(client.created_at),
+    ]
+  })
+
+  // ── Sheet 2: Booking history ──────────────────────────────────────────────
+  const histHeader = ['Клиент', 'Телефон', 'Дата', 'Час', 'Услуга', 'Майстор', 'Статус', 'Бележки']
+  const histRows = []
+  clients.forEach(client => {
+    const sorted = [...(client.bookings ?? [])].sort((a, b) =>
+      b.date > a.date ? 1 : b.date < a.date ? -1 : 0
+    )
+    sorted.forEach(b => {
+      histRows.push([
+        client.name,
+        client.phone,
+        fmtDate(b.date),
+        b.time_start?.slice(0, 5) ?? '',
+        b.service?.name ?? '',
+        b.master?.name ?? '',
+        STATUS_LABELS[b.status] ?? b.status,
+        b.admin_notes ?? '',
+      ])
+    })
+  })
+
+  // Combine into one CSV: clients block, blank line, history block
+  const toCSV = (header, rows) => [
+    header.map(escapeCSV).join(','),
+    ...rows.map(r => r.map(escapeCSV).join(',')),
+  ].join('\r\n')
+
+  const csv = [
+    '=== КЛИЕНТИ ===',
+    toCSV(clientsHeader, clientsRows),
+    '',
+    '=== ИСТОРИЯ НА РЕЗЕРВАЦИИТЕ ===',
+    toCSV(histHeader, histRows),
+  ].join('\r\n')
+
+  const blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' })
+  const url  = URL.createObjectURL(blob)
+  const a    = document.createElement('a')
+  a.href     = url
+  a.download = `brillare-bm-${new Date().toISOString().slice(0, 10)}.csv`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
