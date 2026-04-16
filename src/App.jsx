@@ -15,6 +15,7 @@ import BookingConfirmation from './pages/BookingConfirmation'
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminClients from './pages/AdminClients'
+import AdminProducts from './pages/AdminProducts'
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/clients" element={<AdminClients />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
         </Route>
       </Routes>
     </AuthProvider>

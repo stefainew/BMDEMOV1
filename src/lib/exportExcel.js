@@ -88,10 +88,9 @@ function fmtTimestamp(iso) {
   return fmtDate(d.toISOString().slice(0, 10))
 }
 
-// ─── Main export ──────────────────────────────────────────────────────────────
-export async function exportClientsExcel(supabase) {
-  // Fetch all clients with full booking history
-  const { data: clients, error } = await supabase
+// ─── Shared fetch ─────────────────────────────────────────────────────────────
+async function fetchAllClients(supabase) {
+  const { data, error } = await supabase
     .from('clients')
     .select(`
       id, name, phone, email, notes, created_at,
@@ -99,11 +98,20 @@ export async function exportClientsExcel(supabase) {
         id, date, time_start, status, admin_notes,
         service:services(name),
         master:masters(name)
+      ),
+      product_sales:product_sales(
+        id, date, quantity, price_sold, notes,
+        product:products(name, brand)
       )
     `)
     .order('name')
-
   if (error) throw error
+  return data ?? []
+}
+
+// ─── Main export ──────────────────────────────────────────────────────────────
+export async function exportClientsExcel(supabase) {
+  const clients = await fetchAllClients(supabase)
 
   const wb = XLSX.utils.book_new()
 
@@ -202,6 +210,58 @@ export async function exportClientsExcel(supabase) {
 
   XLSX.utils.book_append_sheet(wb, wsHistory, 'История')
 
+  // ── Sheet 3: Product sales ────────────────────────────────────────────────
+  const salesHeaders = [
+    headerCell('Клиент'),
+    headerCell('Телефон'),
+    headerCell('Дата'),
+    headerCell('Продукт'),
+    headerCell('Марка'),
+    headerCell('Брой'),
+    headerCell('Цена (лв)'),
+    headerCell('Общо (лв)'),
+    headerCell('Бележка'),
+  ]
+
+  const salesRows = []
+  let salesIdx = 0
+  clients.forEach(client => {
+    const sorted = [...(client.product_sales ?? [])].sort((a, b) =>
+      b.date > a.date ? 1 : b.date < a.date ? -1 : 0
+    )
+    sorted.forEach(s => {
+      const isAlt = salesIdx % 2 === 1
+      const cell  = isAlt ? altDataCell : dataCell
+      salesRows.push([
+        cell(client.name),
+        cell(client.phone),
+        cell(fmtDate(s.date)),
+        cell(s.product?.name ?? '—'),
+        cell(s.product?.brand ?? ''),
+        { ...cell(s.quantity, 'n'), s: { ...cell(s.quantity, 'n').s, alignment: { horizontal: 'center', vertical: 'center' } } },
+        cell(Number(s.price_sold).toFixed(2)),
+        cell((s.quantity * s.price_sold).toFixed(2)),
+        cell(s.notes ?? ''),
+      ])
+      salesIdx++
+    })
+  })
+
+  const wsSales = XLSX.utils.aoa_to_sheet([salesHeaders, ...salesRows])
+  wsSales['!cols'] = [
+    { wch: 24 }, // Клиент
+    { wch: 16 }, // Телефон
+    { wch: 14 }, // Дата
+    { wch: 28 }, // Продукт
+    { wch: 16 }, // Марка
+    { wch: 7  }, // Брой
+    { wch: 12 }, // Цена
+    { wch: 12 }, // Общо
+    { wch: 36 }, // Бележка
+  ]
+  wsSales['!rows'] = [{ hpt: 26 }]
+  XLSX.utils.book_append_sheet(wb, wsSales, 'Продажби')
+
   // ── Download ──────────────────────────────────────────────────────────────
   const date     = new Date().toISOString().slice(0, 10)
   const filename = `brillare-bm-${date}.xlsx`
@@ -218,61 +278,42 @@ function escapeCSV(val) {
 }
 
 export async function exportClientsCSV(supabase) {
-  const { data: clients, error } = await supabase
-    .from('clients')
-    .select(`
-      id, name, phone, email, notes, created_at,
-      bookings:bookings(
-        id, date, time_start, status, admin_notes,
-        service:services(name),
-        master:masters(name)
-      )
-    `)
-    .order('name')
-
-  if (error) throw error
+  const clients = await fetchAllClients(supabase)
 
   const BOM = '\uFEFF' // UTF-8 BOM so Excel opens Cyrillic correctly
 
-  // ── Sheet 1: Clients summary ──────────────────────────────────────────────
+  // ── Section 1: Clients summary ────────────────────────────────────────────
   const clientsHeader = ['Клиент', 'Телефон', 'Имейл', 'Посещения', 'Последно посещение', 'Бележки', 'Регистриран']
   const clientsRows = clients.map(client => {
-    const bookings  = client.bookings ?? []
-    const valid     = bookings.filter(b => b.status !== 'cancelled' && b.status !== 'no_show')
+    const valid     = (client.bookings ?? []).filter(b => b.status !== 'cancelled' && b.status !== 'no_show')
     const lastVisit = [...valid].sort((a, b) => b.date > a.date ? 1 : -1)[0]?.date ?? ''
-    return [
-      client.name,
-      client.phone,
-      client.email ?? '',
-      valid.length,
-      fmtDate(lastVisit),
-      client.notes ?? '',
-      fmtTimestamp(client.created_at),
-    ]
+    return [client.name, client.phone, client.email ?? '', valid.length, fmtDate(lastVisit), client.notes ?? '', fmtTimestamp(client.created_at)]
   })
 
-  // ── Sheet 2: Booking history ──────────────────────────────────────────────
+  // ── Section 2: Booking history ────────────────────────────────────────────
   const histHeader = ['Клиент', 'Телефон', 'Дата', 'Час', 'Услуга', 'Майстор', 'Статус', 'Бележки']
   const histRows = []
   clients.forEach(client => {
-    const sorted = [...(client.bookings ?? [])].sort((a, b) =>
-      b.date > a.date ? 1 : b.date < a.date ? -1 : 0
-    )
-    sorted.forEach(b => {
-      histRows.push([
-        client.name,
-        client.phone,
-        fmtDate(b.date),
-        b.time_start?.slice(0, 5) ?? '',
-        b.service?.name ?? '',
-        b.master?.name ?? '',
-        STATUS_LABELS[b.status] ?? b.status,
-        b.admin_notes ?? '',
-      ])
-    })
+    const sorted = [...(client.bookings ?? [])].sort((a, b) => b.date > a.date ? 1 : b.date < a.date ? -1 : 0)
+    sorted.forEach(b => histRows.push([
+      client.name, client.phone, fmtDate(b.date), b.time_start?.slice(0, 5) ?? '',
+      b.service?.name ?? '', b.master?.name ?? '', STATUS_LABELS[b.status] ?? b.status, b.admin_notes ?? '',
+    ]))
   })
 
-  // Combine into one CSV: clients block, blank line, history block
+  // ── Section 3: Product sales ──────────────────────────────────────────────
+  const salesHeader = ['Клиент', 'Телефон', 'Дата', 'Продукт', 'Марка', 'Брой', 'Цена (лв)', 'Общо (лв)', 'Бележка']
+  const salesRows = []
+  clients.forEach(client => {
+    const sorted = [...(client.product_sales ?? [])].sort((a, b) => b.date > a.date ? 1 : b.date < a.date ? -1 : 0)
+    sorted.forEach(s => salesRows.push([
+      client.name, client.phone, fmtDate(s.date),
+      s.product?.name ?? '', s.product?.brand ?? '',
+      s.quantity, Number(s.price_sold).toFixed(2), (s.quantity * s.price_sold).toFixed(2), s.notes ?? '',
+    ]))
+  })
+
+  // Combine into one CSV
   const toCSV = (header, rows) => [
     header.map(escapeCSV).join(','),
     ...rows.map(r => r.map(escapeCSV).join(',')),
@@ -284,6 +325,9 @@ export async function exportClientsCSV(supabase) {
     '',
     '=== ИСТОРИЯ НА РЕЗЕРВАЦИИТЕ ===',
     toCSV(histHeader, histRows),
+    '',
+    '=== ПРОДАЖБИ НА ПРОДУКТИ ===',
+    toCSV(salesHeader, salesRows),
   ].join('\r\n')
 
   const blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' })

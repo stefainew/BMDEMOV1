@@ -5,6 +5,7 @@ const tabs = [
   { id: 'today',    icon: 'calendar_today',  label: 'Днес',     path: '/admin' },
   { id: 'calendar', icon: 'calendar_month',  label: 'Календар', path: '/admin?view=calendar' },
   { id: 'clients',  icon: 'group',           label: 'Клиенти',  path: '/admin/clients' },
+  { id: 'products', icon: 'local_mall',      label: 'Продукти', path: '/admin/products' },
 ]
 
 export default function AdminBottomNav({ activeView, onChangeView }) {
@@ -23,6 +24,8 @@ export default function AdminBottomNav({ activeView, onChangeView }) {
         const isActive =
           tab.id === 'clients'
             ? location.pathname === '/admin/clients'
+            : tab.id === 'products'
+            ? location.pathname === '/admin/products'
             : location.pathname === '/admin' && (
                 tab.id === 'today'    ? activeView === 'today'
               : tab.id === 'calendar' ? activeView === 'calendar'
@@ -33,7 +36,8 @@ export default function AdminBottomNav({ activeView, onChangeView }) {
           <button
             key={tab.id}
             onClick={() => {
-              if (tab.id === 'clients') navigate('/admin/clients')
+              if (tab.id === 'clients')  navigate('/admin/clients')
+              else if (tab.id === 'products') navigate('/admin/products')
               else { navigate('/admin'); onChangeView?.(tab.id) }
             }}
             className={`flex-1 flex flex-col items-center justify-center py-3 gap-1 min-h-[60px] transition-colors ${
