@@ -6,8 +6,8 @@ const BG_MONTHS = ['Ян','Фев','Мар','Апр','Май','Юни','Юли',
 
 function formatDate(d) {
   if (!d) return '—'
-  const date = new Date(d)
-  return `${date.getDate()} ${BG_MONTHS[date.getMonth()]} ${date.getFullYear()}`
+  const [year, month, day] = d.slice(0, 10).split('-').map(Number)
+  return `${day} ${BG_MONTHS[month - 1]} ${year}`
 }
 
 const STATUS_LABELS = {

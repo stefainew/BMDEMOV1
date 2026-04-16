@@ -8,7 +8,12 @@ const BG_DAYS   = ['Неделя','Понеделник','Вторник','Ср�
 const BG_MONTHS = ['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември']
 const WEEKDAYS  = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд']
 
-function toDateStr(d) { return d.toISOString().split('T')[0] }
+function toDateStr(d) {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
 
 function buildCalDays(year, month) {
   const firstDay = new Date(year, month, 1).getDay()
@@ -28,10 +33,11 @@ export default function AdminDashboard() {
   const [calYear, setCalYear]     = useState(today.getFullYear())
   const [calMonth, setCalMonth]   = useState(today.getMonth())
   const [selectedDate, setSelectedDate] = useState(today)
-  const [bookings, setBookings]   = useState([])
-  const [loading, setLoading]     = useState(true)
-  const [showModal, setShowModal] = useState(false)
-  const [editBooking, setEditBooking] = useState(null)
+  const [bookings, setBookings]         = useState([])
+  const [monthBookings, setMonthBookings] = useState({}) // { 'YYYY-MM-DD': '10:00' }
+  const [loading, setLoading]           = useState(true)
+  const [showModal, setShowModal]       = useState(false)
+  const [editBooking, setEditBooking]   = useState(null)
 
   const dateStr = toDateStr(selectedDate)
 
@@ -52,6 +58,27 @@ export default function AdminDashboard() {
   }, [dateStr])
 
   useEffect(() => { fetchBookings() }, [fetchBookings])
+
+  // Fetch first appointment time for each day in the current calendar month
+  useEffect(() => {
+    async function fetchMonth() {
+      const firstDay = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-01`
+      const lastDay  = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${new Date(calYear, calMonth + 1, 0).getDate()}`
+      const { data } = await supabase
+        .from('bookings')
+        .select('date, time_start')
+        .gte('date', firstDay)
+        .lte('date', lastDay)
+        .not('status', 'eq', 'cancelled')
+        .order('time_start')
+      const map = {}
+      ;(data ?? []).forEach(b => {
+        if (!map[b.date]) map[b.date] = b.time_start?.slice(0, 5)
+      })
+      setMonthBookings(map)
+    }
+    fetchMonth()
+  }, [calYear, calMonth])
 
   function openCreate() { setEditBooking(null); setShowModal(true) }
   function openEdit(b)  { setEditBooking(b);    setShowModal(true) }
@@ -155,21 +182,28 @@ export default function AdminDashboard() {
           ))}
           {calDays.map(({ day, type }, idx) => {
             const dateObj = new Date(calYear, calMonth + (type === 'prev' ? -1 : type === 'next' ? 1 : 0), day)
-            const isT  = dateObj.getTime() === today.getTime()
-            const isSel = dateObj.getTime() === selectedDate.getTime()
+            const isT     = dateObj.getTime() === today.getTime()
+            const isSel   = dateObj.getTime() === selectedDate.getTime()
             const disabled = type !== 'cur'
+            const dateKey = toDateStr(dateObj)
+            const firstTime = type === 'cur' ? monthBookings[dateKey] : null
 
             return (
               <div
                 key={idx}
                 onClick={() => selectDay(day, type)}
-                className={`relative py-2 flex items-center justify-center ${disabled ? 'opacity-20' : 'cursor-pointer'}`}
+                className={`relative py-1 flex flex-col items-center justify-center gap-0.5 min-h-[48px] ${disabled ? 'opacity-20' : 'cursor-pointer'}`}
               >
-                {isSel && <span className="absolute inset-0 m-auto w-9 h-9 bg-[#C9A84C] rounded-sm" />}
-                {isT && !isSel && <span className="absolute inset-0 m-auto w-9 h-9 border border-[#C9A84C]/40 rounded-sm" />}
-                <span className={`relative font-mono text-sm ${
+                {isSel && <span className="absolute inset-x-1 top-0.5 bottom-0.5 bg-[#C9A84C] rounded-sm" />}
+                {isT && !isSel && <span className="absolute inset-x-1 top-0.5 bottom-0.5 border border-[#C9A84C]/40 rounded-sm" />}
+                <span className={`relative font-mono text-sm leading-none ${
                   isSel ? 'text-[#0A0A0A] font-bold' : isT ? 'text-[#C9A84C] font-bold' : 'text-[#EDE8DF]'
                 }`}>{day}</span>
+                {firstTime && (
+                  <span className={`relative font-mono text-[9px] leading-none ${isSel ? 'text-[#0A0A0A]/70' : 'text-[#C9A84C]/70'}`}>
+                    {firstTime}
+                  </span>
+                )}
               </div>
             )
           })}
