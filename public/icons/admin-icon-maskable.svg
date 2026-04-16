@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full bleed background (maskable — no rounded corners, fills entire canvas) -->
+  <rect width="512" height="512" fill="#181818"/>
+  <!-- Gold decorative line top -->
+  <rect x="96" y="150" width="320" height="1.5" fill="#C9A84C" opacity="0.6"/>
+  <!-- BM Monogram (slightly smaller to stay in safe zone) -->
+  <text
+    x="256"
+    y="310"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="190"
+    font-weight="400"
+    fill="#C9A84C"
+    text-anchor="middle"
+    letter-spacing="4"
+  >BM</text>
+  <!-- Gold decorative line bottom -->
+  <rect x="96" y="370" width="320" height="1.5" fill="#C9A84C" opacity="0.6"/>
+  <!-- Subtitle -->
+  <text
+    x="256"
+    y="415"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="34"
+    font-weight="300"
+    fill="#C9A84C"
+    text-anchor="middle"
+    letter-spacing="8"
+    opacity="0.8"
+  >ADMIN</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#181818"/>
+  <!-- Gold decorative line top -->
+  <rect x="96" y="140" width="320" height="1.5" fill="#C9A84C" opacity="0.6"/>
+  <!-- BM Monogram -->
+  <text
+    x="256"
+    y="308"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="210"
+    font-weight="400"
+    fill="#C9A84C"
+    text-anchor="middle"
+    letter-spacing="4"
+  >BM</text>
+  <!-- Gold decorative line bottom -->
+  <rect x="96" y="370" width="320" height="1.5" fill="#C9A84C" opacity="0.6"/>
+  <!-- Subtitle -->
+  <text
+    x="256"
+    y="415"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="36"
+    font-weight="300"
+    fill="#C9A84C"
+    text-anchor="middle"
+    letter-spacing="8"
+    opacity="0.8"
+  >ADMIN</text>
+</svg>
