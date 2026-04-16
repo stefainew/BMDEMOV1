@@ -77,12 +77,12 @@ body {
    FONT UTILITY ALIASES (used in some pages)
    ============================================ */
 .brand-header { font-family: 'Cormorant Garamond', serif; }
-.ui-label    { font-family: 'Josefin Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+.ui-label    { font-family: 'Josefin Sans', 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
 .price-line  { font-family: 'DM Mono', monospace; }
-.josefin-nav { font-family: 'Josefin Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.2em; }
+.josefin-nav { font-family: 'Josefin Sans', 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.2em; }
 .cormorant   { font-family: 'Cormorant Garamond', serif; }
 .dm-mono     { font-family: 'DM Mono', monospace; }
-.text-precision  { font-family: 'Josefin Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.2em; }
+.text-precision  { font-family: 'Josefin Sans', 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.2em; }
 .text-brand-header { font-family: 'Cormorant Garamond', serif; }
 .text-technical  { font-family: 'DM Mono', monospace; }
 .cormorant-display { font-family: 'Cormorant Garamond', serif; }
@@ -101,7 +101,7 @@ body {
   margin-top: 3rem;
   margin-bottom: 1rem;
   color: #C9A84C;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Josefin Sans', 'Jost', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 1.1rem;
