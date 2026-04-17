@@ -57,7 +57,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10">
+      <div className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 max-h-[90vh] flex flex-col">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A]">
           <h2 className="cormorant-display text-lg text-[#EDE8DF]">Добави продажба</h2>
           <button onClick={onClose} className="text-[#8A8070]">
@@ -65,7 +65,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
           </button>
         </div>
 
-        <div className="px-5 py-5 space-y-4">
+          <div className="px-5 py-5 space-y-4 overflow-y-auto">
           {/* Product */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Продукт</label>
