@@ -29,6 +29,26 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   const [notes,     setNotes]     = useState('')
   const [saving,    setSaving]    = useState(false)
   const [error,     setError]     = useState('')
+  const [kbOffset,  setKbOffset]  = useState(0)
+
+  // Push the modal above the virtual keyboard on iOS/Android.
+  // The layout viewport does not shrink when the keyboard opens, so fixed
+  // elements stay behind it. visualViewport.height gives the actual visible
+  // area, letting us compute keyboard height and shift the modal up.
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    const update = () => {
+      const kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop)
+      setKbOffset(kb)
+    }
+    vv.addEventListener('resize', update)
+    vv.addEventListener('scroll', update)
+    return () => {
+      vv.removeEventListener('resize', update)
+      vv.removeEventListener('scroll', update)
+    }
+  }, [])
 
   function onProductChange(id) {
     setProductId(id)
@@ -55,10 +75,15 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+      style={{ paddingBottom: kbOffset, transition: 'padding-bottom 0.15s ease-out' }}
+    >
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 flex flex-col" style={{ maxHeight: 'min(85dvh, 85vh)' }}>
-
+      <div
+        className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 flex flex-col"
+        style={{ maxHeight: kbOffset > 0 ? `calc(100vh - ${kbOffset}px - 16px)` : 'min(85dvh, 85vh)' }}
+      >
         {/* Header — never scrolls */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A] shrink-0">
           <h2 className="cormorant-display text-lg text-[#EDE8DF]">Добави продажба</h2>
@@ -68,7 +93,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
         </div>
 
         {/* Form fields — scrollable */}
-        <div className="px-5 py-5 space-y-4 overflow-y-auto overflow-x-hidden min-h-0" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="px-5 py-5 space-y-4 overflow-y-auto overflow-x-hidden min-h-0 flex-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           {/* Product */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Продукт</label>
@@ -107,15 +132,16 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
             </div>
           </div>
 
-          {/* Date */}
+          {/* Date — appearance:none strips the native calendar widget chrome that
+              overflows the container on Android/iOS while keeping the picker */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Дата</label>
             <input
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
-              style={{ width: '100%', boxSizing: 'border-box' }}
-              className="bg-[#0A0A0A] border border-[#2A2A2A] text-[#EDE8DF] text-sm px-4 py-3 focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="w-full bg-[#0A0A0A] border border-[#2A2A2A] text-[#EDE8DF] text-sm px-4 py-3 focus:outline-none focus:border-[#C9A84C] transition-colors"
+              style={{ WebkitAppearance: 'none', appearance: 'none' }}
             />
           </div>
 
@@ -133,7 +159,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
           {error && <p className="text-red-400 text-xs">{error}</p>}
         </div>
 
-        {/* Save button — pinned to bottom, never scrolls away */}
+        {/* Save button — pinned footer, never scrolls away */}
         <div className="px-5 py-4 border-t border-[#2A2A2A] shrink-0">
           <button
             onClick={save}
@@ -143,7 +169,6 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
             {saving ? 'Записване…' : 'Запази продажбата'}
           </button>
         </div>
-
       </div>
     </div>
   )
