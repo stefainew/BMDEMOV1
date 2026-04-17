@@ -57,7 +57,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 max-h-[90vh] flex flex-col">
+      <div className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 max-h-[85dvh] flex flex-col">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A]">
           <h2 className="cormorant-display text-lg text-[#EDE8DF]">Добави продажба</h2>
           <button onClick={onClose} className="text-[#8A8070]">
@@ -65,7 +65,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
           </button>
         </div>
 
-        <div className="px-5 py-5 space-y-4 overflow-y-auto min-h-0">
+        <div className="px-5 py-5 space-y-4 overflow-y-auto min-h-0 overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
           {/* Product */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Продукт</label>
@@ -105,13 +105,13 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
           </div>
 
           {/* Date */}
-          <div>
+          <div className="overflow-hidden">
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Дата</label>
             <input
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
-              className="w-full bg-[#0A0A0A] border border-[#2A2A2A] text-[#EDE8DF] text-sm px-4 py-3 focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="w-full max-w-full bg-[#0A0A0A] border border-[#2A2A2A] text-[#EDE8DF] text-sm px-4 py-3 focus:outline-none focus:border-[#C9A84C] transition-colors"
             />
           </div>
 
