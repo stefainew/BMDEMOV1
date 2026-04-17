@@ -29,19 +29,20 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   const [notes,     setNotes]     = useState('')
   const [saving,    setSaving]    = useState(false)
   const [error,     setError]     = useState('')
-  const [kbOffset,  setKbOffset]  = useState(0)
+  const [vpTop, setVpTop] = useState(0)
+  const [vpH,   setVpH]   = useState(() => window.visualViewport?.height ?? window.innerHeight)
 
-  // Push the modal above the virtual keyboard on iOS/Android.
-  // The layout viewport does not shrink when the keyboard opens, so fixed
-  // elements stay behind it. visualViewport.height gives the actual visible
-  // area, letting us compute keyboard height and shift the modal up.
+  // Size the overlay to the *visual* viewport so the modal always sits
+  // at the bottom of the visible area — above the keyboard — on iOS/Android.
+  // The layout viewport doesn't shrink when the keyboard opens, so any
+  // fixed element anchored to it ends up behind the keyboard. By tracking
+  // visualViewport.height / offsetTop and applying them as inline styles we
+  // ensure the overlay exactly matches what the user can actually see.
   useEffect(() => {
     const vv = window.visualViewport
     if (!vv) return
-    const update = () => {
-      const kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop)
-      setKbOffset(kb)
-    }
+    const update = () => { setVpTop(vv.offsetTop); setVpH(vv.height) }
+    update()
     vv.addEventListener('resize', update)
     vv.addEventListener('scroll', update)
     return () => {
@@ -76,13 +77,13 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
-      style={{ paddingBottom: kbOffset, transition: 'padding-bottom 0.15s ease-out' }}
+      className="z-50 flex items-end sm:items-center justify-center"
+      style={{ position: 'fixed', top: vpTop, left: 0, right: 0, height: vpH }}
     >
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
       <div
         className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 flex flex-col"
-        style={{ maxHeight: kbOffset > 0 ? `calc(100vh - ${kbOffset}px - 16px)` : 'min(85dvh, 85vh)' }}
+        style={{ maxHeight: Math.min(vpH * 0.92, vpH - 8) }}
       >
         {/* Header — never scrolls */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A] shrink-0">
