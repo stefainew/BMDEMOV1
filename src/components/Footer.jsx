@@ -7,7 +7,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="md:col-span-1">
           <Link to="/">
-            <img src="/logo.jpg" alt="Brillare by BM" className="h-10 w-auto mb-4" />
+            <img src="/Bobi_logo.png" alt="Brillare by BM" className="h-10 w-auto mb-4" />
           </Link>
           <p className="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">
             Фризьорски салон с 25+ години опит в сърцето на София. Вашата красота е нашата страст.

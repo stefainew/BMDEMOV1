@@ -156,15 +156,9 @@ const team = [
     img: 'https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg',
   },
   {
-    name: 'Маги',
-    role: 'Старши Стилист',
-    desc: 'Маги е специалист в цветните техники, балеаж и официални прически. Индивидуален подход и прецизност.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg',
-  },
-  {
     name: 'Brillare by BM',
     role: 'Фризьорски Салон',
-    desc: 'Нашата мисия е да ви помогнем да откриете своя уникален стил с индивидуален подход и премиум продукти.',
+    desc: 'Мисията е да ви помогна да откриете своя уникален стил с индивидуален подход и премиум продукти.',
     img: 'https://brillarebybm.com/wp-content/uploads/2016/05/premium-hair-treatment-sofia-705x705.jpg',
   },
 ]
@@ -881,7 +875,7 @@ export default function Home() {
               lineHeight: 0.88,
               color: '#EDE8DF',
             }}>
-              Боби <em style={{ fontWeight: 300, color: 'rgba(237,232,223,0.45)' }}>&</em> Маги
+              Боби
             </h2>
             <div style={{ textAlign: 'right', paddingBottom: '0.5rem' }}>
               <p style={{
@@ -905,11 +899,11 @@ export default function Home() {
           {/* ── Diptych portraits ── */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1fr',
             gap: '3px',
             backgroundColor: '#0A0A0A',
           }}>
-            {team.slice(0, 2).map((member, i) => (
+            {team.slice(0, 1).map((member, i) => (
               <motion.div
                 key={i}
                 className="group"
@@ -1045,7 +1039,7 @@ export default function Home() {
               maxWidth: '700px',
               lineHeight: 1.6,
             }}>
-              "{team[2].desc}"
+              "{team[1].desc}"
             </p>
             <a
               href="/about"
