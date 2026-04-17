@@ -10,7 +10,7 @@ export default function Footer() {
             <img src="/Bobi_logo.png" alt="Brillare by BM" className="h-10 w-auto mb-4" />
           </Link>
           <p className="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">
-            Фризьорски салон с 25+ години опит в сърцето на София. Вашата красота е нашата страст.
+            Фризьорски салон с 25+ години опит в сърцето на София. Вашата красота е моята страст.
           </p>
           <div className="mt-6 space-y-2">
             <p className="font-['Lora'] text-sm text-[#8A8070]">бул. България 60А, София</p>
@@ -43,7 +43,7 @@ export default function Footer() {
 
         {/* Social & Booking */}
         <div className="flex flex-col space-y-6">
-          <h5 className="font-['Josefin_Sans'] text-on-surface uppercase tracking-widest text-xs">Следвайте ни</h5>
+          <h5 className="font-['Josefin_Sans'] text-on-surface uppercase tracking-widest text-xs">Следвайте ме</h5>
           <div className="flex flex-col space-y-3">
             <a
               href="https://www.facebook.com/brillarebybm"

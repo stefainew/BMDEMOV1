@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import { supabase } from '../lib/supabase'
 import { useBooking } from '../components/booking/BookingContext'
 
-const steps = ['1. Услуга', '2. Майстор', '3. Час', '4. Потвърждение']
+const steps = ['1. Услуга', '2. Час', '3. Потвърждение']
 
 export default function BookingStep1() {
   const [services, setServices] = useState([])
@@ -37,7 +37,7 @@ export default function BookingStep1() {
   const selectedMaster = booking.master
 
   function handleContinue() {
-    if (!selectedService || !selectedMaster) return
+    if (!selectedService) return
     navigate('/booking/date')
   }
 
@@ -80,10 +80,10 @@ export default function BookingStep1() {
         ) : (
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Service Selection */}
-            <div className="lg:col-span-7 space-y-12">
+            <div className="lg:col-span-12 space-y-12">
               <header>
                 <h1 className="cormorant-display text-5xl font-bold text-[#EDE8DF] mb-4">Избор на услуга</h1>
-                <p className="text-[#8A8070] font-body italic">Изберете услугата, за която желаете да запазите час.</p>
+                <p className="text-[#8A8070] font-body italic">Изберете услугата, за която желаете да запазите час при Боби.</p>
               </header>
 
               {/* Category Chips */}
@@ -137,49 +137,7 @@ export default function BookingStep1() {
               </div>
             </div>
 
-            {/* Master Selection */}
-            <div className="lg:col-span-5 space-y-12">
-              <header>
-                <h2 className="cormorant-display text-4xl font-bold text-[#EDE8DF] mb-4">Избор на майстор</h2>
-                <p className="text-[#8A8070] font-body italic">Вашият стил заслужава експертна ръка.</p>
-              </header>
-              <div className="flex flex-col gap-8">
-                {masters.map((m) => {
-                  const isSelected = selectedMaster?.id === m.id
-                  return (
-                    <div
-                      key={m.id}
-                      onClick={() => update({ master: m })}
-                      className={`flex items-center gap-6 group cursor-pointer transition-opacity ${isSelected ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
-                    >
-                      <div className="relative">
-                        <div className={`w-24 h-24 rounded-full overflow-hidden p-1 ${isSelected ? 'selection-ring' : 'border border-[#2A2A2A]'}`}>
-                          <img
-                            alt={m.name}
-                            className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
-                            src={m.image_url}
-                          />
-                        </div>
-                        {isSelected && (
-                          <div className="absolute -bottom-1 -right-1 bg-[#C9A84C] text-[#0A0A0A] rounded-full p-1 shadow-lg">
-                            <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="space-y-1">
-                        <h4 className={`josefin-nav text-lg font-bold ${isSelected ? 'text-[#C9A84C]' : 'text-[#EDE8DF]'}`}>{m.name}</h4>
-                        <p className="text-xs text-[#8A8070] font-body">{m.role}</p>
-                        <div className="flex items-center gap-1 mt-1">
-                          {Array.from({ length: 5 }).map((_, si) => (
-                            <span key={si} className="material-symbols-outlined text-[12px] text-[#C9A84C]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+          </div>
           </div>
         )}
 
@@ -190,7 +148,7 @@ export default function BookingStep1() {
               <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mb-1">Вашият избор</p>
               <div className="flex flex-col">
                 <span className="josefin-nav text-lg font-bold text-[#EDE8DF]">{selectedService?.name || '—'}</span>
-                <span className="text-[#8A8070] font-body text-sm italic">Майстор: {selectedMaster?.name || '—'}</span>
+                <span className="text-[#8A8070] font-body text-sm italic">Майстор: Боби</span>
               </div>
             </div>
             <div className="flex items-center gap-12">
@@ -202,7 +160,7 @@ export default function BookingStep1() {
               </div>
               <button
                 onClick={handleContinue}
-                disabled={!selectedService || !selectedMaster}
+                disabled={!selectedService}
                 className="bg-[#C9A84C] text-[#0A0A0A] josefin-nav font-bold py-4 px-12 text-sm tracking-widest hover:brightness-110 transition-all flex items-center gap-4 disabled:opacity-40"
               >
                 ПРОДЪЛЖИ КЪМ ЧАС

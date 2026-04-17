@@ -885,7 +885,7 @@ export default function Home() {
                 textTransform: 'uppercase',
                 color: '#C9A84C',
                 marginBottom: '0.5rem',
-              }}>[ 05 — ЕКИПЪТ ]</p>
+              }}>[ 05 — МАЙСТОРЪТ ]</p>
               <p style={{
                 fontFamily: "'Lora', serif",
                 fontSize: '0.85rem',
