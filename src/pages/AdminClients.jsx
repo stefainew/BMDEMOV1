@@ -77,7 +77,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
 
   return (
     <div
-      className="z-50 flex items-end sm:items-center justify-center"
+      className="z-[60] flex items-end sm:items-center justify-center"
       style={{ position: 'fixed', top: vpTop, left: 0, right: 0, height: vpH }}
     >
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
