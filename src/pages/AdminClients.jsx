@@ -65,7 +65,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
           </button>
         </div>
 
-          <div className="px-5 py-5 space-y-4 overflow-y-auto">
+        <div className="px-5 py-5 space-y-4 overflow-y-auto min-h-0">
           {/* Product */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Продукт</label>
