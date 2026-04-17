@@ -124,7 +124,7 @@ export default function BookingStep1() {
                       </div>
                       <div className="flex flex-col items-end gap-2 ml-4 shrink-0">
                         <span className={`dm-mono-price text-lg font-medium ${isSelected ? 'text-[#C9A84C]' : 'text-[#EDE8DF]'}`}>
-                          {s.price ? `${s.price} лв.` : s.price_label}
+                          {s.price ? `${s.price} €` : s.price_label}
                         </span>
                         {isSelected
                           ? <span className="material-symbols-outlined text-[#C9A84C]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
@@ -197,7 +197,7 @@ export default function BookingStep1() {
               <div className="text-right">
                 <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mb-1">Общо</p>
                 <span className="dm-mono-price text-2xl font-bold text-[#C9A84C]">
-                  {selectedService?.price ? `${selectedService.price} лв.` : selectedService?.price_label || '—'}
+                  {selectedService?.price ? `${selectedService.price} €` : selectedService?.price_label || '—'}
                 </span>
               </div>
               <button

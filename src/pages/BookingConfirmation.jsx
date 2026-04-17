@@ -197,7 +197,7 @@ export default function BookingConfirmation() {
                     <p className="text-[#8A8070] text-sm mt-1">{booking.service?.duration_min ?? '—'} минути</p>
                   </div>
                   <p className="font-mono text-[#C9A84C] text-lg">
-                    {booking.service?.price ? `${booking.service.price} лв.` : booking.service?.price_label || '—'}
+                    {booking.service?.price ? `${booking.service.price} €` : booking.service?.price_label || '—'}
                   </p>
                 </div>
                 <div>
@@ -217,7 +217,7 @@ export default function BookingConfirmation() {
                 <div className="pt-10 border-t border-[#2A2A2A] flex justify-between items-baseline">
                   <p className="josefin-nav text-sm text-[#EDE8DF] uppercase">Общо</p>
                   <p className="text-3xl font-mono text-[#C9A84C]">
-                    {booking.service?.price ? `${booking.service.price} лв.` : booking.service?.price_label || 'по запитване'}
+                    {booking.service?.price ? `${booking.service.price} €` : booking.service?.price_label || 'по запитване'}
                   </p>
                 </div>
               </div>

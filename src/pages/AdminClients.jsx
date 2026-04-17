@@ -123,7 +123,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
               />
             </div>
             <div className="flex-1 min-w-0">
-              <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Цена (лв)</label>
+              <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Цена (€)</label>
               <input
                 type="number" min="0" step="0.01"
                 value={price}
@@ -333,7 +333,7 @@ function ClientCard({ client, products }) {
                       )}
                     </div>
                     <span className="josefin-nav text-sm text-[#C9A84C] shrink-0 font-bold">
-                      {Number(s.price_sold * s.quantity).toFixed(2)} лв
+                      {Number(s.price_sold * s.quantity).toFixed(2)} €
                     </span>
                   </div>
                 ))}
