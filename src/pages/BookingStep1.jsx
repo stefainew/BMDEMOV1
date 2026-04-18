@@ -138,7 +138,6 @@ export default function BookingStep1() {
             </div>
 
           </div>
-          </div>
         )}
 
         {/* Sticky Summary Bar */}

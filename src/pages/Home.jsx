@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { motion } from 'motion/react'
 import { TestimonialsColumn } from '../components/ui/TestimonialsColumn'
+import BarberDivider from '../components/BarberDivider'
 
 function CountUp({ target, suffix, duration = 1800 }) {
   const [count, setCount] = useState(0)
@@ -703,6 +704,8 @@ export default function Home() {
           </motion.div>
 
         </section>
+
+        <BarberDivider />
 
         {/* Testimonials */}
         <section
