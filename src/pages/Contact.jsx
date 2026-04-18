@@ -1,7 +1,8 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'motion/react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { supabase } from '../lib/supabase'
 
 const ease = [0.16, 1, 0.3, 1]
 
@@ -33,6 +34,47 @@ function InViewSection({ children, className = '', once = true }) {
 
 export default function Contact() {
   const heroRef = useRef(null)
+  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' })
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('')
+
+  function handleChange(e) {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!form.name.trim() || !form.message.trim()) {
+      setErrorMsg('Моля попълнете име и съобщение.')
+      setStatus('error')
+      return
+    }
+    if (!form.phone.trim() && !form.email.trim()) {
+      setErrorMsg('Моля оставете телефон или имейл за връзка.')
+      setStatus('error')
+      return
+    }
+
+    setStatus('sending')
+    setErrorMsg('')
+
+    const { error } = await supabase.from('inquiries').insert({
+      name: form.name.trim(),
+      phone: form.phone.trim() || null,
+      email: form.email.trim() || null,
+      message: form.message.trim(),
+    })
+
+    if (error) {
+      console.error(error)
+      setErrorMsg('Възникна грешка. Моля опитайте отново или ни се обадете.')
+      setStatus('error')
+      return
+    }
+
+    setForm({ name: '', phone: '', email: '', message: '' })
+    setStatus('success')
+  }
 
   return (
     <div className="bg-[#0A0A0A] text-[#EDE8DF] min-h-screen selection:bg-[#C9A84C] selection:text-[#0A0A0A]">
@@ -243,73 +285,111 @@ export default function Contact() {
               </h2>
             </motion.div>
 
-            <form className="space-y-10" onSubmit={e => e.preventDefault()}>
-              {[
-                { label: 'Вашето Име', name: 'name', type: 'text', placeholder: 'Иван Иванов', custom: 1 },
-                { label: 'Телефон', name: 'phone', type: 'tel', placeholder: '+359 888 …', custom: 2 },
-                { label: 'Електронна поща', name: 'email', type: 'email', placeholder: 'ivan@example.com', custom: 3 },
-              ].map((field) => (
+            {status === 'success' ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease }}
+                className="border border-[#C9A84C]/40 p-10 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-10 h-10 border-t border-r border-[#C9A84C]/40" />
+                <p className="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-[#C9A84C] mb-4">Успешно изпратено</p>
+                <h3 className="font-['Cormorant_Garamond'] text-[2.4rem] font-light leading-[1.05] text-[#EDE8DF] mb-4">
+                  Благодарим Ви!
+                </h3>
+                <p className="font-['Lora'] text-[#8A8070] italic leading-relaxed mb-8">
+                  Получихме Вашето запитване. Ще се свържем с Вас възможно най-скоро.
+                </p>
+                <button
+                  onClick={() => setStatus('idle')}
+                  className="font-['Josefin_Sans'] text-[0.65rem] uppercase tracking-[0.3em] text-[#C9A84C] border-b border-[#C9A84C]/40 pb-1 hover:border-[#C9A84C] transition-colors"
+                >
+                  Изпрати ново запитване
+                </button>
+              </motion.div>
+            ) : (
+              <form className="space-y-10" onSubmit={handleSubmit} noValidate>
+                {[
+                  { label: 'Вашето Име *', name: 'name', type: 'text', placeholder: 'Иван Иванов', custom: 1 },
+                  { label: 'Телефон', name: 'phone', type: 'tel', placeholder: '+359 888 …', custom: 2 },
+                  { label: 'Електронна поща', name: 'email', type: 'email', placeholder: 'ivan@example.com', custom: 3 },
+                ].map((field) => (
+                  <motion.div
+                    key={field.name}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: '-40px' }}
+                    custom={field.custom}
+                    className="group relative"
+                  >
+                    <label className="font-['Josefin_Sans'] text-[0.58rem] uppercase tracking-[0.25em] text-[#4A4540] group-focus-within:text-[#C9A84C] transition-colors duration-300 block mb-3">
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      value={form[field.name]}
+                      onChange={handleChange}
+                      placeholder={field.placeholder}
+                      className="w-full bg-transparent border-0 border-b border-[#2A2A2A] focus:border-[#C9A84C] text-[#EDE8DF] text-lg pb-3 px-0 outline-none transition-colors duration-300 placeholder:text-[#2A2A2A] font-['Lora']"
+                    />
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-[#C9A84C] group-focus-within:w-full transition-all duration-500" />
+                  </motion.div>
+                ))}
+
+                {/* Message */}
                 <motion.div
-                  key={field.name}
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-40px' }}
-                  custom={field.custom}
+                  custom={4}
                   className="group relative"
                 >
                   <label className="font-['Josefin_Sans'] text-[0.58rem] uppercase tracking-[0.25em] text-[#4A4540] group-focus-within:text-[#C9A84C] transition-colors duration-300 block mb-3">
-                    {field.label}
+                    Съобщение *
                   </label>
-                  <input
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    className="w-full bg-transparent border-0 border-b border-[#2A2A2A] focus:border-[#C9A84C] text-[#EDE8DF] text-lg pb-3 px-0 outline-none transition-colors duration-300 placeholder:text-[#2A2A2A] font-['Lora']"
+                  <textarea
+                    rows={4}
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="Как можем да Ви помогнем?"
+                    className="w-full bg-transparent border-0 border-b border-[#2A2A2A] focus:border-[#C9A84C] text-[#EDE8DF] text-lg pb-3 px-0 outline-none transition-colors duration-300 placeholder:text-[#2A2A2A] resize-none font-['Lora']"
                   />
-                  {/* Animated underline on focus */}
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-[#C9A84C] group-focus-within:w-full transition-all duration-500" />
                 </motion.div>
-              ))}
 
-              {/* Message */}
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-40px' }}
-                custom={4}
-                className="group relative"
-              >
-                <label className="font-['Josefin_Sans'] text-[0.58rem] uppercase tracking-[0.25em] text-[#4A4540] group-focus-within:text-[#C9A84C] transition-colors duration-300 block mb-3">
-                  Съобщение
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Как можем да Ви помогнем?"
-                  className="w-full bg-transparent border-0 border-b border-[#2A2A2A] focus:border-[#C9A84C] text-[#EDE8DF] text-lg pb-3 px-0 outline-none transition-colors duration-300 placeholder:text-[#2A2A2A] resize-none font-['Lora']"
-                />
-                <span className="absolute bottom-0 left-0 w-0 h-px bg-[#C9A84C] group-focus-within:w-full transition-all duration-500" />
-              </motion.div>
+                {/* Error */}
+                {status === 'error' && errorMsg && (
+                  <p className="font-['Lora'] text-sm italic text-red-400/90">{errorMsg}</p>
+                )}
 
-              {/* Submit */}
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-40px' }}
-                custom={5}
-              >
-                <button
-                  type="submit"
-                  className="group relative w-full overflow-hidden bg-transparent border border-[#C9A84C]/40 hover:border-[#C9A84C] text-[#C9A84C] py-5 font-['Josefin_Sans'] text-[0.7rem] uppercase tracking-[0.3em] font-bold transition-colors duration-400 flex items-center justify-center gap-4"
+                {/* Submit */}
+                <motion.div
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-40px' }}
+                  custom={5}
                 >
-                  {/* Fill on hover */}
-                  <span className="absolute inset-0 bg-[#C9A84C] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-                  <span className="relative group-hover:text-[#0A0A0A] transition-colors duration-300">Изпрати Запитване</span>
-                  <span className="relative group-hover:text-[#0A0A0A] transition-colors duration-300 text-base">→</span>
-                </button>
-              </motion.div>
-            </form>
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="group relative w-full overflow-hidden bg-transparent border border-[#C9A84C]/40 hover:border-[#C9A84C] text-[#C9A84C] py-5 font-['Josefin_Sans'] text-[0.7rem] uppercase tracking-[0.3em] font-bold transition-colors duration-400 flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <span className="absolute inset-0 bg-[#C9A84C] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                    <span className="relative group-hover:text-[#0A0A0A] transition-colors duration-300">
+                      {status === 'sending' ? 'Изпращане…' : 'Изпрати Запитване'}
+                    </span>
+                    {status !== 'sending' && (
+                      <span className="relative group-hover:text-[#0A0A0A] transition-colors duration-300 text-base">→</span>
+                    )}
+                  </button>
+                </motion.div>
+              </form>
+            )}
           </div>
         </section>
 
