@@ -59,7 +59,7 @@ export default function BookingStep3() {
     if (type !== 'cur') return
     const d = new Date(viewYear, viewMonth, day)
     if (d < today) return
-    if (d.getDay() === 0) return // Sunday closed
+    if (d.getDay() === 0 || d.getDay() === 6) return // Sat & Sun closed
     setSelectedDate(d)
     update({ time: null })
   }
@@ -151,10 +151,10 @@ export default function BookingStep3() {
               {calDays.map(({ day, type }, idx) => {
                 const dateObj = new Date(viewYear, viewMonth + (type === 'prev' ? -1 : type === 'next' ? 1 : 0), day)
                 const isPast    = dateObj < today
-                const isSunday  = dateObj.getDay() === 0
+                const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6
                 const isToday   = dateObj.getTime() === today.getTime()
                 const isSelected = selectedDate && dateObj.getTime() === selectedDate.getTime()
-                const isDisabled = type !== 'cur' || isPast || isSunday
+                const isDisabled = type !== 'cur' || isPast || isWeekend
 
                 return (
                   <div
