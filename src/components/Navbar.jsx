@@ -2,9 +2,8 @@ import { Link, useLocation } from 'react-router-dom'
 
 const navLinks = [
   { label: 'Начало', to: '/' },
-  { label: 'За нас', to: '/about' },
+  { label: 'За Боби', to: '/about' },
   { label: 'Услуги', to: '/services' },
-  { label: 'Галерия', to: '/gallery' },
   { label: 'Контакт', to: '/contact' },
 ]
 
@@ -19,7 +18,7 @@ export default function Navbar() {
   return (
     <nav className="bg-transparent backdrop-blur-md dark:bg-black/80 fixed top-0 w-full z-50 flex justify-between items-center px-12 py-6">
       <Link to="/">
-        <img src="/logo.jpg" alt="Brillare by BM" className="h-10 w-auto" />
+        <img src="/logo.jpg" alt="Боби Ярчев" className="h-10 w-auto" />
       </Link>
       <div className="hidden md:flex gap-10 items-center">
         {navLinks.map((link) => (

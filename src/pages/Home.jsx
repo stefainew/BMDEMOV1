@@ -89,7 +89,7 @@ const rituals = [
 
 const testimonials = [
   {
-    text: 'Brillare by BM е любимото ми място в София! Боби и Маги са невероятни – резултатът всеки път надминава очакванията ми. Балеажът е просто перфектен.',
+    text: 'Боби е невероятен – резултатът всеки път надминава очакванията ми. Балеажът е просто перфектен.',
     name: 'Мария Иванова',
     role: 'Клиент',
     image: 'https://randomuser.me/api/portraits/women/32.jpg',
@@ -101,7 +101,7 @@ const testimonials = [
     image: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
-    text: 'Боядисването с тях е цяло изживяване. Обясняват всяка стъпка, съветват какво е най-добро за косата ти и резултатът е всеки път страхотен.',
+    text: 'Боядисването при Боби е цяло изживяване. Обяснява всяка стъпка, съветва какво е най-добро за косата ти и резултатът е всеки път страхотен.',
     name: 'Десислава Тодорова',
     role: 'Клиент',
     image: 'https://randomuser.me/api/portraits/women/55.jpg',
@@ -113,19 +113,19 @@ const testimonials = [
     image: 'https://randomuser.me/api/portraits/women/12.jpg',
   },
   {
-    text: 'Зарадвах се, когато открих Brillare by BM. Екстеншъните са с невероятно качество и прилепват перфектно към естествената ми коса.',
+    text: 'Зарадвах се, когато открих Боби Ярчев. Екстеншъните са с невероятно качество и прилепват перфектно към естествената ми коса.',
     name: 'Виктория Димитрова',
     role: 'Клиент',
     image: 'https://randomuser.me/api/portraits/women/67.jpg',
   },
   {
-    text: 'Прическата за сватбата ми беше дело на Маги – изглеждах приказно! Всички питаха кой ми е направил косата. Само препоръки!',
+    text: 'Прическата за сватбата ми беше дело на Боби – изглеждах приказно! Всички питаха кой ми е направил косата. Само препоръки!',
     name: 'Калина Стоянова',
     role: 'Клиент',
     image: 'https://randomuser.me/api/portraits/women/23.jpg',
   },
   {
-    text: 'Отивам там веднъж месечно. Всеки път излизам с усещане, че косата ми е трансформирана. Премиум продукти и страхотни резултати.',
+    text: 'Отивам при Боби веднъж месечно. Всеки път излизам с усещане, че косата ми е трансформирана. Премиум продукти и страхотни резултати.',
     name: 'Надя Кирова',
     role: 'Редовен клиент',
     image: 'https://randomuser.me/api/portraits/women/78.jpg',
@@ -137,7 +137,7 @@ const testimonials = [
     image: 'https://randomuser.me/api/portraits/women/34.jpg',
   },
   {
-    text: 'Атмосферата е уникална – луксозна, но приятелска. Не просто правят прическа, а правят изживяване. Завинаги мой салон!',
+    text: 'Атмосферата е уникална – луксозна, но приятелска. Боби не просто прави прическа, а прави изживяване.',
     name: 'Ирина Петкова',
     role: 'Клиент',
     image: 'https://randomuser.me/api/portraits/women/91.jpg',
@@ -152,22 +152,12 @@ const team = [
   {
     name: 'Боби',
     role: 'Майстор Фризьор',
-    desc: 'С над 25 години опит, Боби е истинският майстор зад Brillare by BM. Работа по филми, реклами и ТВ продукции.',
+    desc: 'С над 25 години опит, Боби Ярчев е истинският майстор. Работа по филми, реклами и ТВ продукции.',
     img: 'https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg',
   },
-  {
-    name: 'Маги',
-    role: 'Старши Стилист',
-    desc: 'Маги е специалист в цветните техники, балеаж и официални прически. Индивидуален подход и прецизност.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg',
-  },
-  {
-    name: 'Brillare by BM',
-    role: 'Фризьорски Салон',
-    desc: 'Нашата мисия е да ви помогнем да откриете своя уникален стил с индивидуален подход и премиум продукти.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/premium-hair-treatment-sofia-705x705.jpg',
-  },
 ]
+
+const manifestoText = 'Моята мисия е да ви помогна да откриете своя уникален стил с индивидуален подход и премиум продукти.'
 
 /* ─── MOSAIC CELL ───────────────────────────────────────── */
 function ServiceMosaicCell({ ritual, tall = false, wide = false, rowSpan = 1 }) {
@@ -349,15 +339,15 @@ export default function Home() {
               className="font-headline text-6xl md:text-8xl text-on-surface leading-[0.9] mb-8 font-bold"
               variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16,1,0.3,1] } } }}
             >
-              Вашата <br />
-              <span className="italic font-light">красота.</span> <br />
-              Нашата страст.
+              Твоята <br />
+              <span className="italic font-light">коса.</span> <br />
+              Моята страст.
             </motion.h1>
             <motion.p
               className="font-body text-lg text-on-surface-variant max-w-md leading-relaxed mb-12"
               variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16,1,0.3,1] } } }}
             >
-              Модерен фризьорски салон в сърцето на София с над 25 години опит, премиум продукти и индивидуален подход към всяка коса.
+              Боби Ярчев — майстор фризьор с над 25 години опит. Прецизност и индивидуален подход към всяка коса.
             </motion.p>
             <motion.div
               className="flex items-center space-x-8"
@@ -406,11 +396,11 @@ export default function Home() {
             <img
               className="absolute inset-0 w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdreiaFdBTH7plf2YyxkkS82AlTtnJgc6txSFUyrnkRpFgKPQxb14cs6-Wz8oXS6KsnpOw35LGBd09_JCdMvoptXuRChSdJwo9J_0W3uwgIHTbcNgodXNg2n7zzqTK9UGljWCkin9cYkU6wRH5wIrfS2P2mzCCWtxJLkixj_FmTVZWmxZOI_2siUQDlzYCCGJaJkIaMQYAo8jWSAP9pzN0KO5MBHlhr7bRzPG-2rF-IsMXOmU49bBiF1k8Fj72pCxiWyZScXSYeg"
-              alt="Brillare by BM — hero"
+              alt="Боби Ярчев — hero"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent hidden md:block"></div>
             <div className="absolute bottom-12 left-12 md:hidden">
-              <span className="font-headline text-3xl text-primary italic">Brillare by BM</span>
+              <span className="font-headline text-3xl text-primary italic">Боби Ярчев</span>
             </div>
 
             {/* Floating Review Card — top right */}
@@ -473,9 +463,9 @@ export default function Home() {
             className="flex whitespace-nowrap"
             style={{ animation: 'marqueeSlide 22s linear infinite', willChange: 'transform' }}
           >
-            {['BRILLARE BY BM', 'БОБИ И МАГИ', '25+ ГОДИНИ ОПИТ', 'СОФИЯ', 'ПРЕМИУМ СТИЛИСТИКА', 'ИНДИВИДУАЛЕН ПОДХОД',
-              'BRILLARE BY BM', 'БОБИ И МАГИ', '25+ ГОДИНИ ОПИТ', 'СОФИЯ', 'ПРЕМИУМ СТИЛИСТИКА', 'ИНДИВИДУАЛЕН ПОДХОД',
-              'BRILLARE BY BM', 'БОБИ И МАГИ', '25+ ГОДИНИ ОПИТ', 'СОФИЯ', 'ПРЕМИУМ СТИЛИСТИКА', 'ИНДИВИДУАЛЕН ПОДХОД'].map((t, i) => (
+            {['БОБИ ЯРЧЕВ', 'БОБИ ЯРЧЕВ', '25+ ГОДИНИ ОПИТ', 'СОФИЯ', 'ПРЕМИУМ СТИЛИСТИКА', 'ИНДИВИДУАЛЕН ПОДХОД',
+              'БОБИ ЯРЧЕВ', 'БОБИ ЯРЧЕВ', '25+ ГОДИНИ ОПИТ', 'СОФИЯ', 'ПРЕМИУМ СТИЛИСТИКА', 'ИНДИВИДУАЛЕН ПОДХОД',
+              'БОБИ ЯРЧЕВ', 'БОБИ ЯРЧЕВ', '25+ ГОДИНИ ОПИТ', 'СОФИЯ', 'ПРЕМИУМ СТИЛИСТИКА', 'ИНДИВИДУАЛЕН ПОДХОД'].map((t, i) => (
               <span
                 key={i}
                 style={{
@@ -804,7 +794,7 @@ export default function Home() {
                   maxWidth: '400px',
                 }}
               >
-                Запазете своя час онлайн или ни се обадете. Боби и Маги ще се погрижат за всичко останало.
+                Запазете своя час онлайн или ни се обадете. Боби ще се погрижи за всичко останало.
               </p>
             </motion.div>
 
@@ -882,7 +872,7 @@ export default function Home() {
               lineHeight: 0.88,
               color: '#EDE8DF',
             }}>
-              Боби <em style={{ fontWeight: 300, color: 'rgba(237,232,223,0.45)' }}>&</em> Маги
+              Боби
             </h2>
             <div style={{ textAlign: 'right', paddingBottom: '0.5rem' }}>
               <p style={{
@@ -892,7 +882,7 @@ export default function Home() {
                 textTransform: 'uppercase',
                 color: '#C9A84C',
                 marginBottom: '0.5rem',
-              }}>[ 05 — ЕКИПЪТ ]</p>
+              }}>[ 05 — МАЙСТОРЪТ ]</p>
               <p style={{
                 fontFamily: "'Lora', serif",
                 fontSize: '0.85rem',
@@ -906,11 +896,11 @@ export default function Home() {
           {/* ── Diptych portraits ── */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1fr',
             gap: '3px',
             backgroundColor: '#0A0A0A',
           }}>
-            {team.slice(0, 2).map((member, i) => (
+            {team.slice(0, 1).map((member, i) => (
               <motion.div
                 key={i}
                 className="group"
@@ -1046,7 +1036,7 @@ export default function Home() {
               maxWidth: '700px',
               lineHeight: 1.6,
             }}>
-              "{team[2].desc}"
+              "{manifestoText}"
             </p>
             <a
               href="/about"
@@ -1062,7 +1052,7 @@ export default function Home() {
                 textDecoration: 'none',
               }}
             >
-              За нас →
+              За Боби →
             </a>
           </motion.div>
         </section>
@@ -1109,7 +1099,7 @@ export default function Home() {
             <img
               className="w-full h-full object-cover"
               src="https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg"
-              alt="Brillare by BM — Подстригване и стайлинг"
+              alt="Боби Ярчев — Подстригване и стайлинг"
             />
           </motion.div>
         </section>

@@ -77,7 +77,7 @@ export default function BookingConfirmation() {
             <h2 className="cormorant-display text-5xl md:text-7xl font-bold text-[#EDE8DF] mb-8">Резервацията е успешна!</h2>
             <div className="bg-[#131313] p-8 md:p-12 mb-12 text-left border-l-2 border-[#C9A84C]">
               <p className="text-[#8A8070] text-lg mb-4 leading-relaxed">
-                Благодарим Ви! Вашият час е потвърден в Brillare by BM. Очакваме ви!
+                Благодарим Ви! Вашият час при Боби е потвърден. Очакваме ви!
               </p>
               <div className="flex items-start gap-4 text-[#8A8070]">
                 <span className="material-symbols-outlined text-[#C9A84C] mt-1">phone</span>
@@ -230,7 +230,7 @@ export default function BookingConfirmation() {
       <footer className="w-full border-t border-[#2A2A2A] bg-[#0A0A0A]">
         <div className="flex flex-col md:flex-row justify-between items-start px-6 md:px-12 py-16 gap-8 max-w-screen-2xl mx-auto">
           <div className="space-y-4">
-            <div className="text-xl font-bold tracking-widest text-[#EDE8DF] josefin-nav">Brillare by BM</div>
+            <div className="text-xl font-bold tracking-widest text-[#EDE8DF] josefin-nav">Боби Ярчев</div>
             <p className="text-[#8A8070] max-w-xs text-sm font-body italic">Precision is not a skill, it is a state of mind.</p>
           </div>
           <div className="grid grid-cols-2 gap-12">
@@ -243,7 +243,7 @@ export default function BookingConfirmation() {
               <Link className="text-sm text-[#8A8070] hover:text-[#EDE8DF] josefin-nav" to="/privacy">Поверителност</Link>
             </div>
           </div>
-          <p className="text-[10px] text-[#8A8070] josefin-nav uppercase tracking-widest">© 2024 Brillare by BM</p>
+          <p className="text-[10px] text-[#8A8070] josefin-nav uppercase tracking-widest">© 2025 Боби Ярчев</p>
         </div>
       </footer>
     </div>

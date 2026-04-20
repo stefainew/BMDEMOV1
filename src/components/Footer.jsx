@@ -7,10 +7,10 @@ export default function Footer() {
         {/* Brand */}
         <div className="md:col-span-1">
           <Link to="/">
-            <img src="/logo.jpg" alt="Brillare by BM" className="h-10 w-auto mb-4" />
+            <img src="/logo.jpg" alt="Боби Ярчев" className="h-10 w-auto mb-4" />
           </Link>
           <p className="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">
-            Фризьорски салон с 25+ години опит в сърцето на София. Вашата красота е нашата страст.
+            Майстор фризьор с 25+ години опит. Прецизност, стил и индивидуален подход — за всяка коса.
           </p>
           <div className="mt-6 space-y-2">
             <p className="font-['Lora'] text-sm text-[#8A8070]">бул. България 60А, София</p>
@@ -23,9 +23,8 @@ export default function Footer() {
         <div className="flex flex-col space-y-4">
           <h5 className="font-['Josefin_Sans'] text-on-surface uppercase tracking-widest text-xs">Навигация</h5>
           <Link className="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" to="/">Начало</Link>
-          <Link className="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" to="/about">За нас</Link>
+          <Link className="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" to="/about">За Боби</Link>
           <Link className="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" to="/services">Услуги</Link>
-          <Link className="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" to="/gallery">Галерия</Link>
           <Link className="font-['Lora'] text-sm leading-relaxed text-[#8A8070] hover:text-[#EDE8DF] transition-colors duration-300" to="/contact">Контакт</Link>
         </div>
 
@@ -43,7 +42,7 @@ export default function Footer() {
 
         {/* Social & Booking */}
         <div className="flex flex-col space-y-6">
-          <h5 className="font-['Josefin_Sans'] text-on-surface uppercase tracking-widest text-xs">Следвайте ни</h5>
+          <h5 className="font-['Josefin_Sans'] text-on-surface uppercase tracking-widest text-xs">Следвайте ме</h5>
           <div className="flex flex-col space-y-3">
             <a
               href="https://www.facebook.com/brillarebybm"
@@ -54,7 +53,7 @@ export default function Footer() {
               Facebook
             </a>
             <a
-              href="https://www.instagram.com/brillare_by_bm"
+              href="https://www.instagram.com/bobi_yarchev"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors"
@@ -62,7 +61,7 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href="https://www.tiktok.com/@brillare_by_bm"
+              href="https://www.tiktok.com/@bobi_yarchev"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors"
@@ -82,11 +81,11 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#2A2A2A] flex flex-col md:flex-row justify-between items-center text-[#8A8070] font-['Lora'] text-[0.7rem] tracking-widest gap-4">
-        <div className="uppercase">© 2024 Brillare by BM. Всички права запазени.</div>
+        <div className="uppercase">© 2025 Боби Ярчев. Всички права запазени.</div>
         <div className="flex space-x-8 uppercase">
-          <a className="hover:text-primary transition-colors" href="https://www.instagram.com/brillare_by_bm" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a className="hover:text-primary transition-colors" href="https://www.instagram.com/bobi_yarchev" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a className="hover:text-primary transition-colors" href="https://www.facebook.com/brillarebybm" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a className="hover:text-primary transition-colors" href="https://www.tiktok.com/@brillare_by_bm" target="_blank" rel="noopener noreferrer">TikTok</a>
+          <a className="hover:text-primary transition-colors" href="https://www.tiktok.com/@bobi_yarchev" target="_blank" rel="noopener noreferrer">TikTok</a>
         </div>
       </div>
     </footer>

@@ -332,7 +332,7 @@ export default function Services() {
               marginBottom: '1.5rem',
             }}
           >
-            Brillare by BM — Услуги и цени
+            Боби Ярчев — Услуги и цени
           </motion.p>
 
           <motion.h1
@@ -457,7 +457,7 @@ export default function Services() {
                 maxWidth: '400px',
               }}
             >
-              Запазете своя час онлайн или ни се обадете. Боби и Маги ще се погрижат за всичко останало.
+              Запазете своя час онлайн или ни се обадете. Боби ще се погрижи за всичко останало.
             </p>
           </motion.div>
 

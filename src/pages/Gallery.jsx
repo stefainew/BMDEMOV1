@@ -257,7 +257,7 @@ export default function Gallery() {
                   marginBottom: '1.5rem',
                 }}
               >
-                Brillare by BM — Нашата работа
+                Боби Ярчев — Моята работа
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 48 }}
@@ -419,7 +419,7 @@ export default function Gallery() {
                   marginBottom: '1.5rem',
                 }}
               >
-                Последвайте ни
+                Последвайте ме
               </p>
               <h2
                 style={{
@@ -447,7 +447,7 @@ export default function Gallery() {
                 За ежедневна доза вдъхновение, процеси "зад кулисите" и най-новите ни творби — присъединете се към нашата общност в Instagram.
               </p>
               <a
-                href="https://www.instagram.com/brillare_by_bm"
+                href="https://www.instagram.com/bobi_yarchev"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -463,7 +463,7 @@ export default function Gallery() {
                   textDecoration: 'none',
                 }}
               >
-                @brillare_by_bm
+                @bobi_yarchev
               </a>
             </motion.div>
 
