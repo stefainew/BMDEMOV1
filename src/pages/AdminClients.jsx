@@ -29,6 +29,27 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   const [notes,     setNotes]     = useState('')
   const [saving,    setSaving]    = useState(false)
   const [error,     setError]     = useState('')
+  const [vpTop, setVpTop] = useState(0)
+  const [vpH,   setVpH]   = useState(() => window.visualViewport?.height ?? window.innerHeight)
+
+  // Size the overlay to the *visual* viewport so the modal always sits
+  // at the bottom of the visible area — above the keyboard — on iOS/Android.
+  // The layout viewport doesn't shrink when the keyboard opens, so any
+  // fixed element anchored to it ends up behind the keyboard. By tracking
+  // visualViewport.height / offsetTop and applying them as inline styles we
+  // ensure the overlay exactly matches what the user can actually see.
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    const update = () => { setVpTop(vv.offsetTop); setVpH(vv.height) }
+    update()
+    vv.addEventListener('resize', update)
+    vv.addEventListener('scroll', update)
+    return () => {
+      vv.removeEventListener('resize', update)
+      vv.removeEventListener('scroll', update)
+    }
+  }, [])
 
   function onProductChange(id) {
     setProductId(id)
@@ -55,17 +76,25 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div
+      className="z-[60] flex items-end sm:items-center justify-center"
+      style={{ position: 'fixed', top: vpTop, left: 0, right: 0, height: vpH }}
+    >
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A]">
+      <div
+        className="relative w-full sm:max-w-md bg-[#131313] border-t border-[#2A2A2A] sm:border z-10 flex flex-col"
+        style={{ maxHeight: Math.min(vpH * 0.92, vpH - 8) }}
+      >
+        {/* Header — never scrolls */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A] shrink-0">
           <h2 className="cormorant-display text-lg text-[#EDE8DF]">Добави продажба</h2>
           <button onClick={onClose} className="text-[#8A8070]">
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
 
-        <div className="px-5 py-5 space-y-4">
+        {/* Form fields — scrollable */}
+        <div className="px-5 py-5 space-y-4 overflow-y-auto overflow-x-hidden min-h-0 flex-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           {/* Product */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Продукт</label>
@@ -93,8 +122,8 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
                 className="w-full bg-[#0A0A0A] border border-[#2A2A2A] text-[#EDE8DF] text-sm px-4 py-3 focus:outline-none focus:border-[#C9A84C] transition-colors"
               />
             </div>
-            <div className="flex-1">
-              <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Цена (лв)</label>
+            <div className="flex-1 min-w-0">
+              <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Цена (€)</label>
               <input
                 type="number" min="0" step="0.01"
                 value={price}
@@ -104,7 +133,8 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
             </div>
           </div>
 
-          {/* Date */}
+          {/* Date — appearance:none strips the native calendar widget chrome that
+              overflows the container on Android/iOS while keeping the picker */}
           <div>
             <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">Дата</label>
             <input
@@ -112,6 +142,7 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
               value={date}
               onChange={e => setDate(e.target.value)}
               className="w-full bg-[#0A0A0A] border border-[#2A2A2A] text-[#EDE8DF] text-sm px-4 py-3 focus:outline-none focus:border-[#C9A84C] transition-colors"
+              style={{ WebkitAppearance: 'none', appearance: 'none' }}
             />
           </div>
 
@@ -127,7 +158,10 @@ function SaleModal({ clientId, products, onClose, onSaved }) {
           </div>
 
           {error && <p className="text-red-400 text-xs">{error}</p>}
+        </div>
 
+        {/* Save button — pinned footer, never scrolls away */}
+        <div className="px-5 py-4 border-t border-[#2A2A2A] shrink-0">
           <button
             onClick={save}
             disabled={saving}
@@ -299,7 +333,7 @@ function ClientCard({ client, products }) {
                       )}
                     </div>
                     <span className="josefin-nav text-sm text-[#C9A84C] shrink-0 font-bold">
-                      {Number(s.price_sold * s.quantity).toFixed(2)} лв
+                      {Number(s.price_sold * s.quantity).toFixed(2)} €
                     </span>
                   </div>
                 ))}

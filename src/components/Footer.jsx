@@ -7,7 +7,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="md:col-span-1">
           <Link to="/">
-            <img src="/logo.jpg" alt="Боби Ярчев" className="h-10 w-auto mb-4" />
+            <img src="/Bobi_logo.png" alt="Боби Ярчев" className="h-10 w-auto mb-4" />
           </Link>
           <p className="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">
             Майстор фризьор с 25+ години опит. Прецизност, стил и индивидуален подход — за всяка коса.

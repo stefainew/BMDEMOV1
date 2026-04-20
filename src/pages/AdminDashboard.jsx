@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../contexts/AuthContext'
 import AdminBottomNav from '../components/admin/AdminBottomNav'
 import BookingCard from '../components/admin/BookingCard'
 import BookingModal from '../components/admin/BookingModal'
@@ -28,6 +30,8 @@ function buildCalDays(year, month) {
 }
 
 export default function AdminDashboard() {
+  const navigate = useNavigate()
+  const { signOut } = useAuth()
   const today = new Date(); today.setHours(0,0,0,0)
   const [view, setView]           = useState('today')
   const [calYear, setCalYear]     = useState(today.getFullYear())
@@ -227,9 +231,18 @@ export default function AdminDashboard() {
           <p className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest">Brillare by BM</p>
           <h1 className="cormorant-display text-xl text-[#EDE8DF]">Панел</h1>
         </div>
-        <button onClick={fetchBookings} className="p-2 text-[#8A8070] active:text-[#EDE8DF] transition-colors">
-          <span className="material-symbols-outlined">refresh</span>
-        </button>
+        <div className="flex items-center gap-1">
+          <button onClick={fetchBookings} className="p-2 text-[#8A8070] active:text-[#EDE8DF] transition-colors">
+            <span className="material-symbols-outlined">refresh</span>
+          </button>
+          <button
+            onClick={async () => { await signOut(); navigate('/') }}
+            className="p-2 text-[#8A8070] active:text-red-400 transition-colors"
+            title="Изход"
+          >
+            <span className="material-symbols-outlined">logout</span>
+          </button>
+        </div>
       </header>
 
       {/* Content */}

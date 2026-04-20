@@ -5,8 +5,11 @@ import { useBooking } from '../components/booking/BookingContext'
 import { useAvailability } from '../hooks/useAvailability'
 
 const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд']
-
 const BG_MONTHS = ['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември']
+const BG_MONTHS_SHORT = ['Яну','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек']
+
+const steps = ['Услуга', 'Дата и час', 'Потвърждение']
+const CURRENT = 1
 
 function buildCalendarDays(year, month) {
   const firstDay = new Date(year, month, 1).getDay()
@@ -24,7 +27,31 @@ function toDateStr(date) {
   return date.toISOString().split('T')[0]
 }
 
-const steps = ['1. Услуга', '2. Майстор', '3. Час', '4. Потвърждение']
+function MobileStepper() {
+  return (
+    <div className="md:hidden mb-8 px-1">
+      <div className="flex items-center justify-center mb-3">
+        {steps.map((_, i) => (
+          <div key={i} className="flex items-center">
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold josefin-nav transition-all ${
+              i === CURRENT
+                ? 'bg-[#C9A84C] text-[#0A0A0A] shadow-[0_0_10px_rgba(201,168,76,0.35)]'
+                : i < CURRENT
+                ? 'bg-[#1C1B1B] border border-[#C9A84C]/50 text-[#C9A84C]'
+                : 'bg-[#131313] border border-[#2A2A2A] text-[#4A4540]'
+            }`}>
+              {i < CURRENT ? '✓' : i + 1}
+            </div>
+            {i < steps.length - 1 && (
+              <div className={`w-10 h-[1px] ${i < CURRENT ? 'bg-[#C9A84C]/40' : 'bg-[#2A2A2A]'}`} />
+            )}
+          </div>
+        ))}
+      </div>
+      <p className="text-center josefin-nav text-[11px] text-[#C9A84C] tracking-widest uppercase">{steps[CURRENT]}</p>
+    </div>
+  )
+}
 
 export default function BookingStep3() {
   const today = new Date()
@@ -59,7 +86,7 @@ export default function BookingStep3() {
     if (type !== 'cur') return
     const d = new Date(viewYear, viewMonth, day)
     if (d < today) return
-    if (d.getDay() === 0) return // Sunday closed
+    if (d.getDay() === 0 || d.getDay() === 6) return
     setSelectedDate(d)
     update({ time: null })
   }
@@ -84,7 +111,7 @@ export default function BookingStep3() {
       <button
         key={time}
         onClick={() => selectTime(time)}
-        className={`py-4 border font-mono text-sm transition-all active:scale-95 ${
+        className={`py-3.5 md:py-4 border font-mono text-sm transition-all active:scale-95 ${
           isSelected
             ? 'bg-[#C9A84C] border-[#C9A84C] text-[#0A0A0A] font-bold shadow-lg'
             : 'border-[#2A2A2A] text-[#EDE8DF] hover:border-[#C9A84C] hover:text-[#C9A84C]'
@@ -96,38 +123,149 @@ export default function BookingStep3() {
   }
 
   const renderBookedSlot = (time) => (
-    <button key={time} disabled className="py-4 border border-[#2A2A2A] font-mono text-sm text-[#3A3A3A] opacity-40 cursor-not-allowed line-through">
+    <button key={time} disabled className="py-3.5 md:py-4 border border-[#2A2A2A] font-mono text-sm text-[#3A3A3A] opacity-40 cursor-not-allowed line-through">
       {time}
     </button>
   )
+
+  const selectedDateLabel = selectedDate
+    ? selectedDate.toLocaleDateString('bg-BG', { weekday: 'long', day: 'numeric', month: 'long' })
+    : null
 
   return (
     <div className="bg-[#0A0A0A] text-[#EDE8DF] min-h-screen">
       <div className="grain-overlay fixed inset-0 z-[100]"></div>
       <Navbar />
 
-      <main className="pt-32 pb-20 px-6 md:px-12 max-w-screen-xl mx-auto">
-        {/* Stepper */}
-        <div className="mb-16">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 max-w-3xl mx-auto relative mb-8">
-            <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#2A2A2A] -translate-y-1/2 hidden md:block"></div>
+      <main className="pt-24 md:pt-32 pb-32 md:pb-20 px-4 md:px-12 max-w-screen-xl mx-auto">
+
+        {/* Desktop stepper */}
+        <div className="hidden md:block mb-16">
+          <div className="flex justify-between items-center gap-4 max-w-3xl mx-auto relative mb-8">
+            <div className="absolute top-5 left-0 w-full h-[1px] bg-[#2A2A2A]" />
             {steps.map((step, i) => (
               <div key={i} className="relative z-10 flex flex-col items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold josefin-nav text-xs ${
-                  i === 2
+                  i === CURRENT
                     ? 'bg-[#C9A84C] text-[#0A0A0A] shadow-[0_0_15px_rgba(201,168,76,0.5)]'
-                    : i < 2
+                    : i < CURRENT
                     ? 'bg-[#1C1B1B] border border-[#C9A84C]/40 text-[#C9A84C]'
                     : 'bg-[#131313] border border-[#2A2A2A] text-[#8A8070]'
-                }`}>{i < 2 ? '✓' : i + 1}</div>
-                <span className={`josefin-nav text-[10px] ${i === 2 ? 'text-[#C9A84C] font-bold' : i < 2 ? 'text-[#C9A84C] opacity-60' : 'text-[#8A8070]'}`}>{step}</span>
+                }`}>{i < CURRENT ? '✓' : i + 1}</div>
+                <span className={`josefin-nav text-[10px] ${i === CURRENT ? 'text-[#C9A84C] font-bold' : i < CURRENT ? 'text-[#C9A84C] opacity-60' : 'text-[#8A8070]'}`}>{step}</span>
               </div>
             ))}
           </div>
-          <h1 className="cormorant-display text-4xl md:text-5xl text-[#EDE8DF] text-center md:text-left">Избор на дата и час</h1>
+          <h1 className="cormorant-display text-4xl md:text-5xl text-[#EDE8DF]">Избор на дата и час</h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Mobile stepper + title */}
+        <MobileStepper />
+        <h1 className="md:hidden cormorant-display text-3xl font-bold text-[#EDE8DF] mb-6">Дата и час</h1>
+
+        {/* ── MOBILE LAYOUT ── */}
+        <div className="md:hidden space-y-4">
+
+          {/* Calendar */}
+          <div className="bg-[#131313] p-4 rounded-sm">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="josefin-nav uppercase tracking-widest text-sm text-[#C9A84C]">
+                {BG_MONTHS_SHORT[viewMonth]} {viewYear}
+              </h2>
+              <div className="flex gap-1">
+                <button onClick={prevMonth} className="w-10 h-10 flex items-center justify-center hover:bg-[#1C1B1B] rounded transition-colors">
+                  <span className="material-symbols-outlined text-[#8A8070]">chevron_left</span>
+                </button>
+                <button onClick={nextMonth} className="w-10 h-10 flex items-center justify-center hover:bg-[#1C1B1B] rounded transition-colors">
+                  <span className="material-symbols-outlined text-[#8A8070]">chevron_right</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-7 gap-y-1 text-center">
+              {weekdays.map(d => (
+                <div key={d} className="josefin-nav text-[9px] text-[#8A8070] uppercase pb-2">{d}</div>
+              ))}
+              {calDays.map(({ day, type }, idx) => {
+                const dateObj = new Date(viewYear, viewMonth + (type === 'prev' ? -1 : type === 'next' ? 1 : 0), day)
+                const isPast    = dateObj < today
+                const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6
+                const isToday   = dateObj.getTime() === today.getTime()
+                const isSelected = selectedDate && dateObj.getTime() === selectedDate.getTime()
+                const isDisabled = type !== 'cur' || isPast || isWeekend
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => !isDisabled && selectDate(day, type)}
+                    className={`relative flex items-center justify-center aspect-square ${
+                      isDisabled ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer active:scale-90 transition-transform'
+                    }`}
+                  >
+                    {isSelected && <span className="absolute inset-[2px] bg-[#C9A84C] rounded-sm" />}
+                    {isToday && !isSelected && <span className="absolute inset-[2px] border border-[#C9A84C]/40 rounded-sm" />}
+                    <span className={`relative font-mono text-xs ${
+                      isSelected ? 'text-[#0A0A0A] font-bold' : isToday ? 'text-[#C9A84C] font-bold' : 'text-[#EDE8DF]'
+                    }`}>{day}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Time slots */}
+          <div className="bg-[#131313] rounded-sm">
+            <div className="px-4 py-4 border-b border-[#2A2A2A]">
+              <h3 className="josefin-nav uppercase tracking-widest text-xs text-[#EDE8DF]">Налични часове</h3>
+              {selectedDateLabel && (
+                <p className="font-body text-xs text-[#8A8070] mt-1 italic capitalize">{selectedDateLabel}</p>
+              )}
+            </div>
+
+            <div className="p-4">
+              {!selectedDate ? (
+                <p className="text-[#8A8070] text-sm italic text-center py-8">Изберете дата от календара.</p>
+              ) : slotsLoading ? (
+                <div className="grid grid-cols-3 gap-2">
+                  {[...Array(9)].map((_, i) => (
+                    <div key={i} className="h-12 bg-[#1C1B1B] animate-pulse rounded" />
+                  ))}
+                </div>
+              ) : available.length === 0 && booked.length === 0 ? (
+                <p className="text-[#8A8070] text-sm italic text-center py-8">Няма налични часове за тази дата.</p>
+              ) : (
+                <div className="grid grid-cols-3 gap-2">
+                  {morning.length > 0 && (
+                    <div className="col-span-full josefin-nav text-[9px] text-[#8A8070] uppercase tracking-widest mt-1 mb-1">Сутрин</div>
+                  )}
+                  {morning.map(renderSlot)}
+                  {afternoon.length > 0 && (
+                    <div className="col-span-full josefin-nav text-[9px] text-[#8A8070] uppercase tracking-widest mt-3 mb-1">Следобед</div>
+                  )}
+                  {afternoon.map(renderSlot)}
+                  {evening.length > 0 && (
+                    <div className="col-span-full josefin-nav text-[9px] text-[#8A8070] uppercase tracking-widest mt-3 mb-1">Вечер</div>
+                  )}
+                  {evening.map(renderSlot)}
+                  {booked.length > 0 && (
+                    <>
+                      <div className="col-span-full josefin-nav text-[9px] text-[#8A8070] uppercase tracking-widest mt-3 mb-1 opacity-50">Заети</div>
+                      {booked.map(renderBookedSlot)}
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Duration info */}
+          <div className="flex items-center gap-3 px-1 text-[#5A5550] text-xs">
+            <span className="material-symbols-outlined !text-sm">schedule</span>
+            <span>Продължителност: {booking.service?.duration_min ?? 60} мин.</span>
+          </div>
+        </div>
+
+        {/* ── DESKTOP LAYOUT ── */}
+        <div className="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Calendar */}
           <div className="lg:col-span-5 bg-[#131313] p-8 rounded-sm">
             <div className="flex items-center justify-between mb-8">
@@ -151,11 +289,10 @@ export default function BookingStep3() {
               {calDays.map(({ day, type }, idx) => {
                 const dateObj = new Date(viewYear, viewMonth + (type === 'prev' ? -1 : type === 'next' ? 1 : 0), day)
                 const isPast    = dateObj < today
-                const isSunday  = dateObj.getDay() === 0
+                const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6
                 const isToday   = dateObj.getTime() === today.getTime()
                 const isSelected = selectedDate && dateObj.getTime() === selectedDate.getTime()
-                const isDisabled = type !== 'cur' || isPast || isSunday
-
+                const isDisabled = type !== 'cur' || isPast || isWeekend
                 return (
                   <div
                     key={idx}
@@ -190,7 +327,7 @@ export default function BookingStep3() {
             </div>
           </div>
 
-          {/* Time Slots */}
+          {/* Time slots */}
           <div className="lg:col-span-7">
             <div className="bg-[#131313] rounded-sm h-full flex flex-col">
               <div className="p-8 border-b border-[#2A2A2A] flex justify-between items-center">
@@ -222,21 +359,12 @@ export default function BookingStep3() {
                   <p className="text-[#8A8070] text-sm italic text-center py-12">Няма налични часове за тази дата.</p>
                 ) : (
                   <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
-                    {morning.length > 0 && (
-                      <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-2 mb-2">Сутрин</div>
-                    )}
+                    {morning.length > 0 && <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-2 mb-2">Сутрин</div>}
                     {morning.map(renderSlot)}
-
-                    {afternoon.length > 0 && (
-                      <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-4 mb-2">Следобед</div>
-                    )}
+                    {afternoon.length > 0 && <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-4 mb-2">Следобед</div>}
                     {afternoon.map(renderSlot)}
-
-                    {evening.length > 0 && (
-                      <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-4 mb-2">Вечер</div>
-                    )}
+                    {evening.length > 0 && <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-4 mb-2">Вечер</div>}
                     {evening.map(renderSlot)}
-
                     {booked.length > 0 && (
                       <>
                         <div className="col-span-full josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest mt-4 mb-2 opacity-50">Заети</div>
@@ -273,6 +401,31 @@ export default function BookingStep3() {
         </div>
       </main>
 
+      {/* Mobile fixed bottom bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0E0E0E]/95 backdrop-blur-sm border-t border-[#2A2A2A] px-4 py-3">
+        {selectedDate && booking.time && (
+          <div className="flex justify-between items-center mb-2 px-1">
+            <span className="font-body text-xs text-[#8A8070] italic capitalize">{selectedDateLabel}</span>
+            <span className="font-mono text-sm text-[#C9A84C]">{booking.time} ч.</span>
+          </div>
+        )}
+        <div className="flex gap-3">
+          <button
+            onClick={() => navigate('/booking')}
+            className="flex-none px-5 py-4 border border-[#2A2A2A] text-[#8A8070] josefin-nav text-[10px] uppercase tracking-widest active:bg-[#1C1B1B] transition-colors"
+          >
+            Назад
+          </button>
+          <button
+            onClick={handleContinue}
+            disabled={!selectedDate || !booking.time}
+            className="flex-1 py-4 bg-[#C9A84C] text-[#0A0A0A] josefin-nav font-bold text-[10px] uppercase tracking-widest disabled:opacity-40 active:scale-[0.98] transition-all"
+          >
+            {!selectedDate ? 'Изберете дата' : !booking.time ? 'Изберете час' : 'Продължи'}
+          </button>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="bg-[#0A0A0A] w-full border-t border-[#2A2A2A]">
         <div className="flex flex-col md:flex-row justify-between items-start px-6 md:px-12 py-16 gap-8 max-w-screen-2xl mx-auto">
@@ -290,7 +443,7 @@ export default function BookingStep3() {
               <Link className="text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors josefin-nav" to="/contact">Contact</Link>
             </div>
           </div>
-          <p className="text-[10px] text-[#8A8070] josefin-nav uppercase tracking-widest">© 2024 Brillare by BM</p>
+          <p className="text-[10px] text-[#8A8070] josefin-nav uppercase tracking-widest">© 2026 Brillare by BM</p>
         </div>
       </footer>
     </div>

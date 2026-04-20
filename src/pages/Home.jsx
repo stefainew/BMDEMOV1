@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { motion } from 'motion/react'
 import { TestimonialsColumn } from '../components/ui/TestimonialsColumn'
+import BarberDivider from '../components/BarberDivider'
 
 function CountUp({ target, suffix, duration = 1800 }) {
   const [count, setCount] = useState(0)
@@ -368,7 +369,7 @@ export default function Home() {
 
             {/* Star Rating */}
             <motion.div
-              className="flex items-center gap-4 mt-8"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-8"
               variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.7, delay: 0.1 } } }}
             >
               <div className="flex items-center gap-1">
@@ -403,8 +404,8 @@ export default function Home() {
               <span className="font-headline text-3xl text-primary italic">Боби Ярчев</span>
             </div>
 
-            {/* Floating Review Card — top right */}
-            <div className="absolute top-10 right-6 hidden md:block w-64 bg-[#0A0A0A]/80 backdrop-blur-md border border-[#C9A84C]/20 p-5 shadow-2xl" style={{ animation: 'floatY 6s ease-in-out infinite' }}>
+            {/* Floating Review Card — top right on desktop, bottom-right on mobile */}
+            <div className="absolute bottom-16 right-3 w-52 md:top-10 md:right-6 md:bottom-auto md:w-64 bg-[#0A0A0A]/80 backdrop-blur-md border border-[#C9A84C]/20 p-4 md:p-5 shadow-2xl" style={{ animation: 'floatY 6s ease-in-out infinite' }}>
               <div className="flex items-center gap-3 mb-3">
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" className="w-9 h-9 rounded-full object-cover border border-primary/30" alt="" />
                 <div>
@@ -419,7 +420,7 @@ export default function Home() {
               <p className="font-body text-[0.7rem] text-[#D4CFC6] italic leading-relaxed font-semibold">"Индивидуалният подход е несравним. Оттогава не сменям салон."</p>
             </div>
 
-            {/* Floating Review Card — middle left on image */}
+            {/* Floating Review Card — middle left on desktop only (covers face on mobile) */}
             <div className="absolute top-1/2 -translate-y-1/2 left-6 hidden md:block w-56 bg-[#0A0A0A]/80 backdrop-blur-md border border-outline-variant/30 p-4 shadow-2xl" style={{ animation: 'floatY 7s ease-in-out infinite 1.5s' }}>
               <div className="flex items-center gap-2 mb-2">
                 <img src="https://randomuser.me/api/portraits/women/23.jpg" className="w-8 h-8 rounded-full object-cover border border-primary/30" alt="" />
@@ -435,8 +436,8 @@ export default function Home() {
               <p className="font-body text-[0.65rem] text-[#D4CFC6] italic leading-relaxed font-semibold">"Прическата за сватбата ми беше приказна!"</p>
             </div>
 
-            {/* Floating stat badge — bottom right */}
-            <div className="absolute bottom-10 right-6 hidden md:block bg-[#C9A84C] px-5 py-3 shadow-2xl" style={{ animation: 'floatY 5s ease-in-out infinite 3s' }}>
+            {/* Floating stat badge — top-left on mobile, bottom-right on desktop */}
+            <div className="absolute top-4 left-3 md:top-auto md:bottom-10 md:left-auto md:right-6 bg-[#C9A84C] px-4 py-2 md:px-5 md:py-3 shadow-2xl" style={{ animation: 'floatY 5s ease-in-out infinite 3s' }}>
               <p className="font-label text-[0.6rem] uppercase tracking-widest text-[#0A0A0A] mb-0.5">Средна оценка</p>
               <div className="flex items-baseline gap-1.5">
                 <span className="font-headline text-2xl font-bold text-[#0A0A0A] leading-none">5.0</span>
@@ -572,10 +573,9 @@ export default function Home() {
           </motion.div>
 
           {/* ── Mosaic grid ── */}
-          <div style={{
+          <div className="[grid-template-rows:auto] md:[grid-template-rows:340px_340px]" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gridTemplateRows: '340px 340px',
             gap: '3px',
             backgroundColor: '#0A0A0A',
           }}>
@@ -594,7 +594,7 @@ export default function Home() {
               viewport={{ once: true, amount: 0 }}
               style={{
                 backgroundColor: '#F5F0E8',
-                height: '340px',
+                minHeight: '340px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -700,6 +700,8 @@ export default function Home() {
           </motion.div>
 
         </section>
+
+        <BarberDivider />
 
         {/* Testimonials */}
         <section

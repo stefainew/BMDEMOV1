@@ -94,7 +94,7 @@ function ProductModal({ product, onClose, onSaved }) {
             </div>
             <div className="w-28">
               <label className="josefin-nav text-[10px] text-[#8A8070] uppercase tracking-widest block mb-1">
-                Цена (лв) *
+                Цена (€) *
               </label>
               <input
                 type="number"
@@ -249,7 +249,7 @@ function ProductRow({ product, onEdit }) {
       </div>
       <div className="shrink-0 text-right">
         <p className="josefin-nav text-sm text-[#C9A84C] font-bold">
-          {product.price != null ? `${Number(product.price).toFixed(2)} лв` : '—'}
+          {product.price != null ? `${Number(product.price).toFixed(2)} €` : '—'}
         </p>
         <span className="material-symbols-outlined text-[#8A8070] text-sm">chevron_right</span>
       </div>

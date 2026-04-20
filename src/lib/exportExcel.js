@@ -218,8 +218,8 @@ export async function exportClientsExcel(supabase) {
     headerCell('Продукт'),
     headerCell('Марка'),
     headerCell('Брой'),
-    headerCell('Цена (лв)'),
-    headerCell('Общо (лв)'),
+    headerCell('Цена (€)'),
+    headerCell('Общо (€)'),
     headerCell('Бележка'),
   ]
 
@@ -302,7 +302,7 @@ export async function exportClientsCSV(supabase) {
   })
 
   // ── Section 3: Product sales ──────────────────────────────────────────────
-  const salesHeader = ['Клиент', 'Телефон', 'Дата', 'Продукт', 'Марка', 'Брой', 'Цена (лв)', 'Общо (лв)', 'Бележка']
+  const salesHeader = ['Клиент', 'Телефон', 'Дата', 'Продукт', 'Марка', 'Брой', 'Цена (€)', 'Общо (€)', 'Бележка']
   const salesRows = []
   clients.forEach(client => {
     const sorted = [...(client.product_sales ?? [])].sort((a, b) => b.date > a.date ? 1 : b.date < a.date ? -1 : 0)
