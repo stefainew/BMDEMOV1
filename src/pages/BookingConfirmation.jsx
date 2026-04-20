@@ -12,6 +12,7 @@ export default function BookingConfirmation() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [agreed, setAgreed] = useState(false)
+  const [agreedTerms, setAgreedTerms] = useState(false)
 
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -19,7 +20,7 @@ export default function BookingConfirmation() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!agreed) { setError('Трябва да се съгласите с условията.'); return }
+    if (!agreed || !agreedTerms) { setError('Трябва да се съгласите с Политиката за поверителност и Общите условия.'); return }
     if (!booking.service || !booking.master || !booking.date || !booking.time) {
       setError('Непълна резервация. Моля, върнете се назад и попълнете всички стъпки.')
       return
@@ -153,17 +154,39 @@ export default function BookingConfirmation() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 pt-4">
-                  <input
-                    id="terms"
-                    type="checkbox"
-                    checked={agreed}
-                    onChange={e => setAgreed(e.target.checked)}
-                    className="w-5 h-5 rounded-none border-[#2A2A2A] bg-transparent accent-[#C9A84C]"
-                  />
-                  <label className="text-[#8A8070] text-sm" htmlFor="terms">
-                    Съгласен съм с <Link className="text-[#C9A84C] underline" to="/privacy">Политиката за поверителност</Link>.
-                  </label>
+                <div className="space-y-4 pt-4">
+                  <div className="flex items-start gap-4">
+                    <input
+                      id="privacy-agree"
+                      type="checkbox"
+                      checked={agreed}
+                      onChange={e => setAgreed(e.target.checked)}
+                      className="w-5 h-5 mt-0.5 shrink-0 rounded-none border-[#2A2A2A] bg-transparent accent-[#C9A84C]"
+                    />
+                    <label className="text-[#8A8070] text-sm leading-relaxed" htmlFor="privacy-agree">
+                      Прочел/а съм и се съгласявам с{' '}
+                      <Link className="text-[#C9A84C] underline hover:brightness-125 transition-all" to="/privacy">
+                        Политиката за поверителност
+                      </Link>
+                      {' '}и давам съгласие за обработване на личните ми данни за целите на резервацията. *
+                    </label>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <input
+                      id="terms-agree"
+                      type="checkbox"
+                      checked={agreedTerms}
+                      onChange={e => setAgreedTerms(e.target.checked)}
+                      className="w-5 h-5 mt-0.5 shrink-0 rounded-none border-[#2A2A2A] bg-transparent accent-[#C9A84C]"
+                    />
+                    <label className="text-[#8A8070] text-sm leading-relaxed" htmlFor="terms-agree">
+                      Запознат/а съм с{' '}
+                      <Link className="text-[#C9A84C] underline hover:brightness-125 transition-all" to="/terms">
+                        Общите условия
+                      </Link>
+                      {' '}за резервации — включително с политиката за отмяна и закъснение. *
+                    </label>
+                  </div>
                 </div>
 
                 {error && (
