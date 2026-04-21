@@ -39,6 +39,7 @@ export default function BookingConfirmation() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ firstName: '', lastName: '', phone: '', email: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [confirmedBooking, setConfirmedBooking] = useState(null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [agreed, setAgreed] = useState(false)
@@ -71,6 +72,7 @@ export default function BookingConfirmation() {
         p_time_end:   timeEnd,
       })
       if (rpcErr) throw rpcErr
+      setConfirmedBooking({ ...booking, clientName: `${form.firstName} ${form.lastName}`.trim(), clientPhone: form.phone })
       reset()
       setSubmitted(true)
     } catch (err) {
@@ -81,50 +83,86 @@ export default function BookingConfirmation() {
     }
   }
 
-  const displayDate = booking.date
-    ? new Date(booking.date).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' })
+  const activeBooking = confirmedBooking ?? booking
+
+  const displayDate = activeBooking.date
+    ? new Date(activeBooking.date).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' })
     : '—'
 
   /* ── Booking summary card — used both mobile (top) and desktop (right sidebar) ── */
+  const masterInitials = activeBooking.master?.name
+    ? activeBooking.master.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+    : 'БМ'
+
   const SummaryCard = ({ className = '' }) => (
-    <div className={`bg-[#131313] relative overflow-hidden border-l border-[#2A2A2A] ${className}`}>
-      <div className="absolute top-0 right-0 p-6 opacity-5">
-        <span className="material-symbols-outlined text-7xl">content_cut</span>
+    <div
+      className={`relative overflow-hidden rounded-3xl p-8 md:p-12 ${className}`}
+      style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.07)' }}
+    >
+      {/* Decorative background icon */}
+      <div className="absolute -top-10 -right-10 opacity-[0.03] rotate-12 pointer-events-none">
+        <span className="material-symbols-outlined" style={{ fontSize: '14rem', lineHeight: 1 }}>content_cut</span>
       </div>
-      <div className="p-6 md:p-12">
-        <h3 className="josefin-nav text-xs text-[#8A8070] mb-6 border-b border-[#2A2A2A] pb-4 uppercase tracking-widest">Резюме</h3>
-        <div className="space-y-5 md:space-y-8">
-          <div className="flex justify-between items-start gap-4">
-            <div>
-              <p className="josefin-nav text-[0.6rem] text-[#8A8070] mb-1 uppercase">Услуга</p>
-              <p className="text-lg md:text-xl cormorant-display font-bold text-[#EDE8DF] leading-tight">{booking.service?.name || '—'}</p>
-              <p className="text-[#8A8070] text-xs mt-1">{booking.service?.duration_min ?? '—'} мин.</p>
-            </div>
-            <p className="font-mono text-[#C9A84C] text-base md:text-lg shrink-0">
-              {booking.service?.price ? `${booking.service.price} €` : booking.service?.price_label || '—'}
+
+      <h3 className="josefin-nav text-[10px] text-[#C9A84C] font-bold mb-10 tracking-[0.3em] uppercase relative z-10">
+        Резюме на резервацията
+      </h3>
+
+      <div className="space-y-8 relative z-10">
+
+        {/* Service */}
+        <div className="flex justify-between items-start gap-4">
+          <div className="space-y-1.5 min-w-0">
+            <p className="josefin-nav text-[0.6rem] text-[#8A8070] uppercase tracking-widest">Избрана услуга</p>
+            <p className="cormorant-display text-2xl font-bold text-[#EDE8DF] leading-tight">
+              {activeBooking.service?.name || '—'}
+            </p>
+            <p className="text-[#8A8070] text-sm font-body inline-flex items-center gap-1.5">
+              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>schedule</span>
+              {activeBooking.service?.duration_min ?? '—'} минути
             </p>
           </div>
-          <div>
-            <p className="josefin-nav text-[0.6rem] text-[#8A8070] mb-1 uppercase">Майстор</p>
-            <p className="text-base md:text-lg cormorant-display text-[#EDE8DF]">{booking.master?.name || '—'}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:gap-8 pt-2">
-            <div>
-              <p className="josefin-nav text-[0.6rem] text-[#8A8070] mb-1 uppercase">Дата</p>
-              <p className="text-[#EDE8DF] text-sm">{displayDate}</p>
+          <p className="font-mono text-[#C9A84C] text-xl font-medium shrink-0">
+            {activeBooking.service?.price ? `${activeBooking.service.price} €` : activeBooking.service?.price_label || 'по запитване'}
+          </p>
+        </div>
+
+        {/* Master */}
+        <div className="space-y-3">
+          <p className="josefin-nav text-[0.6rem] text-[#8A8070] uppercase tracking-widest">Вашият майстор</p>
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#1C1B1B] border border-white/10 flex items-center justify-center shrink-0">
+              <span className="cormorant-display text-xl font-bold text-[#C9A84C]">{masterInitials}</span>
             </div>
             <div>
-              <p className="josefin-nav text-[0.6rem] text-[#8A8070] mb-1 uppercase">Час</p>
-              <p className="font-mono text-[#EDE8DF]">{booking.time ? `${booking.time} ч.` : '—'}</p>
+              <p className="cormorant-display text-xl font-bold text-[#EDE8DF]">{activeBooking.master?.name || '—'}</p>
+              {activeBooking.master?.role && (
+                <p className="josefin-nav text-[10px] text-[#C9A84C] uppercase tracking-widest">{activeBooking.master.role}</p>
+              )}
             </div>
-          </div>
-          <div className="pt-5 md:pt-10 border-t border-[#2A2A2A] flex justify-between items-baseline">
-            <p className="josefin-nav text-sm text-[#EDE8DF] uppercase">Общо</p>
-            <p className="text-2xl md:text-3xl font-mono text-[#C9A84C]">
-              {booking.service?.price ? `${booking.service.price} €` : booking.service?.price_label || 'по запитване'}
-            </p>
           </div>
         </div>
+
+        {/* Date / Time */}
+        <div className="grid grid-cols-2 gap-6 py-7 border-y border-white/[0.06]">
+          <div className="space-y-1.5">
+            <p className="josefin-nav text-[0.6rem] text-[#8A8070] uppercase tracking-widest">Дата</p>
+            <p className="cormorant-display text-xl text-[#EDE8DF]">{displayDate}</p>
+          </div>
+          <div className="space-y-1.5">
+            <p className="josefin-nav text-[0.6rem] text-[#8A8070] uppercase tracking-widest">Час</p>
+            <p className="font-mono text-xl text-[#EDE8DF]">{booking.time ? `${booking.time} ч.` : '—'}</p>
+          </div>
+        </div>
+
+        {/* Total */}
+        <div className="flex justify-between items-baseline pt-1">
+          <p className="josefin-nav text-xs text-[#8A8070] uppercase tracking-widest">Обща стойност</p>
+          <p className="font-mono text-3xl md:text-4xl text-[#C9A84C] font-bold">
+            {activeBooking.service?.price ? `${activeBooking.service.price} €` : activeBooking.service?.price_label || 'по запитване'}
+          </p>
+        </div>
+
       </div>
     </div>
   )
@@ -137,26 +175,99 @@ export default function BookingConfirmation() {
       <main className="pt-24 md:pt-32 pb-12 md:pb-24 px-4 md:px-12 max-w-screen-xl mx-auto">
         {submitted ? (
           /* ── SUCCESS ── */
-          <section className="max-w-3xl mx-auto text-center py-16 md:py-20">
-            <div className="mb-10 inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-[#131313] border border-[#C9A84C]/20 relative">
-              <span className="material-symbols-outlined text-[#C9A84C] text-4xl md:text-5xl">check_circle</span>
-              <div className="absolute -bottom-2 -right-2 w-7 h-7 md:w-8 md:h-8 bg-[#C9A84C] text-[#0A0A0A] flex items-center justify-center">
-                <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+          <section className="w-full max-w-4xl mx-auto text-center space-y-12 py-8 md:py-16">
+
+            {/* Icon */}
+            <div className="flex justify-center">
+              <div className="w-24 h-24 rounded-full border border-[#C9A84C]/30 flex items-center justify-center bg-[#131313]/50 backdrop-blur-md">
+                <span
+                  className="material-symbols-outlined text-[#C9A84C]"
+                  style={{ fontSize: '48px', fontVariationSettings: "'wght' 200" }}
+                >check_circle</span>
               </div>
             </div>
-            <h2 className="cormorant-display text-4xl md:text-6xl font-bold text-[#EDE8DF] mb-6">Резервацията е успешна!</h2>
-            <div className="bg-[#131313] p-6 md:p-10 mb-10 text-left border-l-2 border-[#C9A84C]">
-              <p className="text-[#8A8070] text-base md:text-lg mb-4 leading-relaxed">
-                Благодарим Ви! Вашият час при Боби е потвърден. Очакваме ви!
+
+            {/* Title */}
+            <div className="space-y-3">
+              <h1 className="cormorant-display text-4xl md:text-6xl lg:text-7xl text-[#EDE8DF] font-bold tracking-tight">
+                Вашата резервация е потвърдена
+              </h1>
+              <p className="josefin-nav text-xs md:text-sm text-[#8A8070] tracking-[0.2em] uppercase">
+                Очакваме Ви с нетърпение
               </p>
-              <div className="flex items-start gap-3 text-[#8A8070]">
-                <span className="material-symbols-outlined text-[#C9A84C] mt-0.5 text-base">phone</span>
-                <p className="text-sm">Въпроси? Обадете ни се на <a href="tel:+359897975527" className="text-[#EDE8DF]">+359 897 975 527</a></p>
+            </div>
+
+            {/* Summary glass card — 2 columns */}
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 rounded-lg overflow-hidden border border-white/10 shadow-2xl"
+              style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(24px)' }}
+            >
+              {/* Left: service + master */}
+              <div className="bg-[#131313]/60 p-8 md:p-10 text-left flex flex-col justify-between gap-8">
+                <div>
+                  <span className="josefin-nav text-[0.65rem] tracking-[0.15em] text-[#8A8070] uppercase block mb-2">Услуга</span>
+                  <h2 className="cormorant-display text-2xl md:text-3xl text-[#EDE8DF] leading-snug">
+                    {confirmedBooking?.service?.name || '—'}
+                  </h2>
+                  <p className="text-[#8A8070] text-sm mt-1 font-body">
+                    {confirmedBooking?.service?.duration_min ?? '—'} минути
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-sm bg-[#1C1B1B] border border-white/10 flex items-center justify-center shrink-0">
+                    <span className="cormorant-display text-lg font-bold text-[#C9A84C]">{masterInitials}</span>
+                  </div>
+                  <div>
+                    <span className="josefin-nav text-[0.65rem] tracking-[0.15em] text-[#8A8070] uppercase block">Майстор</span>
+                    <span className="font-body text-lg text-[#EDE8DF]">{confirmedBooking?.master?.name || '—'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: date + time */}
+              <div className="bg-[#2A2A2A]/40 p-8 md:p-10 text-left flex flex-col justify-between gap-8 border-t md:border-t-0 md:border-l border-white/5">
+                <div className="space-y-6">
+                  <div>
+                    <span className="josefin-nav text-[0.65rem] tracking-[0.15em] text-[#8A8070] uppercase block mb-1">Дата</span>
+                    <div className="font-mono text-xl md:text-2xl text-[#C9A84C]">{displayDate}</div>
+                  </div>
+                  <div>
+                    <span className="josefin-nav text-[0.65rem] tracking-[0.15em] text-[#8A8070] uppercase block mb-1">Час</span>
+                    <div className="font-mono text-3xl md:text-4xl text-[#EDE8DF]">
+                      {confirmedBooking?.time ? `${confirmedBooking.time} ч.` : '—'}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-[#8A8070]">
+                  <span className="material-symbols-outlined text-sm">phone</span>
+                  <a href="tel:+359897975527" className="josefin-nav text-[0.65rem] tracking-widest uppercase hover:text-[#EDE8DF] transition-colors">
+                    +359 897 975 527
+                  </a>
+                </div>
               </div>
             </div>
-            <Link className="inline-block bg-[#C9A84C] text-[#0A0A0A] px-10 py-4 josefin-nav text-sm font-bold hover:brightness-110 transition-all" to="/">
-              Обратно към начало
-            </Link>
+
+            {/* Action buttons */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-2">
+              <Link
+                to="/"
+                className="w-full md:w-auto px-12 py-5 bg-[#C9A84C] text-[#0A0A0A] josefin-nav text-xs font-bold tracking-[0.2em] uppercase hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-3"
+              >
+                Обратно към началото
+              </Link>
+              <button
+                onClick={() => navigate('/booking')}
+                className="w-full md:w-auto px-12 py-5 border border-white/10 text-[#EDE8DF] josefin-nav text-xs tracking-[0.2em] uppercase hover:bg-white/5 transition-all active:scale-95"
+              >
+                Нова резервация
+              </button>
+            </div>
+
+            {/* Footnote */}
+            <p className="font-body text-sm text-[#8A8070] italic pt-4">
+              Моля, уведомете ни 24 часа предварително при промяна на резервацията.
+            </p>
+
           </section>
         ) : (
           /* ── FORM ── */
