@@ -9,7 +9,7 @@ const services = [
     tag: 'Цвят и Живот',
     title: 'Боядисване',
     desc: 'Трайни, живи цветове с висок клас продукти. Пълна грижа за структурата на косата при всяко боядисване.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-coloring-salon-sofia-705x705.jpg',
+    img: '/service-color.jpg',
     items: [
       { name: 'Цялостно боядисване', desc: 'Равномерно покритие от корен до връхчета' },
       { name: 'Корени', desc: 'Боядисване само на израснала коса' },
@@ -23,7 +23,7 @@ const services = [
     tag: 'Светлина и Нюанс',
     title: 'Кичури и Балеаж',
     desc: 'Деликатно осветляване за естествен, слънчев ефект, персонализирано за вашия тип коса и желан резултат.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/balayage-highlights-hair-color-1-705x705.jpg',
+    img: '/service-color.jpg',
     items: [
       { name: 'Балеаж', desc: 'Ръчно нанесено осветляване за естествен ефект' },
       { name: 'Кичури', desc: 'Класически или модерни кичури по цялата дължина' },
@@ -37,7 +37,7 @@ const services = [
     tag: 'Обем и Дължина',
     title: 'Екстеншъни',
     desc: 'Премиум удължаване и сгъстяване с висококачествена коса. Естествен вид и трайност при правилна грижа.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-extensions-premium-sofia-1-705x705.jpg',
+    img: '/service-styling.jpg',
     items: [
       { name: 'Микро-ринг', desc: 'Безнагревна техника без лепило' },
       { name: 'Tape-in', desc: 'Бърза и лесна апликация' },
@@ -51,7 +51,7 @@ const services = [
     tag: 'Форма и Стил',
     title: 'Подстригване',
     desc: 'Прецизно подстригване и стайлинг за всеки тип коса. Консултация включена — намираме формата, която е само ваша.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg',
+    img: '/service-cut.jpg',
     items: [
       { name: 'Дамско подстригване', desc: 'С индивидуална консултация за форма' },
       { name: 'Стайлинг и сешоар', desc: 'Оформяне след подстригване' },
@@ -65,7 +65,7 @@ const services = [
     tag: 'Специален Повод',
     title: 'Официални прически',
     desc: 'Сватби, абитуриентски балове и всеки специален момент заслужава перфектна прическа. Всяко движение е прецизно обмислено.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg',
+    img: '/service-styling.jpg',
     items: [
       { name: 'Сватбена прическа', desc: 'Консултация и репетиция включена' },
       { name: 'Абитуриентска прическа', desc: 'Изискан вид за незабравимата вечер' },
@@ -79,7 +79,7 @@ const services = [
     tag: 'Грижа и Възстановяване',
     title: 'Премиум терапии',
     desc: 'Научно обосновани, резултат-ориентирани процедури за здрава, блестяща и силна коса. Грижа от вътре навън.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/premium-hair-treatment-sofia-705x705.jpg',
+    img: '/service-cut.jpg',
     items: [
       { name: 'Ботокс за коса', desc: 'Дълбока реконструкция на структурата' },
       { name: 'Кератинова терапия', desc: 'Изглаждане и премахване на накъдряне' },

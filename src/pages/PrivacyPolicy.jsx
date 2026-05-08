@@ -75,7 +75,7 @@ export default function PrivacyPolicy() {
             <p><span className="text-[#C9A84C]">ЕИК / ЕГН:</span> [XXXXXXXXX] <span className="text-[#4A4540]">← попълва се</span></p>
             <p><span className="text-[#C9A84C]">Адрес:</span> [УЛ., ГРАД, ПОЩЕНСКИ КОД] <span className="text-[#4A4540]">← попълва се</span></p>
             <p><span className="text-[#C9A84C]">Телефон:</span> +359 897 975 527</p>
-            <p><span className="text-[#C9A84C]">Имейл:</span> bmhairstdio19@gmail.com</p>
+            <p><span className="text-[#C9A84C]">Имейл:</span> byarchev@gmail.com</p>
             <p><span className="text-[#C9A84C]">Уебсайт:</span> brillarebybm.vercel.app</p>
           </div>
           <p className="text-xs italic text-[#5A5550]">
@@ -335,7 +335,7 @@ export default function PrivacyPolicy() {
           <div className="p-5 bg-[#131313] border border-[#2A2A2A] font-mono text-xs space-y-3">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-[#C9A84C] text-base">mail</span>
-              <a href="mailto:bmhairstdio19@gmail.com" className="text-[#C9A84C] hover:underline">bmhairstdio19@gmail.com</a>
+              <a href="mailto:byarchev@gmail.com" className="text-[#C9A84C] hover:underline">byarchev@gmail.com</a>
             </div>
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-[#C9A84C] text-base">phone</span>

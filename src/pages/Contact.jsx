@@ -206,11 +206,11 @@ export default function Contact() {
             >
               <p className="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-[#C9A84C] mb-5">03 — Електронна поща</p>
               <a
-                href="mailto:bmhairstdio19@gmail.com"
+                href="mailto:byarchev@gmail.com"
                 className="group flex items-baseline gap-3"
               >
                 <span className="font-['DM_Mono'] text-lg text-[#EDE8DF] group-hover:text-[#C9A84C] transition-colors duration-400 tracking-tight break-all">
-                  bmhairstdio19@gmail.com
+                  byarchev@gmail.com
                 </span>
                 <span className="text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity text-sm shrink-0">↗</span>
               </a>
@@ -251,9 +251,9 @@ export default function Contact() {
               className="flex gap-6"
             >
               {[
-                { label: 'Instagram', href: 'https://www.instagram.com/brillare_by_bm' },
-                { label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61558337120146' },
-                { label: 'TikTok',    href: 'https://www.tiktok.com/@brillare_by_bm' },
+                { label: 'Instagram', href: 'https://www.instagram.com/boby_yarchev/' },
+                { label: 'Facebook',  href: 'https://www.facebook.com/yarchev' },
+                { label: 'TikTok',    href: 'https://www.tiktok.com/@bobi_yarchev' },
               ].map((s) => (
                 <a
                   key={s.label}
@@ -399,29 +399,52 @@ export default function Contact() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1.2 }}
-          className="relative h-[500px] overflow-hidden"
-          style={{ borderTop: '1px solid #1C1C1C' }}
+          className="relative overflow-hidden"
+          style={{ borderTop: '1px solid #1C1C1C', height: '580px' }}
         >
+          {/* Edge fades */}
           <div className="absolute inset-0 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, transparent 15%, transparent 85%, #0A0A0A 100%)' }} />
+            style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, transparent 12%, transparent 88%, #0A0A0A 100%)' }} />
           <div className="absolute inset-0 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #0A0A0A 0%, transparent 20%, transparent 80%, #0A0A0A 100%)' }} />
+            style={{ background: 'linear-gradient(to right, #0A0A0A 0%, transparent 18%, transparent 82%, #0A0A0A 100%)' }} />
 
-          <img
-            className="w-full h-full object-cover"
-            style={{ filter: 'grayscale(100%) brightness(0.35) contrast(1.1)', transform: 'scale(1.04)' }}
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7tiYdndQG81tD-dt3EcCB6vdODjdborkjb2wu3zsjUHXUr095HP6HS7Uw7HSbRtAGq0-dTytGAqQ71wZd73_Doy12bugkoh0A2EcQIruC75NwJ-AMdh0q9ntNIv0Gh2b0gZSuRlU3GbkGEVnm9GhBlRh_81hDzIqTBdQcIuPC4dwK7T4GuJLApaZqIS4UH-w8eusp8lC-8MwHxKR7h-WipQhxk2tl7TkedLQYB03Kfc04Hl_2RpNABOnUAw55u1UzUXviN1r_3w"
-            alt="Sofia map"
+          {/* Google Maps iframe */}
+          <iframe
+            title="Brillare by BM location"
+            src="https://maps.google.com/maps?q=%D0%B1%D1%83%D0%BB.+%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F+60%D0%90%2C+%D0%A1%D0%BE%D1%84%D0%B8%D1%8F&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            className="absolute inset-0 w-full h-full border-0"
+            style={{ filter: 'grayscale(100%) brightness(0.38) contrast(1.15)', transform: 'scale(1.02)' }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           />
 
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4">
-            <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#C9A84C]" />
-            <div className="w-3 h-3 rounded-full border border-[#C9A84C] flex items-center justify-center">
-              <div className="w-1 h-1 rounded-full bg-[#C9A84C]" />
+          {/* Gold corner accents */}
+          <div className="absolute top-8 left-8 z-20 pointer-events-none w-10 h-10 border-t border-l border-[#C9A84C]/40" />
+          <div className="absolute top-8 right-8 z-20 pointer-events-none w-10 h-10 border-t border-r border-[#C9A84C]/40" />
+          <div className="absolute bottom-8 left-8 z-20 pointer-events-none w-10 h-10 border-b border-l border-[#C9A84C]/40" />
+          <div className="absolute bottom-8 right-8 z-20 pointer-events-none w-10 h-10 border-b border-r border-[#C9A84C]/40" />
+
+          {/* Location card */}
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 pointer-events-none">
+            <div className="w-px h-10 bg-gradient-to-b from-transparent to-[#C9A84C]" />
+            <motion.div
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-3 h-3 rounded-full bg-[#C9A84C] shadow-[0_0_12px_rgba(201,168,76,0.8)]"
+            />
+            <div className="mt-2 px-7 py-3.5 border border-[#C9A84C]/35 flex flex-col items-center gap-2"
+              style={{ background: 'rgba(10,10,10,0.82)', backdropFilter: 'blur(12px)' }}>
+              <p className="font-['DM_Mono'] text-[0.58rem] uppercase tracking-[0.35em] text-[#C9A84C]">Brillare by BM</p>
+              <p className="font-['Lora'] text-[0.75rem] italic text-[#8A8070]">бул. България 60А · София</p>
             </div>
-            <div className="mt-3 px-8 py-3 border border-[#C9A84C]/30" style={{ background: 'rgba(10,10,10,0.7)', backdropFilter: 'blur(8px)' }}>
-              <p className="font-['DM_Mono'] text-[0.6rem] uppercase tracking-[0.35em] text-[#C9A84C]">бул. България 60А · София</p>
-            </div>
+            <a
+              href="https://maps.google.com/?q=бул.+България+60А,+София"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pointer-events-auto mt-1 px-6 py-2.5 bg-[#C9A84C] text-[#0A0A0A] font-['Josefin_Sans'] text-[0.6rem] uppercase tracking-[0.25em] font-bold hover:brightness-110 active:scale-95 transition-all flex items-center gap-2"
+            >
+              Маршрут <span className="text-xs">→</span>
+            </a>
           </div>
         </motion.section>
 

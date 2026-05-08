@@ -28,7 +28,7 @@ export default function Navbar() {
       {/* ─── NAVBAR BAR ─────────────────────────────────────────── */}
       <nav className="bg-transparent backdrop-blur-md dark:bg-black/80 fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-5 md:py-6">
         <Link to="/" onClick={() => setOpen(false)}>
-          <img src="/Bobi_logo.png" alt="Боби Ярчев" className="h-10 w-auto" />
+          <img src="/new_logo.png" alt="Боби Ярчев" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop links */}

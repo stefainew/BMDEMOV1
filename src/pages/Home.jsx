@@ -60,7 +60,7 @@ const rituals = [
     desc: 'Деликатно осветляване и техника балеаж за естествен, слънчев ефект. Персонализирано за вашия тип коса и желан резултат.',
     price: '',
     wide: true,
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/balayage-highlights-hair-color-1-705x705.jpg',
+    img: '/service-color.jpg',
   },
   {
     num: '02',
@@ -68,7 +68,7 @@ const rituals = [
     desc: 'Професионално боядисване с висок клас продукти за трайни и живи цветове. Пълна грижа за структурата на косата.',
     price: '',
     wide: false,
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-coloring-salon-sofia-705x705.jpg',
+    img: '/service-cut.jpg',
   },
   {
     num: '03',
@@ -76,7 +76,7 @@ const rituals = [
     desc: 'Премиум удължаване и сгъстяване с висококачествена коса. Естествен вид и трайност при правилна грижа.',
     price: '',
     wide: false,
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-extensions-premium-sofia-1-705x705.jpg',
+    img: '/service-styling.jpg',
   },
   {
     num: '04',
@@ -84,7 +84,7 @@ const rituals = [
     desc: 'Изискана прическа за сватба, абитуриентски бал или всеки специален повод. Всяко движение е прецизно обмислено.',
     price: '',
     wide: true,
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg',
+    img: '/service-styling.jpg',
   },
 ]
 
@@ -154,7 +154,7 @@ const team = [
     name: 'Боби',
     role: 'Майстор Фризьор',
     desc: 'С над 25 години опит, Боби Ярчев е истинският майстор. Работа по филми, реклами и ТВ продукции.',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg',
+    img: '/Bobi_himself.jpg',
   },
 ]
 
@@ -1086,7 +1086,7 @@ export default function Home() {
                 <div>
                   <span className="font-label text-primary uppercase tracking-widest text-xs block mb-4">Контакти</span>
                   <a href="tel:+359897975527" className="font-mono text-secondary text-sm block hover:text-primary transition-colors">+359 897 975 527</a>
-                  <a href="mailto:bmhairstdio19@gmail.com" className="font-mono text-secondary text-sm block hover:text-primary transition-colors">bmhairstdio19@gmail.com</a>
+                  <a href="mailto:byarchev@gmail.com" className="font-mono text-secondary text-sm block hover:text-primary transition-colors">byarchev@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -1100,7 +1100,7 @@ export default function Home() {
           >
             <img
               className="w-full h-full object-cover"
-              src="https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg"
+              src="/service-cut.jpg"
               alt="Боби Ярчев — Подстригване и стайлинг"
             />
           </motion.div>

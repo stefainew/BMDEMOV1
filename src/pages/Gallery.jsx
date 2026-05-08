@@ -12,7 +12,7 @@ const items = [
     category: 'Кичури и Балеаж',
     label: 'Кичури и Балеаж',
     desc: 'Ръчно нанесено балеаж осветляване',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/balayage-highlights-hair-color-1-705x705.jpg',
+    img: '/service-color.jpg',
     span: 'wide',
   },
   {
@@ -20,7 +20,7 @@ const items = [
     category: 'Боядисване',
     label: 'Боядисване',
     desc: 'Пълно боядисване с премиум продукти',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-coloring-salon-sofia-705x705.jpg',
+    img: '/service-color.jpg',
     span: 'narrow',
   },
   {
@@ -28,7 +28,7 @@ const items = [
     category: 'Официални',
     label: 'Официална прическа',
     desc: 'Сватбена прическа — прецизност в детайла',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg',
+    img: '/service-styling.jpg',
     span: 'narrow',
   },
   {
@@ -36,7 +36,7 @@ const items = [
     category: 'Екстеншъни',
     label: 'Екстеншъни',
     desc: 'Премиум удължаване — естествен вид',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-extensions-premium-sofia-1-705x705.jpg',
+    img: '/service-styling.jpg',
     span: 'wide',
   },
   {
@@ -44,7 +44,7 @@ const items = [
     category: 'Подстригване',
     label: 'Подстригване и стайлинг',
     desc: 'Прецизна форма и индивидуална консултация',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg',
+    img: '/service-cut.jpg',
     span: 'half',
   },
   {
@@ -52,7 +52,7 @@ const items = [
     category: 'Терапии',
     label: 'Премиум терапия',
     desc: 'Дълбока реконструкция и блясък',
-    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/premium-hair-treatment-sofia-705x705.jpg',
+    img: '/service-cut.jpg',
     span: 'half',
   },
 ]
@@ -477,7 +477,7 @@ export default function Gallery() {
               style={{ minHeight: '420px' }}
             >
               <img
-                src="https://brillarebybm.com/wp-content/uploads/2016/05/balayage-highlights-hair-color-1-705x705.jpg"
+                src="/service-color.jpg"
                 alt="Instagram 1"
                 style={{
                   position: 'absolute',
@@ -490,7 +490,7 @@ export default function Gallery() {
                 }}
               />
               <img
-                src="https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg"
+                src="/service-styling.jpg"
                 alt="Instagram 2"
                 style={{
                   position: 'absolute',

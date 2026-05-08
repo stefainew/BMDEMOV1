@@ -160,7 +160,7 @@ export default function About() {
             >
               {/* Main image */}
               <img
-                src="https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg"
+                src="/Bobi_himself.jpg"
                 alt="Боби — официална прическа"
                 style={{
                   position: 'absolute',
@@ -175,7 +175,7 @@ export default function About() {
               />
               {/* Secondary image — bottom left overlap */}
               <img
-                src="https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg"
+                src="/service-cut.jpg"
                 alt="Боби — стайлинг"
                 style={{
                   position: 'absolute',
@@ -509,7 +509,7 @@ export default function About() {
       {/* ── GALLERY CALLOUT ──────────────────────────────── */}
       <section style={{ position: 'relative', height: '560px', overflow: 'hidden' }}>
         <img
-          src="https://brillarebybm.com/wp-content/uploads/2016/05/hair-coloring-salon-sofia-705x705.jpg"
+          src="/service-color.jpg"
           alt="Brillare by BM — галерия"
           style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }}
         />

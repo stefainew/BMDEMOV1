@@ -7,7 +7,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="md:col-span-1">
           <Link to="/">
-            <img src="/Bobi_logo.png" alt="Боби Ярчев" className="h-10 w-auto mb-4" />
+            <img src="/new_logo.png" alt="Боби Ярчев" className="h-10 w-auto mb-4" />
           </Link>
           <p className="font-['Lora'] text-sm leading-relaxed text-[#8A8070]">
             Майстор фризьор с 25+ години опит. Прецизност, стил и индивидуален подход — за всяка коса.
@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="mt-6 space-y-2">
             <p className="font-['Lora'] text-sm text-[#8A8070]">бул. България 60А, София</p>
             <a href="tel:+359897975527" className="font-['DM_Mono'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors block">+359 897 975 527</a>
-            <a href="mailto:bmhairstdio19@gmail.com" className="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors block">bmhairstdio19@gmail.com</a>
+            <a href="mailto:byarchev@gmail.com" className="font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors block">byarchev@gmail.com</a>
           </div>
         </div>
 
@@ -45,20 +45,20 @@ export default function Footer() {
           <h5 className="font-['Josefin_Sans'] text-on-surface uppercase tracking-widest text-xs">Следвайте ме</h5>
           <div className="flex flex-col space-y-3">
             <a
-              href="https://www.facebook.com/brillarebybm"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors"
-            >
-              Facebook
-            </a>
-            <a
-              href="https://www.instagram.com/bobi_yarchev"
+              href="https://www.instagram.com/boby_yarchev/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors"
             >
               Instagram
+            </a>
+            <a
+              href="https://www.facebook.com/yarchev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 font-['Lora'] text-sm text-[#8A8070] hover:text-[#EDE8DF] transition-colors"
+            >
+              Facebook
             </a>
             <a
               href="https://www.tiktok.com/@bobi_yarchev"
@@ -83,8 +83,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#2A2A2A] flex flex-col md:flex-row justify-between items-center text-[#8A8070] font-['Lora'] text-[0.7rem] tracking-widest gap-4">
         <div className="uppercase">© 2025 Боби Ярчев. Всички права запазени.</div>
         <div className="flex space-x-8 uppercase">
-          <a className="hover:text-primary transition-colors" href="https://www.instagram.com/bobi_yarchev" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a className="hover:text-primary transition-colors" href="https://www.facebook.com/brillarebybm" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a className="hover:text-primary transition-colors" href="https://www.instagram.com/boby_yarchev/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a className="hover:text-primary transition-colors" href="https://www.facebook.com/yarchev" target="_blank" rel="noopener noreferrer">Facebook</a>
           <a className="hover:text-primary transition-colors" href="https://www.tiktok.com/@bobi_yarchev" target="_blank" rel="noopener noreferrer">TikTok</a>
         </div>
       </div>
