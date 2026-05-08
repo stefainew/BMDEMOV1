@@ -60,7 +60,7 @@ const rituals = [
     desc: 'Деликатно осветляване и техника балеаж за естествен, слънчев ефект. Персонализирано за вашия тип коса и желан резултат.',
     price: '',
     wide: true,
-    img: '/service-color.jpg',
+    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/balayage-highlights-hair-color-1-705x705.jpg',
   },
   {
     num: '02',
@@ -68,7 +68,7 @@ const rituals = [
     desc: 'Професионално боядисване с висок клас продукти за трайни и живи цветове. Пълна грижа за структурата на косата.',
     price: '',
     wide: false,
-    img: '/service-cut.jpg',
+    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-coloring-salon-sofia-705x705.jpg',
   },
   {
     num: '03',
@@ -76,7 +76,7 @@ const rituals = [
     desc: 'Премиум удължаване и сгъстяване с висококачествена коса. Естествен вид и трайност при правилна грижа.',
     price: '',
     wide: false,
-    img: '/service-styling.jpg',
+    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/hair-extensions-premium-sofia-1-705x705.jpg',
   },
   {
     num: '04',
@@ -84,7 +84,7 @@ const rituals = [
     desc: 'Изискана прическа за сватба, абитуриентски бал или всеки специален повод. Всяко движение е прецизно обмислено.',
     price: '',
     wide: true,
-    img: '/service-styling.jpg',
+    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/bridal-hairstyle-sofia-salon-705x705.jpg',
   },
 ]
 
@@ -154,7 +154,7 @@ const team = [
     name: 'Боби',
     role: 'Майстор Фризьор',
     desc: 'С над 25 години опит, Боби Ярчев е истинският майстор. Работа по филми, реклами и ТВ продукции.',
-    img: '/service-styling.jpg',
+    img: 'https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg',
   },
 ]
 
@@ -1092,19 +1092,17 @@ export default function Home() {
             </div>
           </motion.div>
           <motion.div
-            className="h-[400px] md:h-auto w-full relative overflow-hidden"
+            className="h-[400px] md:h-auto w-full grayscale contrast-125 opacity-70"
             initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 0.7, x: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, amount: 0 }}
           >
             <img
               className="w-full h-full object-cover"
-              style={{ objectPosition: 'center 15%', filter: 'grayscale(30%) brightness(0.75) contrast(1.05)' }}
-              src="/Bobi_himself.jpg"
-              alt="Боби Ярчев"
+              src="https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg"
+              alt="Боби Ярчев — Подстригване и стайлинг"
             />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0A0A0A 0%, transparent 25%)' }} />
           </motion.div>
         </section>
       </main>

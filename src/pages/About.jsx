@@ -166,11 +166,27 @@ export default function About() {
                   position: 'absolute',
                   top: 0,
                   right: 0,
-                  width: '82%',
+                  width: '72%',
                   aspectRatio: '3/4',
                   objectFit: 'cover',
                   objectPosition: 'center top',
                   zIndex: 2,
+                  filter: 'contrast(1.05)',
+                }}
+              />
+              {/* Secondary image — bottom left overlap */}
+              <img
+                src="https://brillarebybm.com/wp-content/uploads/2016/05/haircut-and-styling-sofia-salon-705x705.jpg"
+                alt="Боби — стайлинг"
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '55%',
+                  aspectRatio: '1/1',
+                  objectFit: 'cover',
+                  zIndex: 3,
+                  border: '6px solid #F5F0E8',
                   filter: 'contrast(1.05)',
                 }}
               />
@@ -494,7 +510,7 @@ export default function About() {
       {/* ── GALLERY CALLOUT ──────────────────────────────── */}
       <section style={{ position: 'relative', height: '560px', overflow: 'hidden' }}>
         <img
-          src="/service-color.jpg"
+          src="https://brillarebybm.com/wp-content/uploads/2016/05/hair-coloring-salon-sofia-705x705.jpg"
           alt="Brillare by BM — галерия"
           style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }}
         />
