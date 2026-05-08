@@ -154,7 +154,7 @@ const team = [
     name: 'Боби',
     role: 'Майстор Фризьор',
     desc: 'С над 25 години опит, Боби Ярчев е истинският майстор. Работа по филми, реклами и ТВ продукции.',
-    img: '/Bobi_himself.jpg',
+    img: '/service-styling.jpg',
   },
 ]
 
@@ -1092,17 +1092,19 @@ export default function Home() {
             </div>
           </motion.div>
           <motion.div
-            className="h-[400px] md:h-auto w-full grayscale contrast-125 opacity-70"
+            className="h-[400px] md:h-auto w-full relative overflow-hidden"
             initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 0.7, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, amount: 0 }}
           >
             <img
               className="w-full h-full object-cover"
-              src="/service-cut.jpg"
-              alt="Боби Ярчев — Подстригване и стайлинг"
+              style={{ objectPosition: 'center 15%', filter: 'grayscale(30%) brightness(0.75) contrast(1.05)' }}
+              src="/Bobi_himself.jpg"
+              alt="Боби Ярчев"
             />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0A0A0A 0%, transparent 25%)' }} />
           </motion.div>
         </section>
       </main>

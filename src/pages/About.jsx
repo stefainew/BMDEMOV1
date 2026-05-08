@@ -166,26 +166,11 @@ export default function About() {
                   position: 'absolute',
                   top: 0,
                   right: 0,
-                  width: '72%',
+                  width: '82%',
                   aspectRatio: '3/4',
                   objectFit: 'cover',
+                  objectPosition: 'center top',
                   zIndex: 2,
-                  filter: 'contrast(1.05)',
-                }}
-              />
-              {/* Secondary image — bottom left overlap */}
-              <img
-                src="/service-cut.jpg"
-                alt="Боби — стайлинг"
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  width: '55%',
-                  aspectRatio: '1/1',
-                  objectFit: 'cover',
-                  zIndex: 3,
-                  border: '6px solid #F5F0E8',
                   filter: 'contrast(1.05)',
                 }}
               />
